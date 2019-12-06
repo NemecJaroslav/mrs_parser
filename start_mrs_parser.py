@@ -1,4 +1,4 @@
-from mrs_parser import MRSParser
+from code.mrs_parser import MRSParser
 
 # Marek
 # 49.1686025, 16.5705978
