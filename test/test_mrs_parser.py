@@ -1,5 +1,5 @@
 from unittest import TestCase
-from code.mrs_parser import MRSParser, GPSCoordinate
+from production_code.mrs_parser import MRSParser, GPSCoordinate
 
 
 class TestMRSParser(TestCase):
