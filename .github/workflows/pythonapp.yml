@@ -24,10 +24,17 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Coverage check
+      uses: devmasx/coverage-check-action@v1.1.0
+      with:
+        type: simplecov
+        result_path: coverage/.last_run.json
+        min_coverage: 90
+        token: ${{secrets.GITHUB_TOKEN}}
+    
     - name: Test with pytest
       run: |
         pip install pytest
         pytest
         
-    - name: Coverage check
-      uses: devmasx/coverage-check-action@v1.1.0
