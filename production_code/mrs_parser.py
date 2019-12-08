@@ -2,6 +2,8 @@ import re
 import requests
 from geopy.distance import great_circle
 
+from .constants import Constants
+
 
 class GPSCoordinate(object):
     def __init__(self, degrees, minutes, seconds, direction):
@@ -38,46 +40,6 @@ class FishingLocation(object):
 class MRSParser(object):
     def __init__(self):
         self._fishing_locations = []
-        self._mrs_home_page = "http://www.mrsbrno.cz"
-        self._locations_url = (self._mrs_home_page
-                               + "/index.php/kontakty/33-seznam-reviru/"
-                               + "142-seznam-rybarskych-reviru-mimopstruhovych")
-        self._location_pattern = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
-        self._location_id_pattern = "ev. číslo revíru:.*?(\\d{3}\\s*\\d{3})<"
-        self._location_name_pattern = "<title>(.*?)</title>"
-        self._gps_group_name = "gps_group"
-        self._gps = "\\d{1,2}\\s*[‘'°]\\s*" \
-                    "\\d{1,2}\\s*[‘'´]\\s*\\d{1,2}\\s*\\.?\\s*" \
-                    "\\d{1,3}\\s*(”|\"|''|'|´)\\s*N\\s*,*\\s*" \
-                    "(&nbsp;)*" \
-                    "\\d{1,2}\\s*[‘'°]\\s*" \
-                    "\\d{1,2}\\s*[‘'´]\\s*\\d{1,2}\\s*\\.?\\s*" \
-                    "\\d{1,3}\\s*(”|\"|''|'|´)\\s*E"
-        self._gps_2 = "\\d{1,2}\\s*°\\s*" \
-                      "\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*N\\s*,*\\s*" \
-                      "(&nbsp;)*" \
-                      "\\d{1,2}\\s*°\\s*" \
-                      "\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*E"
-        self._gps_3 = "\\d{1,2}\\s*[‘'°]\\s*" \
-                      "\\d{1,2}\\s*[‘'´]\\s*\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*N\\s*,*\\s*" \
-                      "(&nbsp;)*" \
-                      "\\d{1,2}\\s*°\\s*" \
-                      "\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*E"
-        self._gps_4 = "\\d{1,2}\\s*°\\s*" \
-                      "\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*N\\s*,*\\s*" \
-                      "(&nbsp;)*" \
-                      "\\d{1,2}\\s*[‘'°]\\s*" \
-                      "\\d{1,2}\\s*[‘'´]\\s*\\d{1,2}\\s*\\.?\\s*" \
-                      "\\d{1,3}\\s*(”|\"|''|'|´)\\s*E"
-        self._gps_pattern = "(?P<" + self._gps_group_name + ">" + self._gps + ")"
-        self._gps_pattern_2 = "(?P<" + self._gps_group_name + ">" + self._gps_2 + ")"
-        self._gps_pattern_3 = "(?P<" + self._gps_group_name + ">" + self._gps_3 + ")"
-        self._gps_pattern_4 = "(?P<" + self._gps_group_name + ">" + self._gps_4 + ")"
 
     def parse(self):
         locations = self._get_locations()
@@ -116,14 +78,11 @@ class MRSParser(object):
         invalid_gps = []
         for gps_string in gps_strings:
 
-            # TODO: two incorrect GPS locations, Dyje 3A
-            if gps_string == "48°45.569' N  16°52.717' E":
-                gps_string = "48° 45' 34.1388'' N, 16° 52' 43.0212'' E"
-            elif gps_string == "48°46.974' N  16°54.025' E":
-                gps_string = "48° 46' 58.44'' N, 16° 54' 1.5012'' E"
+            if gps_string in Constants.INCORRECT_GPS:
+                gps_string = Constants.INCORRECT_GPS[gps_string]
 
-            numbers = re.findall("\\d+\\.*\\d*", gps_string)
-            directions = re.findall("[NEWS]", gps_string)
+            numbers = re.findall(Constants.NUMBERS_PATTERN, gps_string)
+            directions = re.findall(Constants.DIRECTIONS_PATTERN, gps_string)
             if len(numbers) != 6 or len(directions) != 2:
                 invalid_gps.append(gps_string)
                 continue
@@ -177,26 +136,25 @@ class MRSParser(object):
 
     def _get_locations(self):
         locations = []
-        decoded_content = self._get_decoded_source_page(self._locations_url)
-        for match in re.finditer(self._location_pattern, decoded_content):
-            locations.append(self._mrs_home_page + match.group(1))
+        decoded_content = self._get_decoded_source_page(Constants.LOCATIONS_URL)
+        for match in re.finditer(Constants.LOCATION_PATTERN, decoded_content):
+            locations.append(Constants.MRS_HOME_PAGE + match.group(1))
         return locations
 
-    def _get_location_id(self, context):
-        return re.search(self._location_id_pattern, context).group(1)
+    @staticmethod
+    def _get_location_id(context):
+        return re.search(Constants.LOCATION_ID_PATTERN, context).group(1)
 
-    def _get_location_name(self, context):
-        return re.search(self._location_name_pattern, context).group(1)
+    @staticmethod
+    def _get_location_name(context):
+        return re.search(Constants.LOCATION_NAME_PATTERN, context).group(1)
 
-    def _get_gps(self, context):
+    @staticmethod
+    def _get_gps(context):
         gps = []
-        for gps_pattern in [self._gps_pattern,
-                            self._gps_pattern_2,
-                            self._gps_pattern_3,
-                            self._gps_pattern_4
-                            ]:
+        for gps_pattern in Constants.GPS_PATTERNS:
             for match in re.finditer(gps_pattern, context):
-                current_gps = match.group(self._gps_group_name).replace(
-                    "&nbsp;", " ")
+                current_gps = match.group(Constants.GPS_GROUP_NAME).replace(
+                    Constants.NON_BREAKING_SPACE, " ")
                 gps.append(current_gps)
         return gps
