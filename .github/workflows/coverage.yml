@@ -11,9 +11,9 @@ jobs:
         run: npm test
 
       - name: Monitor coverage
-        uses: slavcodev/coverage-monitor-action@v1.0.0
+        uses: devmasx/coverage-check-action@v1.1.0
         with:
+          type: lcov
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover_file: "logs/clover.xml"
-          threshold_alert: 10
-          threshold_warning: 50
+          result_path: coverage/example.lcov
+          min_coverage: 90
