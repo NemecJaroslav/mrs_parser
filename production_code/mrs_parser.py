@@ -3,38 +3,8 @@ import requests
 from geopy.distance import great_circle
 
 from .constants import Constants
-
-
-class GPSCoordinate(object):
-    def __init__(self, degrees, minutes, seconds, direction):
-        self.degrees = degrees
-        self.minutes = minutes
-        self.seconds = seconds
-        self.direction = direction
-
-    def __eq__(self, other):
-        if isinstance(other, GPSCoordinate):
-            return (self.degrees == other.degrees
-                    and self.minutes == other.minutes
-                    and self.seconds == other.seconds
-                    and self.direction == other.direction)
-        return False
-
-    def __str__(self):
-        return (str(self.degrees)
-                + "," + str(self.minutes)
-                + "," + str(self.seconds)
-                + "," + self.direction)
-
-
-class FishingLocation(object):
-    def __init__(self, identifier, name, locations):
-        self.identifier = identifier
-        self.name = name
-        self.locations = locations
-
-    def __str__(self):
-        return self.identifier + ", " + self.name
+from .gps_coordinate import GPSCoordinate
+from .fishing_location import FishingLocation
 
 
 class MRSParser(object):
