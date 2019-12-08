@@ -104,7 +104,8 @@ class MRSParser(object):
     @staticmethod
     def _dms_to_dd(degree, minutes, seconds, direction):
         dd = float(degree) + float(minutes) / 60. + float(seconds) / 3600.
-        if direction == 'W' or direction == 'S':
+        if (direction == Constants.WEST
+                or direction == Constants.SOUTH):
             return -dd
         return dd
 

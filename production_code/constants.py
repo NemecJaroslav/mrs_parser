@@ -56,4 +56,13 @@ class Constants(object):
     }
 
     NUMBERS_PATTERN = "\\d+\\.*\\d*"
-    DIRECTIONS_PATTERN = "[NEWS]"
+    NORTH = "N"
+    SOUTH = "S"
+    WEST = "W"
+    EAST = "E"
+    DIRECTIONS_PATTERN = ("["
+                          + NORTH
+                          + SOUTH
+                          + WEST
+                          + EAST
+                          + "]")
