@@ -274,6 +274,9 @@ class TestMRSParser(TestCase):
             "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/415-zeletavka-2b",
             "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/778-zeletavka-2c",
         ]
+        self.assertEqual(245, len(expected_locations))
+        self.assertEqual(sorted(expected_locations),
+                         sorted(set(expected_locations)))
         self.assertEqual(sorted(expected_locations),
                          sorted(self.parser._get_locations()))
 
@@ -1262,7 +1265,13 @@ class TestMRSParser(TestCase):
                 "461 400"
             ]
         ]
-
+        self.assertEqual(245, len(expected_results))
+        locations = [expected_result[0] for expected_result in expected_results]
+        ids = [expected_result[1] for expected_result in expected_results]
+        self.assertEqual(sorted(locations),
+                         sorted(set(locations)))
+        self.assertEqual(sorted(ids),
+                         sorted(set(ids)))
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_location_id(context)
@@ -2253,7 +2262,13 @@ class TestMRSParser(TestCase):
                 "Želetavka 2C"
             ]
         ]
-
+        self.assertEqual(245, len(expected_results))
+        locations = [expected_result[0] for expected_result in expected_results]
+        names = [expected_result[1] for expected_result in expected_results]
+        self.assertEqual(sorted(locations),
+                         sorted(set(locations)))
+        self.assertEqual(sorted(names),
+                         sorted(set(names)))
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_location_name(context)
@@ -3688,14 +3703,17 @@ class TestMRSParser(TestCase):
                 ["49°1'54.80''N, 15°33'59.90''E"]
             ]
         ]
-
+        self.assertEqual(245, len(expected_results))
+        locations = [expected_result[0] for expected_result in expected_results]
+        self.assertEqual(sorted(locations),
+                         sorted(set(locations)))
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_gps(context)
             self.assertEqual(sorted(expected_result[1]),
                              sorted(actual))
 
-    # TODO: add more test cases
+    # TODO: add more test cases & uniqueness test
     def test_convert_string_to_gps(self):
         expected_results = [
             [
@@ -3741,7 +3759,7 @@ class TestMRSParser(TestCase):
             self.assertEqual(expected_result[1],
                              self.parser._convert_string_to_gps(expected_result[0]))
 
-    # TODO: add more test cases
+    # TODO: add more test cases & uniqueness test
     def test_get_headquarters(self):
         expected_results = [
             [
@@ -3795,7 +3813,79 @@ class TestMRSParser(TestCase):
             [
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/188-brtnice-1a",
                 "Brtnice"
-            ]
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/189-buchlovicky-potok-1",
+                "Nedakonice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/190-buchlovicky-potok-1m",
+                "Nedakonice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/191-bystrice-pernstejnska-2",
+                "Bystřice nad Pernštejnem"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/777-bykovka-1a",
+                "Blansko"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/192-cezava-1",
+                "Brno 5"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/193-cezava-1a",
+                "Brno 5"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/194-cezava-2",
+                "Slavkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/195-cezava-2a",
+                "Slavkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/196-cezava-3a",
+                "Slavkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/197-cikhajsky-potok-1",
+                "Žďár nad Sázavou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/198-drevnice-1",
+                "Zlín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/199-drevnice-1a",
+                "Zlín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/200-dyje-2",
+                "Břeclav"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/201-dyje-3",
+                "Břeclav"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/202-dyje-3a",
+                "Břeclav"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/203-dyje-4",
+                "Podivín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/204-dyje-4a",
+                "Podivín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/205-dyje-4b",
+                "Rakvice"
+            ],
         ]
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
