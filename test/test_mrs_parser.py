@@ -3740,3 +3740,64 @@ class TestMRSParser(TestCase):
         for expected_result in expected_results:
             self.assertEqual(expected_result[1],
                              self.parser._convert_string_to_gps(expected_result[0]))
+
+    # TODO: add more test cases
+    def test_get_headquarters(self):
+        expected_results = [
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/176-bacicky-potok",
+                "Hrotovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/177-balas-1a",
+                "Zlín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/178-balinka-1",
+                "Velké Meziříčí"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/179-balinka-1a",
+                "Velké Meziříčí"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/180-balinka-1b",
+                "Velké Meziříčí"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/181-bily-potok-2a",
+                "Velká Bíteš"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/182-blata-3",
+                "Prostějov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/183-bobrava-1",
+                "Brno 1"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/184-bobrava-2",
+                "Rosice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/185-bobrava-2a",
+                "Rosice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/186-brodecky-potok-1",
+                "Němčice nad Hanou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/187-brtnice-1",
+                "Brtnice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/188-brtnice-1a",
+                "Brtnice"
+            ]
+        ]
+        for expected_result in expected_results:
+            context = self.parser._get_decoded_source_page(expected_result[0])
+            actual = self.parser._get_headquarters(context)
+            self.assertEqual(expected_result[1], actual)

@@ -6,6 +6,8 @@ class Constants(object):
     LOCATION_PATTERN = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
     LOCATION_ID_PATTERN = "ev. číslo revíru:.*?(\\d{3}\\s*\\d{3})<"
     LOCATION_NAME_PATTERN = "<title>(.*?)</title>"
+    HEADQUARTERS_PATTERN = "pobočný spolek pověřený hospodařením:.*?>" \
+                           "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s]+)"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
     GPS = "\\d{1,2}\\s*[‘'°]\\s*" \

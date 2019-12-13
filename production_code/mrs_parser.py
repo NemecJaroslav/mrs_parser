@@ -129,3 +129,7 @@ class MRSParser(object):
                     Constants.NON_BREAKING_SPACE, " ")
                 gps.append(current_gps)
         return gps
+
+    @staticmethod
+    def _get_headquarters(context):
+        return re.search(Constants.HEADQUARTERS_PATTERN, context).group(1)
