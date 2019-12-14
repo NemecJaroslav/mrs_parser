@@ -4569,9 +4569,188 @@ class TestMRSParser(TestCase):
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/372-rusava-2b",
                 "Holešov"
             ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/373-sazava-17",
+                "Žďár nad Sázavou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/374-sazava-18",
+                "Žďár nad Sázavou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/376-sazava-19",
+                "Žďár nad Sázavou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/377-starecsky-potok-1",
+                "Třebíč"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/378-starecsky-potok-1a",
+                "Rudíkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/379-starecsky-potok-1b",
+                "Rudíkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/380-svitava-1",
+                "Brno 3"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/382-svitava-3a",
+                "Blansko"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/381-svitava-5a",
+                "Letovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/383-svratka-1",
+                "Vranovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/384-svratka-1a",
+                "Vranovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/385-svratka-1m",
+                "Vranovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/386-svratka-2",
+                "Brno 5"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/395-svratka-2b",
+                "Brno 5"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/387-svratka-3",
+                "Brno 1"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/388-svratka-4",
+                "Brno 2"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/389-svratka-5",
+                "Brno 2"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/390-svratka-6",
+                "Veverská Bitýška"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/391-svratka-7-8a",
+                "Tišnov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/392-svratka-11m",
+                "Vír"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/393-svratka-14a",
+                "Svratka"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/394-svratka-14m",
+                "Svratka"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/396-scavnice-2a",
+                "Sehradice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/397-svabovsky-potok-1",
+                "Batelov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/398-trkmanka-1",
+                "Podivín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/399-trkmanka-2",
+                "Velké Bílovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/400-trestsky-potok-1",
+                "Třešť"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/401-valcha-1",
+                "Třešť"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/402-valcha-2",
+                "Třešť"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/403-valova-2",
+                "Prostějov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/779-vapovka-2",
+                "Telč"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/404-velicka-1",
+                "Strážnice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/405-velicka-1m",
+                "Strážnice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/406-velicka-2",
+                "Veselí nad Moravou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/416-vicemilice-1",
+                "Slavkov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/407-vlara-1",
+                "Slavičín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/408-vlara-1a",
+                "Slavičín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/409-vracov-1",
+                "Vracov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/410-zdarna-1",
+                "Boskovice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/411-zeletavka-1",
+                "Police"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/412-zeletavka-1a",
+                "Police"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/413-zeletavka-2",
+                "Jemnice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/414-zeletavka-2a",
+                "Jemnice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/415-zeletavka-2b",
+                "Želetava"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/778-zeletavka-2c",
+                "Jemnice"
+            ],
         ]
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_headquarters(context)
-            print(expected_result[0])
             self.assertEqual(expected_result[1], actual)
