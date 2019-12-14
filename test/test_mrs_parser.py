@@ -3886,6 +3886,93 @@ class TestMRSParser(TestCase):
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/205-dyje-4b",
                 "Rakvice"
             ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/206-dyje-4c",
+                "Rakvice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/207-dyje-4c-1",
+                "Brno 5"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/209-dyje-4d",
+                "Lednice"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/210-dyje-4e",
+                "Zaječí"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/211-dyje-4g",
+                "Zaječí"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/212-dyje-4m",
+                "Podivín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/128-dyje-5",
+                "MRS, z.s. Brno"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/213-dyje-5a",
+                "Hustopeče"
+            ],
+            # TODO: dropped " a pobočný spolek Mikulov" from expected result
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/130-dyje-7",
+                "MRS, z.s. Brno"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/214-dyje-7a",
+                "Mikulov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/216-dyje-7b",
+                "Mikulov"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/215-dyje-8",
+                "Hrušovany nad Jevišovkou"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/217-dyje-9",
+                "Znojmo"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/218-dyje-10",
+                "Znojmo"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/219-dyje-11",
+                "Znojmo"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/220-dyje-11a",
+                "Znojmo"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/221-dyje-15",
+                "Znojmo"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/222-dyje-19",
+                "Telč"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/223-dyje-19a",
+                "Telč"
+            ],
+
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/224-dyje-19b",
+                "Telč"
+            ],
+
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/225-dyje-19c",
+                "Telč"
+            ],
         ]
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
