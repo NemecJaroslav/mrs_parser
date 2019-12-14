@@ -11,7 +11,8 @@ class Constants(object):
     HEADQUARTERS_PATTERN_EXT = "(?:pobočný)?\\s*(?:spolek|splok) pověřený hospodařením:.*?>" \
                                "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,]+)"
     HEADQUARTERS_PATTERN = "pobočný spolek pověřený hospodařením:.*?>" \
-                           "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,]+)"
+                           "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
+                           "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
 
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
