@@ -8,8 +8,11 @@ class Constants(object):
     LOCATION_NAME_PATTERN = "<title>(.*?)</title>"
     # TODO: typo on MRS pages (splok)
     # TODO: typo on MRS pages (dropped "pobocny")
-    HEADQUARTERS_PATTERN = "(?:pobočný)?\\s*(?:spolek|splok) pověřený hospodařením:.*?>" \
+    HEADQUARTERS_PATTERN_EXT = "(?:pobočný)?\\s*(?:spolek|splok) pověřený hospodařením:.*?>" \
+                               "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,]+)"
+    HEADQUARTERS_PATTERN = "pobočný spolek pověřený hospodařením:.*?>" \
                            "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,]+)"
+
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
     GPS = "\\d{1,2}\\s*[‘'°]\\s*" \
