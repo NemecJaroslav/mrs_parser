@@ -6,11 +6,7 @@ class Constants(object):
     LOCATION_PATTERN = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
     LOCATION_ID_PATTERN = "ev. číslo revíru:.*?(\\d{3}\\s*\\d{3})<"
     LOCATION_NAME_PATTERN = "<title>(.*?)</title>"
-    # TODO: typo on MRS pages (splok)
-    # TODO: typo on MRS pages (dropped "pobocny")
-    HEADQUARTERS_PATTERN_EXT = "(?:pobočný)?\\s*(?:spolek|splok) pověřený hospodařením:.*?>" \
-                               "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,]+)"
-    HEADQUARTERS_PATTERN = "pobočný spolek pověřený hospodařením:.*?>" \
+    HEADQUARTERS_PATTERN = "hospodařením:.*?>" \
                            "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
                            "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
 

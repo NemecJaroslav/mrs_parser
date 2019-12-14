@@ -3759,7 +3759,6 @@ class TestMRSParser(TestCase):
             self.assertEqual(expected_result[1],
                              self.parser._convert_string_to_gps(expected_result[0]))
 
-    # TODO: add more test cases & uniqueness test
     def test_get_headquarters(self):
         expected_results = [
             [
@@ -3906,26 +3905,23 @@ class TestMRSParser(TestCase):
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/211-dyje-4g",
                 "Zaječí"
             ],
-            # TODO: splok
-            # [
-            #     "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/212-dyje-4m",
-            #     "Podivín"
-            # ],
-            # TODO: missing "pobočný"
-            # [
-            #     "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/128-dyje-5",
-            #     "MRS, z.s. Brno"
-            # ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/212-dyje-4m",
+                "Podivín"
+            ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/128-dyje-5",
+                "MRS, z.s. Brno"
+            ],
             [
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/213-dyje-5a",
                 "Hustopeče"
             ],
-            # TODO: missing "pobočný"
             # TODO: dropped " a pobočný spolek Mikulov" from expected result
-            # [
-            #     "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/130-dyje-7",
-            #     "MRS, z.s. Brno"
-            # ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/130-dyje-7",
+                "MRS, z.s. Brno"
+            ],
             [
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/214-dyje-7a",
                 "Mikulov"
@@ -4200,11 +4196,10 @@ class TestMRSParser(TestCase):
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/337-oslava-1",
                 "Oslavany"
             ],
-            # TODO: plural used "pobocne spolky"
-            # [
-            #     "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/338-oslava-1m",
-            #     "Ivančice"
-            # ],
+            [
+                "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/338-oslava-1m",
+                "Ivančice"
+            ],
             [
                 "http://www.mrsbrno.cz/index.php/14-mimopstruhove-reviry/339-oslava-2",
                 "Náměšť nad Oslavou"
@@ -4750,6 +4745,10 @@ class TestMRSParser(TestCase):
                 "Jemnice"
             ],
         ]
+        self.assertEqual(245, len(expected_results))
+        locations = [expected_result[0] for expected_result in expected_results]
+        self.assertEqual(sorted(locations),
+                         sorted(set(locations)))
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_headquarters(context)
