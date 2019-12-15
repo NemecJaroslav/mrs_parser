@@ -18,7 +18,8 @@ class MRSParser(object):
             self._fishing_locations.append(
                 FishingLocation(self._get_location_id(decoded_content),
                                 self._get_location_name(decoded_content),
-                                self._convert_string_to_gps(self._get_gps(decoded_content))))
+                                self._convert_string_to_gps(self._get_gps(decoded_content)),
+                                self._get_headquarters(decoded_content)))
         self._perform_self_check()
 
     def get_suitable_fishing_locations(self, start_point, distance_limit):
@@ -37,6 +38,7 @@ class MRSParser(object):
                 if distance_limit[0] <= distance < distance_limit[1]:
                     result.append((fishing_location.identifier,
                                    fishing_location.name,
+                                   fishing_location.headquarters,
                                    (dd_1, dd_2),
                                    distance))
         result.sort(key=lambda x: x[-1])
