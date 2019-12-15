@@ -1,5 +1,6 @@
 import re
 import requests
+from collections import defaultdict
 from geopy.distance import great_circle
 
 from .constants import Constants
@@ -10,16 +11,20 @@ from .fishing_location import FishingLocation
 class MRSParser(object):
     def __init__(self):
         self._fishing_locations = []
+        self._headquarter_to_locations = defaultdict(list)
 
     def parse(self):
         locations = self._get_locations()
         for location in locations:
             decoded_content = self._get_decoded_source_page(location)
+            location_name = self._get_location_name(decoded_content)
+            headquarter = self._get_headquarter(decoded_content)
             self._fishing_locations.append(
                 FishingLocation(self._get_location_id(decoded_content),
-                                self._get_location_name(decoded_content),
+                                location_name,
                                 self._convert_string_to_gps(self._get_gps(decoded_content)),
-                                self._get_headquarter(decoded_content)))
+                                headquarter))
+            self._headquarter_to_locations[headquarter].append(location_name)
         self._perform_self_check()
 
     def get_suitable_fishing_locations(self, start_point, distance_limit):
@@ -43,6 +48,12 @@ class MRSParser(object):
                                    distance))
         result.sort(key=lambda x: x[-1])
         return result
+
+    def get_all_headquarters_and_their_locations(self):
+        for headquarter in sorted(self._headquarter_to_locations,
+                                  key=lambda k: len(self._headquarter_to_locations[k]),
+                                  reverse=True):
+            print(headquarter, self._headquarter_to_locations[headquarter])
 
     @staticmethod
     def _convert_string_to_gps(gps_strings):
