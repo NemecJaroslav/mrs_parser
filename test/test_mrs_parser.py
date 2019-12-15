@@ -103,7 +103,7 @@ class TestMRSParser(TestCase):
             self.assertEqual(expected_result[1],
                              self.parser._convert_string_to_gps(expected_result[0]))
 
-    def test_get_headquarters(self):
+    def test_get_headquarter(self):
         expected_results = get_expected_headquarters()
         self.assertEqual(245, len(expected_results))
         locations = [expected_result[0] for expected_result in expected_results]
@@ -111,5 +111,5 @@ class TestMRSParser(TestCase):
                          sorted(set(locations)))
         for expected_result in expected_results:
             context = self.parser._get_decoded_source_page(expected_result[0])
-            actual = self.parser._get_headquarters(context)
+            actual = self.parser._get_headquarter(context)
             self.assertEqual(expected_result[1], actual)
