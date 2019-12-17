@@ -2,7 +2,7 @@ from unittest import TestCase
 from production_code.mrs_parser import MRSParser, GPSCoordinate
 from .test_data import (get_expected_locations, get_expected_location_ids,
                         get_expected_location_names, get_expected_gps,
-                        get_expected_headquarters)
+                        get_expected_headquarters, get_expected_area)
 
 
 class TestMRSParser(TestCase):
@@ -113,3 +113,15 @@ class TestMRSParser(TestCase):
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_headquarter(context)
             self.assertEqual(expected_result[1], actual)
+
+    def test_get_area(self):
+        expected_results = get_expected_area()
+        self.assertEqual(245, len(expected_results))
+        locations = [expected_result[0] for expected_result in expected_results]
+        self.assertEqual(sorted(locations),
+                         sorted(set(locations)))
+        for expected_result in expected_results:
+            context = self.parser._get_decoded_source_page(expected_result[0])
+            actual = self.parser._get_area(context)
+            self.assertEqual(expected_result[1], actual)
+

@@ -146,3 +146,7 @@ class MRSParser(object):
     @staticmethod
     def _get_headquarter(context):
         return re.search(Constants.HEADQUARTER_PATTERN, context).group(1)
+
+    @staticmethod
+    def _get_area(context):
+        return re.search(Constants.AREA_PATTERN, context).group(1)

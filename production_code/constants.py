@@ -9,7 +9,7 @@ class Constants(object):
     HEADQUARTER_PATTERN = "hospodařením:.*?>" \
                           "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
                           "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
-
+    AREA_PATTERN = "výměra:.*?([0-9][0-9,\\s]*)\\s+ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
     GPS = "\\d{1,2}\\s*[‘'°]\\s*" \
