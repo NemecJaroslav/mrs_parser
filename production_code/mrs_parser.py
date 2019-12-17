@@ -12,6 +12,7 @@ class MRSParser(object):
     def __init__(self):
         self._fishing_locations = []
         self._headquarter_to_locations = defaultdict(list)
+        self._headquarter_to_area = defaultdict(float)
 
     def parse(self):
         locations = self._get_locations()
@@ -19,15 +20,18 @@ class MRSParser(object):
             decoded_content = self._get_decoded_source_page(location)
             location_name = self._get_location_name(decoded_content)
             headquarter = self._get_headquarter(decoded_content)
+            area = self._get_area(decoded_content)
             self._fishing_locations.append(
                 FishingLocation(self._get_location_id(decoded_content),
                                 location_name,
                                 self._convert_string_to_gps(self._get_gps(decoded_content)),
-                                headquarter))
+                                headquarter,
+                                area))
             self._headquarter_to_locations[headquarter].append(location_name)
+            self._headquarter_to_area[headquarter] += self._string_area_to_float(area)
         self._perform_self_check()
 
-    def get_suitable_fishing_locations(self, start_point, distance_limit):
+    def print_suitable_fishing_locations(self, start_point, distance_limit):
         result = []
         for fishing_location in self._fishing_locations:
             for location in fishing_location.locations:
@@ -47,13 +51,20 @@ class MRSParser(object):
                                    (dd_1, dd_2),
                                    distance))
         result.sort(key=lambda x: x[-1])
-        return result
+        for _ in result:
+            print(_)
 
-    def get_all_headquarters_and_their_locations(self):
+    def print_all_headquarters_and_their_locations(self):
         for headquarter in sorted(self._headquarter_to_locations,
                                   key=lambda k: len(self._headquarter_to_locations[k]),
                                   reverse=True):
             print(headquarter, self._headquarter_to_locations[headquarter])
+
+    def print_all_headquarters_and_their_areas(self):
+        for headquarter in sorted(self._headquarter_to_area,
+                                  key=self._headquarter_to_area.get,
+                                  reverse=True):
+            print(headquarter, self._headquarter_to_area[headquarter])
 
     @staticmethod
     def _convert_string_to_gps(gps_strings):
@@ -150,3 +161,7 @@ class MRSParser(object):
     @staticmethod
     def _get_area(context):
         return re.search(Constants.AREA_PATTERN, context).group(1)
+
+    @staticmethod
+    def _string_area_to_float(area):
+        return float(re.sub(r"\s+", "", re.sub(r",", ".", area)))
