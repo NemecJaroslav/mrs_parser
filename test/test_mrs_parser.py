@@ -1,6 +1,6 @@
 from unittest import TestCase
 from production_code.mrs_parser import MRSParser, GPSCoordinate
-from .test_data import (get_expected_locations, get_expected_location_ids,
+from .test_data import (get_expected_locations_url, get_expected_location_ids,
                         get_expected_location_names, get_expected_gps,
                         get_expected_headquarters, get_expected_area)
 
@@ -9,13 +9,13 @@ class TestMRSParser(TestCase):
     def setUp(self):
         self.parser = MRSParser()
 
-    def test_get_locations(self):
-        expected_locations = get_expected_locations()
-        self.assertEqual(245, len(expected_locations))
-        self.assertEqual(sorted(expected_locations),
-                         sorted(set(expected_locations)))
-        self.assertEqual(sorted(expected_locations),
-                         sorted(self.parser._get_locations()))
+    def test_get_locations_url(self):
+        expected_locations_url = get_expected_locations_url()
+        self.assertEqual(245, len(expected_locations_url))
+        self.assertEqual(sorted(expected_locations_url),
+                         sorted(set(expected_locations_url)))
+        self.assertEqual(sorted(expected_locations_url),
+                         sorted(self.parser._get_locations_url()))
 
     def test_get_location_id(self):
         expected_results = get_expected_location_ids()

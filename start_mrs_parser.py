@@ -12,8 +12,8 @@ from production_code.mrs_parser import MRSParser
 if __name__ == "__main__":
     parser = MRSParser()
     parser.parse()
-    parser.print_all_headquarters_and_their_locations()
-    parser.print_all_headquarters_and_their_areas()
+    # parser.print_all_headquarters_and_their_locations()
+    # parser.print_all_headquarters_and_their_areas()
     parser.print_suitable_fishing_locations(
-        (49.1806731, 16.6801281),
+        (49.4677572, 17.2850111),
         (0., 30.))

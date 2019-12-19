@@ -1,9 +1,10 @@
 class Constants(object):
     MRS_HOME_PAGE = "http://www.mrsbrno.cz"
-    LOCATIONS_URL = (MRS_HOME_PAGE
-                     + "/index.php/kontakty/33-seznam-reviru/"
-                     + "142-seznam-rybarskych-reviru-mimopstruhovych")
-    LOCATION_PATTERN = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
+    LOCATIONS_LIST_URL = (
+            MRS_HOME_PAGE
+            + "/index.php/kontakty/33-seznam-reviru/"
+            + "142-seznam-rybarskych-reviru-mimopstruhovych")
+    LOCATION_URL_PATTERN = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
     LOCATION_ID_PATTERN = "ev. číslo revíru:.*?(\\d{3}\\s*\\d{3})<"
     LOCATION_NAME_PATTERN = "<title>(.*?)</title>"
     HEADQUARTER_PATTERN = "hospodařením:.*?>" \

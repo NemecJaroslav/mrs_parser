@@ -11,30 +11,26 @@ from .fishing_location import FishingLocation
 class MRSParser(object):
     def __init__(self):
         self._fishing_locations = []
-        self._headquarter_to_locations = defaultdict(list)
-        self._headquarter_to_area = defaultdict(float)
+        self._headquarter_to_fishing_locations = defaultdict(list)
 
     def parse(self):
-        locations = self._get_locations()
-        for location in locations:
-            decoded_content = self._get_decoded_source_page(location)
-            location_name = self._get_location_name(decoded_content)
-            headquarter = self._get_headquarter(decoded_content)
-            area = self._get_area(decoded_content)
-            self._fishing_locations.append(
-                FishingLocation(self._get_location_id(decoded_content),
-                                location_name,
-                                self._convert_string_to_gps(self._get_gps(decoded_content)),
-                                headquarter,
-                                area))
-            self._headquarter_to_locations[headquarter].append(location_name)
-            self._headquarter_to_area[headquarter] += self._string_area_to_float(area)
+        for location_url in self._get_locations_url():
+            decoded_page = self._get_decoded_source_page(location_url)
+            fishing_location = FishingLocation(
+                self._get_location_id(decoded_page),
+                self._get_location_name(decoded_page),
+                self._get_headquarter(decoded_page),
+                self._string_area_to_float(self._get_area(decoded_page)),
+                self._convert_string_to_gps(self._get_gps(decoded_page))
+            )
+            self._fishing_locations.append(fishing_location)
+            self._headquarter_to_fishing_locations[fishing_location.headquarter].append(fishing_location)
         self._perform_self_check()
 
     def print_suitable_fishing_locations(self, start_point, distance_limit):
-        result = []
+        suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
-            for location in fishing_location.locations:
+            for location in fishing_location.gps_locations:
                 dd_1 = self._dms_to_dd(location[0].degrees,
                                        location[0].minutes,
                                        location[0].seconds,
@@ -45,26 +41,37 @@ class MRSParser(object):
                                        location[1].direction)
                 distance = self._get_distance_in_km(start_point, (dd_1, dd_2))
                 if distance_limit[0] <= distance < distance_limit[1]:
-                    result.append((fishing_location.identifier,
-                                   fishing_location.name,
-                                   fishing_location.headquarter,
-                                   (dd_1, dd_2),
-                                   distance))
-        result.sort(key=lambda x: x[-1])
-        for _ in result:
-            print(_)
+                    suitable_fishing_locations.append(
+                        (fishing_location.identifier,
+                         fishing_location.name,
+                         fishing_location.headquarter,
+                         (dd_1, dd_2),
+                         distance))
+        suitable_fishing_locations.sort(key=lambda x: x[-1])
+        for suitable_fishing_location in suitable_fishing_locations:
+            print(suitable_fishing_location)
 
     def print_all_headquarters_and_their_locations(self):
-        for headquarter in sorted(self._headquarter_to_locations,
-                                  key=lambda k: len(self._headquarter_to_locations[k]),
+        for headquarter in sorted(self._headquarter_to_fishing_locations,
+                                  key=lambda k: len(self._headquarter_to_fishing_locations[k]),
                                   reverse=True):
-            print(headquarter, self._headquarter_to_locations[headquarter])
+            print("{}, {} location(s)".format(
+                headquarter,
+                len(self._headquarter_to_fishing_locations[
+                        headquarter])), end=":\n")
+            for fishing_location in self._headquarter_to_fishing_locations[headquarter]:
+                print(fishing_location.name, end=", ")
+            print(end="\n")
 
     def print_all_headquarters_and_their_areas(self):
-        for headquarter in sorted(self._headquarter_to_area,
-                                  key=self._headquarter_to_area.get,
+        for headquarter in sorted(self._headquarter_to_fishing_locations,
+                                  key=lambda k: sum([fishing_location.area
+                                                     for fishing_location in
+                                                     self._headquarter_to_fishing_locations[k]]),
                                   reverse=True):
-            print(headquarter, self._headquarter_to_area[headquarter])
+            print("{}, {} ha".format(headquarter, sum([fishing_location.area
+                                                       for fishing_location in
+                                                       self._headquarter_to_fishing_locations[headquarter]])))
 
     @staticmethod
     def _convert_string_to_gps(gps_strings):
@@ -129,12 +136,12 @@ class MRSParser(object):
             [item.name for item in self._fishing_locations])
         print("Done")
 
-    def _get_locations(self):
-        locations = []
-        decoded_content = self._get_decoded_source_page(Constants.LOCATIONS_URL)
-        for match in re.finditer(Constants.LOCATION_PATTERN, decoded_content):
-            locations.append(Constants.MRS_HOME_PAGE + match.group(1))
-        return locations
+    def _get_locations_url(self):
+        locations_url = []
+        decoded_page = self._get_decoded_source_page(Constants.LOCATIONS_LIST_URL)
+        for match in re.finditer(Constants.LOCATION_URL_PATTERN, decoded_page):
+            locations_url.append(Constants.MRS_HOME_PAGE + match.group(1))
+        return locations_url
 
     @staticmethod
     def _get_location_id(context):

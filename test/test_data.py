@@ -5,7 +5,7 @@ def zip_lists(list_1, list_2):
     return result
 
 
-def get_expected_locations():
+def get_expected_locations_url():
     locations_short = [
         # B
         "176-bacicky-potok",
@@ -525,7 +525,8 @@ def get_expected_location_ids():
         "461 182",
         "461 400",
     ]
-    return zip_lists(get_expected_locations(), identifiers)
+    return zip_lists(get_expected_locations_url(),
+                     identifiers)
 
 
 def get_expected_location_names():
@@ -776,7 +777,8 @@ def get_expected_location_names():
         "Želetavka 2B",
         "Želetavka 2C",
     ]
-    return zip_lists(get_expected_locations(), names)
+    return zip_lists(get_expected_locations_url(),
+                     names)
 
 
 def get_expected_gps():
@@ -1307,14 +1309,14 @@ def get_expected_gps():
          "48°57'56.85''N, 16°07'31.13''E"],
         ["49°02'17.67''N, 16°06'04.09''E",
          "49°07'04.27''N, 15°49'56.33''E"],
-       ["49°07'33.07''N, 15°53'21.47''E",
-        "49°05'43.70''N, 15°54'59.60''E",
-        "49°06'06.47''N, 15°53'23.74''E",
-        "49°06'15.06''N, 15°55'42.62''E",
-        "49°02'21.94''N, 15°59'06.02''E",
-        "49°07'00.64''N, 15°55'13.77''E",
-        "49°03'14.38''N, 16°02'33.22''E",
-        "49°06'09.36''N, 15°56'30.23''E"],
+        ["49°07'33.07''N, 15°53'21.47''E",
+         "49°05'43.70''N, 15°54'59.60''E",
+         "49°06'06.47''N, 15°53'23.74''E",
+         "49°06'15.06''N, 15°55'42.62''E",
+         "49°02'21.94''N, 15°59'06.02''E",
+         "49°07'00.64''N, 15°55'13.77''E",
+         "49°03'14.38''N, 16°02'33.22''E",
+         "49°06'09.36''N, 15°56'30.23''E"],
         ["49°05'19.87''N, 15°54'27.97''E",
          "49°05'30.39''N, 15°53'03.03''E"],
         ["49°07'04.27''N, 15°49'53.33''E",
@@ -1466,7 +1468,8 @@ def get_expected_gps():
          "49°08'04.95''N, 15°39'38.83''E"],
         ["49°1'54.80''N, 15°33'59.90''E"],
     ]
-    return zip_lists(get_expected_locations(), gps)
+    return zip_lists(get_expected_locations_url(),
+                     gps)
 
 
 def get_expected_headquarters():
@@ -1718,7 +1721,8 @@ def get_expected_headquarters():
         "Želetava",
         "Jemnice",
     ]
-    return zip_lists(get_expected_locations(), headquarters)
+    return zip_lists(get_expected_locations_url(),
+                     headquarters)
 
 
 def get_expected_area():
@@ -1969,4 +1973,5 @@ def get_expected_area():
         "4,3",
         "7,9",
     ]
-    return zip_lists(get_expected_locations(), areas)
+    return zip_lists(get_expected_locations_url(),
+                     areas)
