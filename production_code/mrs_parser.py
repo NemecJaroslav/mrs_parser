@@ -30,48 +30,73 @@ class MRSParser(object):
     def print_suitable_fishing_locations(self, start_point, distance_limit):
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
-            for location in fishing_location.gps_locations:
-                dd_1 = self._dms_to_dd(location[0].degrees,
-                                       location[0].minutes,
-                                       location[0].seconds,
-                                       location[0].direction)
-                dd_2 = self._dms_to_dd(location[1].degrees,
-                                       location[1].minutes,
-                                       location[1].seconds,
-                                       location[1].direction)
-                distance = self._get_distance_in_km(start_point, (dd_1, dd_2))
-                if distance_limit[0] <= distance < distance_limit[1]:
+            for dms_1, dms_2 in fishing_location.gps_locations:
+                dd = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
+                distance = self._get_distance_in_km(start_point, dd)
+                if (distance_limit.min_distance
+                        <= distance < distance_limit.max_distance):
                     suitable_fishing_locations.append(
                         (fishing_location.identifier,
                          fishing_location.name,
                          fishing_location.headquarter,
-                         (dd_1, dd_2),
+                         dd,
                          distance))
         suitable_fishing_locations.sort(key=lambda x: x[-1])
-        for suitable_fishing_location in suitable_fishing_locations:
-            print(suitable_fishing_location)
+        self._print_separated_list(suitable_fishing_locations, Constants.NEW_LINE)
 
     def print_all_headquarters_and_their_locations(self):
-        for headquarter in sorted(self._headquarter_to_fishing_locations,
-                                  key=lambda k: len(self._headquarter_to_fishing_locations[k]),
-                                  reverse=True):
-            print("{}, {} location(s)".format(
+        for headquarter in sorted(
+                self._headquarter_to_fishing_locations,
+                key=lambda k: len(self._headquarter_to_fishing_locations[k]),
+                reverse=True):
+            print(Constants.HEADQUARTER_AND_THEIR_LOCATIONS_OUTPUT.format(
                 headquarter,
-                len(self._headquarter_to_fishing_locations[
-                        headquarter])), end=":\n")
-            for fishing_location in self._headquarter_to_fishing_locations[headquarter]:
-                print(fishing_location.name, end=", ")
-            print(end="\n")
+                len(self._headquarter_to_fishing_locations[headquarter])))
+            self._print_separated_list(
+                [fishing_location.name
+                 for fishing_location
+                 in self._headquarter_to_fishing_locations[headquarter]],
+                Constants.COMMA)
 
     def print_all_headquarters_and_their_areas(self):
-        for headquarter in sorted(self._headquarter_to_fishing_locations,
-                                  key=lambda k: sum([fishing_location.area
-                                                     for fishing_location in
-                                                     self._headquarter_to_fishing_locations[k]]),
-                                  reverse=True):
-            print("{}, {} ha".format(headquarter, sum([fishing_location.area
-                                                       for fishing_location in
-                                                       self._headquarter_to_fishing_locations[headquarter]])))
+        for headquarter in sorted(
+                self._headquarter_to_fishing_locations,
+                key=lambda k: sum([fishing_location.area
+                                   for fishing_location in
+                                   self._headquarter_to_fishing_locations[k]]),
+                reverse=True):
+            print(Constants.HEADQUARTER_AND_THEIR_AREA_OUTPUT.format(
+                headquarter,
+                sum([fishing_location.area
+                     for fishing_location
+                     in self._headquarter_to_fishing_locations[headquarter]])))
+
+    def print_fishing_summary(self, visits):
+        print("All visits: {}".format(len(visits)))
+        for visit in sorted(set(visits)):
+            fishing_location_name = [
+                fishing_location.name for fishing_location
+                in self._fishing_locations
+                if (self._remove_white_characters(fishing_location.identifier)
+                    == self._remove_white_characters(visit))]
+            print("{} {} {}x".format(visit,
+                                     fishing_location_name[0],
+                                     visits.count(visit)))
+
+    def _perform_self_check(self):
+        print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)
+        self._verify_uniqueness(
+            [item.identifier for item in self._fishing_locations])
+        print(Constants.UNIQUENESS_NAME_CHECK_OUTPUT)
+        self._verify_uniqueness(
+            [item.name for item in self._fishing_locations])
+
+    def _get_locations_url(self):
+        locations_url = []
+        decoded_page = self._get_decoded_source_page(Constants.LOCATIONS_LIST_URL)
+        for match in re.finditer(Constants.LOCATION_URL_PATTERN, decoded_page):
+            locations_url.append(Constants.MRS_HOME_PAGE + match.group(1))
+        return locations_url
 
     @staticmethod
     def _convert_string_to_gps(gps_strings):
@@ -97,16 +122,18 @@ class MRSParser(object):
                                          directions[1])
             result.append((first_coord, second_coord))
         if invalid_gps:
-            print("The following GPS were excluded:")
-            for _ in invalid_gps:
-                print(_)
+            print(Constants.EXCLUDED_GPS_LOCATIONS)
+            MRSParser._print_separated_list(invalid_gps,
+                                            Constants.NEW_LINE)
         return result
 
     @staticmethod
-    def _dms_to_dd(degree, minutes, seconds, direction):
-        dd = float(degree) + float(minutes) / 60. + float(seconds) / 3600.
-        if (direction == Constants.WEST
-                or direction == Constants.SOUTH):
+    def _dms_to_dd(dms):
+        dd = (float(dms.degrees)
+              + float(dms.minutes) / 60.
+              + float(dms.seconds) / 3600.)
+        if (dms.direction == Constants.WEST
+                or dms.direction == Constants.SOUTH):
             return -dd
         return dd
 
@@ -116,8 +143,7 @@ class MRSParser(object):
 
     @staticmethod
     def _get_decoded_source_page(url):
-        page = requests.get(url)
-        return page.content.decode('utf-8')
+        return requests.get(url).content.decode(Constants.UTF8)
 
     @staticmethod
     def _verify_uniqueness(items):
@@ -126,22 +152,6 @@ class MRSParser(object):
             for item in set_items:
                 if items.count(item) > 1:
                     print(item)
-
-    def _perform_self_check(self):
-        print("Checking identifiers uniqueness:")
-        self._verify_uniqueness(
-            [item.identifier for item in self._fishing_locations])
-        print("Checking names uniqueness:")
-        self._verify_uniqueness(
-            [item.name for item in self._fishing_locations])
-        print("Done")
-
-    def _get_locations_url(self):
-        locations_url = []
-        decoded_page = self._get_decoded_source_page(Constants.LOCATIONS_LIST_URL)
-        for match in re.finditer(Constants.LOCATION_URL_PATTERN, decoded_page):
-            locations_url.append(Constants.MRS_HOME_PAGE + match.group(1))
-        return locations_url
 
     @staticmethod
     def _get_location_id(context):
@@ -157,7 +167,7 @@ class MRSParser(object):
         for gps_pattern in Constants.GPS_PATTERNS:
             for match in re.finditer(gps_pattern, context):
                 current_gps = match.group(Constants.GPS_GROUP_NAME).replace(
-                    Constants.NON_BREAKING_SPACE, " ")
+                    Constants.NON_BREAKING_SPACE, Constants.SPACE)
                 gps.append(current_gps)
         return gps
 
@@ -171,4 +181,18 @@ class MRSParser(object):
 
     @staticmethod
     def _string_area_to_float(area):
-        return float(re.sub(r"\s+", "", re.sub(r",", ".", area)))
+        return float(MRSParser._remove_white_characters(
+            MRSParser._replace_comma_with_dot(area)))
+
+    @staticmethod
+    def _replace_comma_with_dot(string):
+        return re.sub(Constants.COMMA, Constants.DOT, string)
+
+    @staticmethod
+    def _remove_white_characters(string):
+        return re.sub(Constants.AT_LEAST_ONE_WHITE_CHARACTER,
+                      Constants.EMPTY_STRING, string)
+
+    @staticmethod
+    def _print_separated_list(li, separator):
+        print(separator.join([str(item) for item in li]))

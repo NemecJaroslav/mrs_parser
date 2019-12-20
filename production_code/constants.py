@@ -10,6 +10,8 @@ class Constants(object):
     HEADQUARTER_PATTERN = "hospodařením:.*?>" \
                           "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
                           "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
+    HEADQUARTER_AND_THEIR_LOCATIONS_OUTPUT = "{}, {} location(s):"
+    HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
     AREA_PATTERN = "výměra:.*?([0-9][0-9,\\s]*)\\s+ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
@@ -71,3 +73,13 @@ class Constants(object):
                           + WEST
                           + EAST
                           + "]")
+    EXCLUDED_GPS_LOCATIONS = "The following GPS were excluded:"
+    UNIQUENESS_ID_CHECK_OUTPUT = "Checking identifiers uniqueness:"
+    UNIQUENESS_NAME_CHECK_OUTPUT = "Checking names uniqueness:"
+    AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"
+    COMMA = ","
+    DOT = "."
+    SPACE = " "
+    EMPTY_STRING = ""
+    NEW_LINE = "\n"
+    UTF8 = "utf-8"
