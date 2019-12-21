@@ -91,11 +91,15 @@ class MRSParser(object):
         self._verify_uniqueness(
             [item.name for item in self._fishing_locations])
 
-    def _get_locations_url(self):
+    @staticmethod
+    def _get_locations_url():
         locations_url = []
-        decoded_page = self._get_decoded_source_page(Constants.LOCATIONS_LIST_URL)
+        decoded_page = MRSParser._get_decoded_source_page(
+            Constants.LOCATIONS_LIST_URL)
         for match in re.finditer(Constants.LOCATION_URL_PATTERN, decoded_page):
-            locations_url.append(Constants.MRS_HOME_PAGE + match.group(1))
+            locations_url.append(
+                Constants.MRS_HOME_PAGE
+                + match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME))
         return locations_url
 
     @staticmethod
@@ -155,11 +159,13 @@ class MRSParser(object):
 
     @staticmethod
     def _get_location_id(context):
-        return re.search(Constants.LOCATION_ID_PATTERN, context).group(1)
+        return re.search(Constants.LOCATION_ID_PATTERN, context).group(
+            Constants.LOCATION_ID_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_location_name(context):
-        return re.search(Constants.LOCATION_NAME_PATTERN, context).group(1)
+        return re.search(Constants.LOCATION_NAME_PATTERN, context).group(
+            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_gps(context):
@@ -173,11 +179,13 @@ class MRSParser(object):
 
     @staticmethod
     def _get_headquarter(context):
-        return re.search(Constants.HEADQUARTER_PATTERN, context).group(1)
+        return re.search(Constants.HEADQUARTER_PATTERN, context).group(
+            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_area(context):
-        return re.search(Constants.AREA_PATTERN, context).group(1)
+        return re.search(Constants.AREA_PATTERN, context).group(
+            Constants.AREA_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _string_area_to_float(area):

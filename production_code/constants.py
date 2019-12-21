@@ -4,15 +4,29 @@ class Constants(object):
             MRS_HOME_PAGE
             + "/index.php/kontakty/33-seznam-reviru/"
             + "142-seznam-rybarskych-reviru-mimopstruhovych")
-    LOCATION_URL_PATTERN = "(/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>"
-    LOCATION_ID_PATTERN = "ev. číslo revíru:.*?(\\d{3}\\s*\\d{3})<"
-    LOCATION_NAME_PATTERN = "<title>(.*?)</title>"
+    LOCATION_URL_PATTERN_GROUP_NAME = "location_url"
+    LOCATION_URL_PATTERN = ("(?P<"
+                            + LOCATION_URL_PATTERN_GROUP_NAME
+                            + ">/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>")
+    LOCATION_ID_PATTERN_GROUP_NAME = "location_id"
+    LOCATION_ID_PATTERN = ("ev. číslo revíru:.*?(?P<"
+                           + LOCATION_ID_PATTERN_GROUP_NAME
+                           + ">\\d{3}\\s*\\d{3})<")
+    LOCATION_NAME_PATTERN_GROUP_NAME = "location_name"
+    LOCATION_NAME_PATTERN = ("<title>(?P<"
+                             + LOCATION_NAME_PATTERN_GROUP_NAME
+                             + ">.*?)</title>")
+    HEADQUARTER_PATTERN_GROUP_NAME = "headquarter"
     HEADQUARTER_PATTERN = "hospodařením:.*?>" \
-                          "([a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
+                          "(?P<" + HEADQUARTER_PATTERN_GROUP_NAME\
+                          + ">[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
                           "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
     HEADQUARTER_AND_THEIR_LOCATIONS_OUTPUT = "{}, {} location(s):"
     HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
-    AREA_PATTERN = "výměra:.*?([0-9][0-9,\\s]*)\\s+ha"
+    AREA_PATTERN_GROUP_NAME = "area"
+    AREA_PATTERN = "výměra:.*?(?P<"\
+                   + AREA_PATTERN_GROUP_NAME\
+                   + ">[0-9][0-9,\\s]*)\\s+ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
     GPS = "\\d{1,2}\\s*[‘'°]\\s*" \
