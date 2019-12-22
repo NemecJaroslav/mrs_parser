@@ -90,6 +90,8 @@ class Constants(object):
     EXCLUDED_GPS_LOCATIONS = "The following GPS were excluded:"
     UNIQUENESS_ID_CHECK_OUTPUT = "Checking identifiers uniqueness:"
     UNIQUENESS_NAME_CHECK_OUTPUT = "Checking names uniqueness:"
+    SUITABLE_FISHING_LOCATION = "suitable_fishing_location"
+    SUITABLE_FISHING_LOCATION_MEMBERS = "id name headquarter gps distance"
     AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"
     COMMA = ","
     DOT = "."

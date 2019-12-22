@@ -1,6 +1,6 @@
 import re
 import requests
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 from geopy.distance import great_circle
 
 from .constants import Constants
@@ -28,6 +28,9 @@ class MRSParser(object):
         self._perform_self_check()
 
     def print_suitable_fishing_locations(self, start_point, distance_limit):
+        suitable_fishing_location = namedtuple(
+            Constants.SUITABLE_FISHING_LOCATION,
+            Constants.SUITABLE_FISHING_LOCATION_MEMBERS)
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
             for dms_1, dms_2 in fishing_location.gps_locations:
@@ -36,12 +39,14 @@ class MRSParser(object):
                 if (distance_limit.min_distance
                         <= distance < distance_limit.max_distance):
                     suitable_fishing_locations.append(
-                        (fishing_location.identifier,
-                         fishing_location.name,
-                         fishing_location.headquarter,
-                         dd,
-                         distance))
-        suitable_fishing_locations.sort(key=lambda x: x[-1])
+                        suitable_fishing_location(
+                            fishing_location.identifier,
+                            fishing_location.name,
+                            fishing_location.headquarter,
+                            dd,
+                            distance)
+                        )
+        suitable_fishing_locations.sort(key=lambda x: x.distance)
         self._print_separated_list(suitable_fishing_locations, Constants.NEW_LINE)
 
     def print_all_headquarters_and_their_locations(self):
