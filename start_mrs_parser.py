@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.print_suitable_fishing_locations(
         (49.1806731, 16.6801281),
         DistanceLimit(0., 30.))
-    parser.print_fishing_summary([
+    parser.print_fishing_summary_given_by_id([
         "461171",
         "461221",
         "461187",
@@ -55,4 +55,10 @@ if __name__ == "__main__":
         "461012",
         "461213",
         "461015",
+    ])
+
+    parser.print_fishing_summary_given_by_name([
+        "Žďárná 1",
+        "Kovalovický potok 1",
+        "Žďárná 1",
     ])

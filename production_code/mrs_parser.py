@@ -6,6 +6,7 @@ from geopy.distance import great_circle
 from .constants import Constants
 from .gps_coordinate import GPSCoordinate
 from .fishing_location import FishingLocation
+from .fishing_summary import FishingSummary
 
 
 class MRSParser(object):
@@ -76,17 +77,41 @@ class MRSParser(object):
                      for fishing_location
                      in self._headquarter_to_fishing_locations[headquarter]])))
 
-    def print_fishing_summary(self, visits):
-        print("All visits: {}".format(len(visits)))
-        for visit in sorted(set(visits)):
-            fishing_location_name = [
-                fishing_location.name for fishing_location
+    def print_fishing_summary_given_by_id(self, visits):
+        self._print_fishing_summary(
+            [FishingSummary(visit,
+                            None,
+                            visits.count(visit))
+             for visit in set(visits)], len(visits))
+
+    def print_fishing_summary_given_by_name(self, visits):
+        self._print_fishing_summary(
+            [FishingSummary(None,
+                            visit,
+                            visits.count(visit))
+             for visit in set(visits)], len(visits))
+
+    def _print_fishing_summary(self, fishing_summary, total_visits_count):
+        print(Constants.FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT.format(
+            total_visits_count))
+        for record in fishing_summary:
+            if record.name is None:
+                record.name = self._identifier_to_name(record.identifier)
+            elif record.identifier is None:
+                record.identifier = self._name_to_identifier(record.name)
+        fishing_summary.sort(key=lambda x: x.identifier)
+        self._print_separated_list(fishing_summary, Constants.NEW_LINE)
+
+    def _identifier_to_name(self, identifier):
+        return [fishing_location.name for fishing_location
                 in self._fishing_locations
                 if (self._remove_white_characters(fishing_location.identifier)
-                    == self._remove_white_characters(visit))]
-            print("{} {} {}x".format(visit,
-                                     fishing_location_name[0],
-                                     visits.count(visit)))
+                    == self._remove_white_characters(identifier))][0]
+
+    def _name_to_identifier(self, name):
+        return [fishing_location.identifier for fishing_location
+                in self._fishing_locations
+                if fishing_location.name == name][0]
 
     def _perform_self_check(self):
         print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)

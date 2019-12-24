@@ -92,6 +92,7 @@ class Constants(object):
     UNIQUENESS_NAME_CHECK_OUTPUT = "Checking names uniqueness:"
     SUITABLE_FISHING_LOCATION = "suitable_fishing_location"
     SUITABLE_FISHING_LOCATION_MEMBERS = "id name headquarter gps distance"
+    FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT = "Total visits count = {}"
     AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"
     COMMA = ","
     DOT = "."
