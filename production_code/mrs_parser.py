@@ -78,6 +78,7 @@ class MRSParser(object):
                      in self._headquarter_to_fishing_locations[headquarter]])))
 
     def print_fishing_summary_given_by_id(self, visits):
+        visits = [self._remove_white_characters(visit) for visit in visits]
         self._print_fishing_summary(
             [FishingSummary(visit,
                             None,
@@ -85,6 +86,7 @@ class MRSParser(object):
              for visit in set(visits)], len(visits))
 
     def print_fishing_summary_given_by_name(self, visits):
+        visits = [visit.strip().upper() for visit in visits]
         self._print_fishing_summary(
             [FishingSummary(None,
                             visit,
@@ -106,12 +108,12 @@ class MRSParser(object):
         return [fishing_location.name for fishing_location
                 in self._fishing_locations
                 if (self._remove_white_characters(fishing_location.identifier)
-                    == self._remove_white_characters(identifier))][0]
+                    == identifier)][0]
 
     def _name_to_identifier(self, name):
         return [fishing_location.identifier for fishing_location
                 in self._fishing_locations
-                if fishing_location.name == name][0]
+                if fishing_location.name.strip().upper() == name][0]
 
     def _perform_self_check(self):
         print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)
