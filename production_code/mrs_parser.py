@@ -18,9 +18,9 @@ class MRSParser(object):
         for location_url in self._get_locations_url():
             decoded_page = self._get_decoded_source_page(location_url)
             fishing_location = FishingLocation(
-                self._get_location_id(decoded_page),
-                self._get_location_name(decoded_page),
-                self._get_headquarter(decoded_page),
+                self._remove_white_characters(self._get_location_id(decoded_page)),
+                self._get_location_name(decoded_page).strip().upper(),
+                self._get_headquarter(decoded_page).strip().upper(),
                 self._string_area_to_float(self._get_area(decoded_page)),
                 self._convert_string_to_gps(self._get_gps(decoded_page))
             )
@@ -107,13 +107,12 @@ class MRSParser(object):
     def _identifier_to_name(self, identifier):
         return [fishing_location.name for fishing_location
                 in self._fishing_locations
-                if (self._remove_white_characters(fishing_location.identifier)
-                    == identifier)][0]
+                if fishing_location.identifier == identifier][0]
 
     def _name_to_identifier(self, name):
         return [fishing_location.identifier for fishing_location
                 in self._fishing_locations
-                if fishing_location.name.strip().upper() == name][0]
+                if fishing_location.name == name][0]
 
     def _perform_self_check(self):
         print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)
