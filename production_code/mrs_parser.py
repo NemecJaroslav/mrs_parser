@@ -161,9 +161,9 @@ class MRSParser(object):
 
     @staticmethod
     def _dms_to_dd(dms):
-        dd = (float(dms.degrees)
-              + float(dms.minutes) / 60.
-              + float(dms.seconds) / 3600.)
+        dd = (dms.degrees
+              + dms.minutes / Constants.MINUTES_IN_HOUR
+              + dms.seconds / Constants.SECONDS_IN_HOUR)
         if (dms.direction == Constants.WEST
                 or dms.direction == Constants.SOUTH):
             return -dd
@@ -182,7 +182,7 @@ class MRSParser(object):
         set_items = set(items)
         if len(items) != len(set_items):
             for item in set_items:
-                if items.count(item) > 1:
+                if items.count(item) > Constants.UNIQUENESS_OCCURRENCE_COUNT:
                     print(item)
 
     @staticmethod
