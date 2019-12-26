@@ -143,17 +143,14 @@ class MRSParser(object):
 
             numbers = re.findall(Constants.NUMBERS_PATTERN, gps_string)
             directions = re.findall(Constants.DIRECTIONS_PATTERN, gps_string)
-            if len(numbers) != 6 or len(directions) != 2:
+            if (len(numbers) != Constants.NUMBERS_IN_DMS_FORMAT
+                    or len(directions) != Constants.DIRECTIONS_IN_DMS_FORMAT):
                 invalid_gps.append(gps_string)
                 continue
-            first_coord = GPSCoordinate(float(numbers[0]),
-                                        float(numbers[1]),
-                                        float(numbers[2]),
-                                        directions[0])
-            second_coord = GPSCoordinate(float(numbers[3]),
-                                         float(numbers[4]),
-                                         float(numbers[5]),
-                                         directions[1])
+            degrees_1, minutes_1, seconds_1, degrees_2, minutes_2, seconds_2 = map(float, numbers)
+            direction_1, direction_2 = directions
+            first_coord = GPSCoordinate(degrees_1, minutes_1, seconds_1, direction_1)
+            second_coord = GPSCoordinate(degrees_2, minutes_2, seconds_2, direction_2)
             result.append((first_coord, second_coord))
         if invalid_gps:
             print(Constants.EXCLUDED_GPS_LOCATIONS)

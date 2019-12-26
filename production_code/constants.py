@@ -88,6 +88,8 @@ class Constants(object):
                           + EAST
                           + "]")
     EXCLUDED_GPS_LOCATIONS = "The following GPS were excluded:"
+    NUMBERS_IN_DMS_FORMAT = 6
+    DIRECTIONS_IN_DMS_FORMAT = 2
     UNIQUENESS_ID_CHECK_OUTPUT = "Checking identifiers uniqueness:"
     UNIQUENESS_NAME_CHECK_OUTPUT = "Checking names uniqueness:"
     SUITABLE_FISHING_LOCATION = "suitable_fishing_location"
