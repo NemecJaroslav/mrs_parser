@@ -1,5 +1,6 @@
 import re
 import requests
+import itertools
 from collections import defaultdict, namedtuple
 from geopy.distance import great_circle
 
@@ -92,6 +93,49 @@ class MRSParser(object):
                             visit,
                             visits.count(visit))
              for visit in set(visits)], len(visits))
+
+    def print_suspiciously_close_gps_locations(self, distance_limit):
+        fishing_location_index = 0
+        while fishing_location_index < len(self._fishing_locations):
+            for gps_1, gps_2 in itertools.combinations(
+                    self._fishing_locations[
+                        fishing_location_index].gps_locations, 2):
+                gps_1_dms_1, gps_1_dms_2 = gps_1
+                gps_2_dms_1, gps_2_dms_2 = gps_2
+                gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
+                gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
+                distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
+                if (distance_limit.min_distance
+                        <= distance <= distance_limit.max_distance):
+                    print(self._fishing_locations[
+                        fishing_location_index].name)
+                    print(gps_1_dd)
+                    print(gps_2_dd)
+            for gps_1 in self._fishing_locations[fishing_location_index].gps_locations:
+                next_fishing_location_index = fishing_location_index + 1
+                while next_fishing_location_index < len(self._fishing_locations):
+                    for gps_2 in self._fishing_locations[next_fishing_location_index].gps_locations:
+                        gps_1_dms_1, gps_1_dms_2 = gps_1
+                        gps_2_dms_1, gps_2_dms_2 = gps_2
+                        gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
+                        gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
+                        distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
+                        if (distance_limit.min_distance
+                                <= distance <= distance_limit.max_distance):
+                            print(self._fishing_locations[
+                                      fishing_location_index].name)
+                            print(self._fishing_locations[
+                                      next_fishing_location_index].name)
+                            print(gps_1_dd)
+                            print(gps_2_dd)
+                    next_fishing_location_index += 1
+            fishing_location_index += 1
+
+    def _get_all_gps_locations(self):
+        list_of_lists = []
+        for fishing_location in self._fishing_locations:
+            list_of_lists.append(fishing_location.gps_locations)
+        return [item for sublist in list_of_lists for item in sublist]
 
     def _print_fishing_summary(self, fishing_summary, total_visits_count):
         print(Constants.FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT.format(
