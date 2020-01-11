@@ -8,6 +8,7 @@ from .constants import Constants
 from .gps_coordinate import GPSCoordinate
 from .fishing_location import FishingLocation
 from .fishing_summary import FishingSummary
+from .justified_close_locations import justified_close_locations
 
 
 class MRSParser(object):
@@ -105,8 +106,9 @@ class MRSParser(object):
                 gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
                 gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
                 distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
-                if (distance_limit.min_distance
-                        <= distance <= distance_limit.max_distance):
+                if ((distance_limit.min_distance
+                     <= distance <= distance_limit.max_distance)
+                        and not (gps_1_dd, gps_2_dd) in justified_close_locations):
                     print(self._fishing_locations[
                         fishing_location_index].name)
                     print(gps_1_dd)
@@ -120,8 +122,9 @@ class MRSParser(object):
                         gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
                         gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
                         distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
-                        if (distance_limit.min_distance
-                                <= distance <= distance_limit.max_distance):
+                        if ((distance_limit.min_distance
+                             <= distance <= distance_limit.max_distance)
+                                and not (gps_1_dd, gps_2_dd) in justified_close_locations):
                             print(self._fishing_locations[
                                       fishing_location_index].name)
                             print(self._fishing_locations[
