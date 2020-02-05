@@ -134,12 +134,6 @@ class MRSParser(object):
                     next_fishing_location_index += 1
             fishing_location_index += 1
 
-    def _get_all_gps_locations(self):
-        list_of_lists = []
-        for fishing_location in self._fishing_locations:
-            list_of_lists.append(fishing_location.gps_locations)
-        return [item for sublist in list_of_lists for item in sublist]
-
     def _print_fishing_summary(self, fishing_summary, total_visits_count):
         print(Constants.FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT.format(
             total_visits_count))
