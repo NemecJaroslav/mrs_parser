@@ -100,6 +100,7 @@ class Constants(object):
     SUSPICIOUSLY_CLOSE_GPS_LOCATION = "suspiciously_close_gps_location"
     SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS = "location_1 location_2 gps_1 gps_2 distance"
     FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT = "Total visits count = {}"
+    FISHING_SUMMARY_TRANSLATION_ERROR = "ERROR"
     AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"
     COMMA = ","
     DOT = "."
@@ -107,3 +108,4 @@ class Constants(object):
     EMPTY_STRING = ""
     NEW_LINE = "\n"
     UTF8 = "utf-8"
+    TIMES = "x"

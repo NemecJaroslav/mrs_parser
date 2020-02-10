@@ -156,12 +156,14 @@ class MRSParser(object):
     def _identifier_to_name(self, identifier):
         return next(iter([fishing_location.name for fishing_location
                           in self._fishing_locations
-                          if fishing_location.identifier == identifier]), None)
+                          if fishing_location.identifier == identifier]),
+                    Constants.FISHING_SUMMARY_TRANSLATION_ERROR)
 
     def _name_to_identifier(self, name):
         return next(iter([fishing_location.identifier for fishing_location
                           in self._fishing_locations
-                          if fishing_location.name == name]), None)
+                          if fishing_location.name == name]),
+                    Constants.FISHING_SUMMARY_TRANSLATION_ERROR)
 
     def _perform_self_check(self):
         print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)

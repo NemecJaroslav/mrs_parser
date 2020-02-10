@@ -10,4 +10,4 @@ class FishingSummary(object):
     def __str__(self):
         return (str(self.identifier) + Constants.SPACE
                 + str(self.name) + Constants.SPACE
-                + str(self.visits_count))
+                + str(self.visits_count) + Constants.TIMES)
