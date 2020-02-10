@@ -12,6 +12,15 @@ from .justified_close_locations import justified_close_locations
 
 
 class MRSParser(object):
+    suitable_fishing_location = namedtuple(
+        Constants.SUITABLE_FISHING_LOCATION,
+        Constants.SUITABLE_FISHING_LOCATION_MEMBERS)
+
+    suspiciously_close_gps_location = namedtuple(
+        Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION,
+        Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS
+    )
+
     def __init__(self):
         self._fishing_locations = []
         self._headquarter_to_fishing_locations = defaultdict(list)
@@ -31,9 +40,6 @@ class MRSParser(object):
         self._perform_self_check()
 
     def print_suitable_fishing_locations(self, start_point, distance_limit):
-        suitable_fishing_location = namedtuple(
-            Constants.SUITABLE_FISHING_LOCATION,
-            Constants.SUITABLE_FISHING_LOCATION_MEMBERS)
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
             for dms_1, dms_2 in fishing_location.gps_locations:
@@ -42,7 +48,7 @@ class MRSParser(object):
                 if (distance_limit.min_distance
                         <= distance < distance_limit.max_distance):
                     suitable_fishing_locations.append(
-                        suitable_fishing_location(
+                        self.suitable_fishing_location(
                             fishing_location.identifier,
                             fishing_location.name,
                             fishing_location.headquarter,
@@ -96,16 +102,16 @@ class MRSParser(object):
              for visit in set(visits)], len(visits))
 
     def print_suspiciously_close_gps_locations(self, distance_limit):
-        suspiciously_close_gps_location = namedtuple(
-            Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION,
-            Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS
-        )
+        suspiciously_close_gps_locations = (self._get_suspiciously_close_gps_locations_within_one_fishing_location(
+            distance_limit) + self._get_suspiciously_close_gps_locations_between_different_fishing_locations(
+            distance_limit))
+        suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
+        self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
+
+    def _get_suspiciously_close_gps_locations_within_one_fishing_location(self, distance_limit):
         suspiciously_close_gps_locations = []
-        fishing_location_index = 0
-        while fishing_location_index < len(self._fishing_locations):
-            for gps_1, gps_2 in itertools.combinations(
-                    self._fishing_locations[
-                        fishing_location_index].gps_locations, 2):
+        for fishing_location in self._fishing_locations:
+            for gps_1, gps_2 in itertools.combinations(fishing_location.gps_locations, 2):
                 gps_1_dms_1, gps_1_dms_2 = gps_1
                 gps_2_dms_1, gps_2_dms_2 = gps_2
                 gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
@@ -114,33 +120,27 @@ class MRSParser(object):
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
                         and not (gps_1_dd, gps_2_dd) in justified_close_locations):
-                    suspiciously_close_gps_locations.append(
-                        suspiciously_close_gps_location(
-                            self._fishing_locations[fishing_location_index].name,
-                            self._fishing_locations[fishing_location_index].name,
-                            gps_1_dd, gps_2_dd, distance))
-            for gps_1 in self._fishing_locations[fishing_location_index].gps_locations:
-                next_fishing_location_index = fishing_location_index + 1
-                while next_fishing_location_index < len(self._fishing_locations):
-                    for gps_2 in self._fishing_locations[next_fishing_location_index].gps_locations:
-                        gps_1_dms_1, gps_1_dms_2 = gps_1
-                        gps_2_dms_1, gps_2_dms_2 = gps_2
-                        gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
-                        gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
-                        distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
-                        if ((distance_limit.min_distance
-                             <= distance <= distance_limit.max_distance)
-                                and not (gps_1_dd, gps_2_dd) in justified_close_locations):
-                            suspiciously_close_gps_locations.append(
-                                suspiciously_close_gps_location(
-                                    self._fishing_locations[fishing_location_index].name,
-                                    self._fishing_locations[next_fishing_location_index].name,
-                                    gps_1_dd, gps_2_dd, distance)
-                            )
-                    next_fishing_location_index += 1
-            fishing_location_index += 1
-        suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
-        self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
+                    suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(fishing_location.name,
+                                                                                                 fishing_location.name,
+                                                                                                 gps_1_dd, gps_2_dd,
+                                                                                                 distance))
+        return suspiciously_close_gps_locations
+
+    def _get_suspiciously_close_gps_locations_between_different_fishing_locations(self, distance_limit):
+        suspiciously_close_gps_locations = []
+        for fishing_location_1, fishing_location_2 in itertools.combinations(self._fishing_locations, 2):
+            for gps_1, gps_2 in itertools.product(fishing_location_1.gps_locations, fishing_location_2.gps_locations):
+                gps_1_dms_1, gps_1_dms_2 = gps_1
+                gps_2_dms_1, gps_2_dms_2 = gps_2
+                gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
+                gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
+                distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
+                if ((distance_limit.min_distance
+                     <= distance <= distance_limit.max_distance)
+                        and not (gps_1_dd, gps_2_dd) in justified_close_locations):
+                    suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(
+                        fishing_location_1.name, fishing_location_2.name, gps_1_dd, gps_2_dd, distance))
+        return suspiciously_close_gps_locations
 
     def _print_fishing_summary(self, fishing_summary, total_visits_count):
         print(Constants.FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT.format(
