@@ -96,6 +96,11 @@ class MRSParser(object):
              for visit in set(visits)], len(visits))
 
     def print_suspiciously_close_gps_locations(self, distance_limit):
+        suspiciously_close_gps_location = namedtuple(
+            Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION,
+            Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS
+        )
+        suspiciously_close_gps_locations = []
         fishing_location_index = 0
         while fishing_location_index < len(self._fishing_locations):
             for gps_1, gps_2 in itertools.combinations(
@@ -109,10 +114,11 @@ class MRSParser(object):
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
                         and not (gps_1_dd, gps_2_dd) in justified_close_locations):
-                    print(self._fishing_locations[
-                        fishing_location_index].name)
-                    print(gps_1_dd)
-                    print(gps_2_dd)
+                    suspiciously_close_gps_locations.append(
+                        suspiciously_close_gps_location(
+                            self._fishing_locations[fishing_location_index].name,
+                            self._fishing_locations[fishing_location_index].name,
+                            gps_1_dd, gps_2_dd, distance))
             for gps_1 in self._fishing_locations[fishing_location_index].gps_locations:
                 next_fishing_location_index = fishing_location_index + 1
                 while next_fishing_location_index < len(self._fishing_locations):
@@ -125,14 +131,16 @@ class MRSParser(object):
                         if ((distance_limit.min_distance
                              <= distance <= distance_limit.max_distance)
                                 and not (gps_1_dd, gps_2_dd) in justified_close_locations):
-                            print(self._fishing_locations[
-                                      fishing_location_index].name)
-                            print(self._fishing_locations[
-                                      next_fishing_location_index].name)
-                            print(gps_1_dd)
-                            print(gps_2_dd)
+                            suspiciously_close_gps_locations.append(
+                                suspiciously_close_gps_location(
+                                    self._fishing_locations[fishing_location_index].name,
+                                    self._fishing_locations[next_fishing_location_index].name,
+                                    gps_1_dd, gps_2_dd, distance)
+                            )
                     next_fishing_location_index += 1
             fishing_location_index += 1
+        suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
+        self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
 
     def _print_fishing_summary(self, fishing_summary, total_visits_count):
         print(Constants.FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT.format(
