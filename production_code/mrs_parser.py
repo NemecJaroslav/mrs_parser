@@ -154,14 +154,14 @@ class MRSParser(object):
         self._print_separated_list(fishing_summary, Constants.NEW_LINE)
 
     def _identifier_to_name(self, identifier):
-        return [fishing_location.name for fishing_location
-                in self._fishing_locations
-                if fishing_location.identifier == identifier][0]
+        return next(iter([fishing_location.name for fishing_location
+                          in self._fishing_locations
+                          if fishing_location.identifier == identifier]), None)
 
     def _name_to_identifier(self, name):
-        return [fishing_location.identifier for fishing_location
-                in self._fishing_locations
-                if fishing_location.name == name][0]
+        return next(iter([fishing_location.identifier for fishing_location
+                          in self._fishing_locations
+                          if fishing_location.name == name]), None)
 
     def _perform_self_check(self):
         print(Constants.UNIQUENESS_ID_CHECK_OUTPUT)
