@@ -1,3 +1,6 @@
+from .constants import Constants
+
+
 class GPSCoordinate(object):
     def __init__(self, degrees, minutes, seconds, direction):
         self.degrees = degrees
@@ -15,6 +18,6 @@ class GPSCoordinate(object):
 
     def __str__(self):
         return (str(self.degrees)
-                + "," + str(self.minutes)
-                + "," + str(self.seconds)
-                + "," + self.direction)
+                + Constants.COMMA + str(self.minutes)
+                + Constants.COMMA + str(self.seconds)
+                + Constants.COMMA + self.direction)
