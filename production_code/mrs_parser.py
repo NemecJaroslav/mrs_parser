@@ -234,7 +234,7 @@ class MRSParser(object):
         if len(items) != len(set_items):
             for item in set_items:
                 if items.count(item) > Constants.UNIQUENESS_OCCURRENCE_COUNT:
-                    print(item)
+                    print(item + Constants.SPACE + str(items.count(item)) + Constants.TIMES)
 
     @staticmethod
     def _get_location_id(context):
