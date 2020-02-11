@@ -1,4 +1,4 @@
-from .constants import Constants
+from production_code.common.constants import Constants
 
 
 class FishingLocation(object):

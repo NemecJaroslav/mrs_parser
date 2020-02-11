@@ -4,11 +4,10 @@ import itertools
 from collections import defaultdict, namedtuple
 from geopy.distance import great_circle
 
-from .constants import Constants
-from .gps_coordinate import GPSCoordinate
-from .fishing_location import FishingLocation
-from .fishing_summary import FishingSummary
-from .justified_close_locations import justified_close_locations
+from production_code.common.constants import Constants
+from production_code.common.gps_coordinate import GPSCoordinate
+from production_code.common.fishing_location import FishingLocation
+from production_code.common.fishing_summary import FishingSummary
 
 
 class MRSParser(object):
@@ -108,6 +107,9 @@ class MRSParser(object):
         suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
         self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
 
+    def _get_justified_close_locations(self):
+        raise NotImplementedError("Must be implemented")
+
     def _get_suspiciously_close_gps_locations_within_one_fishing_location(self, distance_limit):
         suspiciously_close_gps_locations = []
         for fishing_location in self._fishing_locations:
@@ -119,7 +121,7 @@ class MRSParser(object):
                 distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
-                        and not (gps_1_dd, gps_2_dd) in justified_close_locations):
+                        and not (gps_1_dd, gps_2_dd) in self._get_justified_close_locations()):
                     suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(fishing_location.name,
                                                                                                  fishing_location.name,
                                                                                                  gps_1_dd, gps_2_dd,
@@ -137,7 +139,7 @@ class MRSParser(object):
                 distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
-                        and not (gps_1_dd, gps_2_dd) in justified_close_locations):
+                        and not (gps_1_dd, gps_2_dd) in self._get_justified_close_locations()):
                     suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(
                         fishing_location_1.name, fishing_location_2.name, gps_1_dd, gps_2_dd, distance))
         return suspiciously_close_gps_locations
@@ -173,25 +175,34 @@ class MRSParser(object):
         self._verify_uniqueness(
             [item.name for item in self._fishing_locations])
 
-    @staticmethod
-    def _get_locations_url():
+    def _get_locations_list_url(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_location_url_pattern(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_locations_url(self):
         locations_url = []
         decoded_page = MRSParser._get_decoded_source_page(
-            Constants.LOCATIONS_LIST_URL)
-        for match in re.finditer(Constants.LOCATION_URL_PATTERN, decoded_page):
+            self._get_locations_list_url())
+        for match in re.finditer(self._get_location_url_pattern(), decoded_page):
             locations_url.append(
                 Constants.MRS_HOME_PAGE
                 + match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME))
         return locations_url
 
-    @staticmethod
-    def _convert_string_to_gps(gps_strings):
+    def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _convert_string_to_gps(self, gps_strings):
         result = []
         invalid_gps = []
         for gps_string in gps_strings:
 
-            if gps_string in Constants.INCORRECT_GPS:
-                gps_string = Constants.INCORRECT_GPS[gps_string]
+            incorrect_gps = self._get_incorrect_gps()
+
+            if gps_string in incorrect_gps:
+                gps_string = incorrect_gps[gps_string]
 
             numbers = re.findall(Constants.NUMBERS_PATTERN, gps_string)
             directions = re.findall(Constants.DIRECTIONS_PATTERN, gps_string)

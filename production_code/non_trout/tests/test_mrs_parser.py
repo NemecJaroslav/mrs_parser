@@ -1,13 +1,14 @@
 from unittest import TestCase
-from production_code.mrs_parser import MRSParser, GPSCoordinate
-from .test_data import (get_expected_locations_url, get_expected_location_ids,
-                        get_expected_location_names, get_expected_gps,
-                        get_expected_headquarters, get_expected_area)
+from production_code.common.mrs_parser import GPSCoordinate
+from production_code.non_trout.non_trout_parser import NonTroutParser
+from production_code.non_trout.tests.test_data import (get_expected_locations_url, get_expected_location_ids,
+                                                       get_expected_location_names, get_expected_gps,
+                                                       get_expected_headquarters, get_expected_area)
 
 
 class TestMRSParser(TestCase):
     def setUp(self):
-        self.parser = MRSParser()
+        self.parser = NonTroutParser()
 
     def test_get_locations_url(self):
         expected_locations_url = get_expected_locations_url()
@@ -124,4 +125,3 @@ class TestMRSParser(TestCase):
             context = self.parser._get_decoded_source_page(expected_result[0])
             actual = self.parser._get_area(context)
             self.assertEqual(expected_result[1], actual)
-
