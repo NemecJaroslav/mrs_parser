@@ -3,7 +3,7 @@ from production_code.non_trout.non_trout_parser import NonTroutParser
 from production_code.non_trout.tests.test_data import get_expected_fishing_locations
 
 
-class TestMRSParser(TestCase):
+class TestNonTroutParser(TestCase):
     def setUp(self):
         self.parser = NonTroutParser()
         self.parser.parse()
