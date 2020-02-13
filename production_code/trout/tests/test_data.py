@@ -51,6 +51,11 @@ def get_expected_location_ids():
         "463019",
         "463020",
         "463021",
+        "463022",
+        "463023",
+        "463024",
+        "463025",
+        "463026",
     ]
 
 
@@ -80,6 +85,11 @@ def get_expected_location_names():
         "DYJE 14",
         "DYJE 20",
         "FRYŠÁVKA 1",
+        "HANÁ 4",
+        "HLOUČELA 1P",
+        "HODONÍNKA 1",
+        "CHVOJNICE 1",
+        "CHVOJNICE 2",
     ]
 
 
@@ -108,6 +118,11 @@ def get_expected_headquarters():
         "VRANOV NAD DYJÍ",
         "TELČ",
         "NOVÉ MĚSTO NA MORAVĚ",
+        "VYŠKOV",
+        "PROSTĚJOV",
+        "NEDVĚDICE",
+        "NÁMĚŠŤ NAD OSLAVOU",
+        "VELKÁ BÍTEŠ",
     ]
 
 
@@ -136,6 +151,11 @@ def get_expected_area():
         22.0,
         2.2,
         5.0,
+        3.0,
+        3.0,
+        4.0,
+        3.0,
+        2.0,
     ]
 
 
@@ -193,4 +213,12 @@ def get_expected_gps():
          (GPSCoordinate(49, 12, 48.09, "N"), GPSCoordinate(15, 30, 44.30, "E"))],
         [(GPSCoordinate(49, 38, 19.68, "N"), GPSCoordinate(16, 13, 26.05, "E")),
          (GPSCoordinate(49, 37, 57.32, "N"), GPSCoordinate(16, 4, 30.65, "E"))],
+        [(GPSCoordinate(49, 16, 55.93, "N"), GPSCoordinate(16, 59, 41.22, "E")),
+         # TODO: missing '' before E
+         (GPSCoordinate(49, 19, 58.05, "N"), GPSCoordinate(16, 55, 57.21, "E"))],
+        [(GPSCoordinate(49, 28, 33.45, "N"), GPSCoordinate(17, 8, 50.31, "E")),
+         (GPSCoordinate(49, 28, 5.45, "N"), GPSCoordinate(17, 2, 23.11, "E"))],
+        [],
+        [],
+        [],
     ]
