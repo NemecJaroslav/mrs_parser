@@ -15,8 +15,8 @@ class TestTroutParser(TestCase):
         expected_fishing_locations.sort(key=lambda x: x.identifier)
         actual_fishing_locations.sort(key=lambda x: x.identifier)
 
-        # self.assertEqual(len(expected_fishing_locations),
-        #                  len(actual_fishing_locations))
+        self.assertEqual(len(expected_fishing_locations),
+                         len(actual_fishing_locations))
         for (expected_fishing_location,
              actual_fishing_location) in zip(expected_fishing_locations,
                                              actual_fishing_locations):
