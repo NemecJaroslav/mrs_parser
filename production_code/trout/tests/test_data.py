@@ -414,7 +414,6 @@ def get_expected_gps():
         [(GPSCoordinate(49, 38, 19.68, "N"), GPSCoordinate(16, 13, 26.05, "E")),
          (GPSCoordinate(49, 37, 57.32, "N"), GPSCoordinate(16, 4, 30.65, "E"))],
         [(GPSCoordinate(49, 16, 55.93, "N"), GPSCoordinate(16, 59, 41.22, "E")),
-         # TODO: missing '' before E
          (GPSCoordinate(49, 19, 58.05, "N"), GPSCoordinate(16, 55, 57.21, "E"))],
         [(GPSCoordinate(49, 28, 33.45, "N"), GPSCoordinate(17, 8, 50.31, "E")),
          (GPSCoordinate(49, 28, 5.45, "N"), GPSCoordinate(17, 2, 23.11, "E"))],
@@ -426,10 +425,9 @@ def get_expected_gps():
         [(GPSCoordinate(49, 5, 50.94, "N"), GPSCoordinate(16, 21, 51.57, "E")),
          (GPSCoordinate(49, 5, 49.75, "N"), GPSCoordinate(16, 18, 08.09, "E"))],
         [(GPSCoordinate(49, 5, 49.75, "N"), GPSCoordinate(16, 18, 08.09, "E")),
-         # TODO: incorrect format, extra °
-         # (GPSCoordinate(49, 6, 1.969, "N"), GPSCoordinate(16, 12, 37.405, "E")),
-         (GPSCoordinate(49, 5, 59.87, "N"), GPSCoordinate(16, 14, 28.32, "E"))],
-         # (GPSCoordinate(49, 6, 1.969, "N"), GPSCoordinate(16, 12, 37.405, "E"))],
+         (GPSCoordinate(49, 6, 1.969, "N"), GPSCoordinate(16, 12, 37.405, "E")),
+         (GPSCoordinate(49, 5, 59.87, "N"), GPSCoordinate(16, 14, 28.32, "E")),
+         (GPSCoordinate(49, 6, 1.969, "N"), GPSCoordinate(16, 12, 37.405, "E"))],
         [(GPSCoordinate(49, 6, 1.79, "N"), GPSCoordinate(16, 12, 37.41, "E")),
          (GPSCoordinate(49, 6, 10.6, "N"), GPSCoordinate(16, 10, 57.2, "E"))],
         [(GPSCoordinate(48, 52, 43.17, "N"), GPSCoordinate(17, 43, 48.71, "E")),
