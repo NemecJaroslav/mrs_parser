@@ -1,5 +1,5 @@
 from production_code.common.distance_limit import DistanceLimit
-from production_code.trout.trout_parser import TroutParser
+from production_code.MRS.salmonid.salmonid_parser import SalmonidParser
 
 # Marek
 # 49.1686025, 16.5705978
@@ -13,7 +13,7 @@ from production_code.trout.trout_parser import TroutParser
 # 49.4823661, 16.8364286
 
 if __name__ == "__main__":
-    parser = TroutParser()
+    parser = SalmonidParser()
     parser.parse()
     # parser.print_all_headquarters_and_their_locations()
     # parser.print_all_headquarters_and_their_areas()

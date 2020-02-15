@@ -1,7 +1,7 @@
 from production_code.common.constants import Constants
 
 
-class TroutConstants(object):
+class SalmonidConstants(object):
     LOCATIONS_LIST_URL = (
             Constants.MRS_HOME_PAGE
             + "/index.php/kontakty/33-seznam-reviru/"

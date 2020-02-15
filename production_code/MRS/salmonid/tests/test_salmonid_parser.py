@@ -1,11 +1,11 @@
 from unittest import TestCase
-from production_code.non_trout.non_trout_parser import NonTroutParser
-from production_code.non_trout.tests.test_data import get_expected_fishing_locations
+from production_code.MRS.salmonid.salmonid_parser import SalmonidParser
+from production_code.MRS.salmonid.tests.test_data import get_expected_fishing_locations
 
 
-class TestNonTroutParser(TestCase):
+class TestSalmonidParser(TestCase):
     def setUp(self):
-        self.parser = NonTroutParser()
+        self.parser = SalmonidParser()
         self.parser.parse()
 
     def test_parse(self):

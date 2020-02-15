@@ -1,5 +1,5 @@
 from production_code.common.distance_limit import DistanceLimit
-from production_code.non_trout.non_trout_parser import NonTroutParser
+from production_code.MRS.non_salmonid.non_salmonid_parser import NonSalmonidParser
 
 # Marek
 # 49.1686025, 16.5705978
@@ -13,7 +13,7 @@ from production_code.non_trout.non_trout_parser import NonTroutParser
 # 49.4823661, 16.8364286
 
 if __name__ == "__main__":
-    parser = NonTroutParser()
+    parser = NonSalmonidParser()
     parser.parse()
     # parser.print_all_headquarters_and_their_locations()
     # parser.print_all_headquarters_and_their_areas()

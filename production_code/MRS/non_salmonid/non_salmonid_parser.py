@@ -1,20 +1,20 @@
 from production_code.common.mrs_parser import MRSParser
-from .constants import NonTroutConstants
+from .constants import NonSalmonidConstants
 from .justified_close_locations import justified_close_locations
 
 
-class NonTroutParser(MRSParser):
+class NonSalmonidParser(MRSParser):
     def __init__(self):
-        super(NonTroutParser, self).__init__()
+        super(NonSalmonidParser, self).__init__()
 
     def _get_locations_list_url(self):
-        return NonTroutConstants.LOCATIONS_LIST_URL
+        return NonSalmonidConstants.LOCATIONS_LIST_URL
 
     def _get_location_url_pattern(self):
-        return NonTroutConstants.LOCATION_URL_PATTERN
+        return NonSalmonidConstants.LOCATION_URL_PATTERN
 
     def _get_incorrect_gps(self):
-        return NonTroutConstants.INCORRECT_GPS
+        return NonSalmonidConstants.INCORRECT_GPS
 
     def _get_justified_close_locations(self):
         return justified_close_locations
