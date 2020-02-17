@@ -1,6 +1,4 @@
 class Constants(object):
-    MRS_HOME_PAGE = "http://www.mrsbrno.cz"
-    LOCATION_URL_PATTERN_GROUP_NAME = "location_url"
     LOCATION_ID_PATTERN_GROUP_NAME = "location_id"
     LOCATION_ID_PATTERN = ("ev. číslo revíru:.*?(?P<"
                            + LOCATION_ID_PATTERN_GROUP_NAME
