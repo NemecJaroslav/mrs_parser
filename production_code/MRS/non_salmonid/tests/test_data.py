@@ -1,5 +1,5 @@
 from production_code.common.fishing_location import FishingLocation
-from production_code.common.mrs_parser import GPSCoordinate
+from production_code.common.parser import GPSCoordinate
 
 
 def get_expected_fishing_locations():

@@ -10,7 +10,7 @@ from production_code.common.fishing_location import FishingLocation
 from production_code.common.fishing_summary import FishingSummary
 
 
-class MRSParser(object):
+class Parser(object):
     suitable_fishing_location = namedtuple(
         Constants.SUITABLE_FISHING_LOCATION,
         Constants.SUITABLE_FISHING_LOCATION_MEMBERS)
@@ -183,7 +183,7 @@ class MRSParser(object):
 
     def _get_locations_url(self):
         locations_url = []
-        decoded_page = MRSParser._get_decoded_source_page(
+        decoded_page = Parser._get_decoded_source_page(
             self._get_locations_list_url())
         for match in re.finditer(self._get_location_url_pattern(), decoded_page):
             locations_url.append(
@@ -217,8 +217,8 @@ class MRSParser(object):
             result.append((first_coord, second_coord))
         if invalid_gps:
             print(Constants.EXCLUDED_GPS_LOCATIONS)
-            MRSParser._print_separated_list(invalid_gps,
-                                            Constants.NEW_LINE)
+            Parser._print_separated_list(invalid_gps,
+                                         Constants.NEW_LINE)
         return result
 
     @staticmethod
@@ -279,8 +279,8 @@ class MRSParser(object):
 
     @staticmethod
     def _string_area_to_float(area):
-        return float(MRSParser._remove_white_characters(
-            MRSParser._replace_comma_with_dot(area)))
+        return float(Parser._remove_white_characters(
+            Parser._replace_comma_with_dot(area)))
 
     @staticmethod
     def _replace_comma_with_dot(string):

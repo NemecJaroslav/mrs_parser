@@ -1,9 +1,9 @@
-from production_code.common.mrs_parser import MRSParser
+from production_code.common.parser import Parser
 from .constants import SalmonidConstants
 from .justified_close_locations import justified_close_locations
 
 
-class SalmonidParser(MRSParser):
+class SalmonidParser(Parser):
     def __init__(self):
         super(SalmonidParser, self).__init__()
 
