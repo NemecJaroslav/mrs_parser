@@ -23,6 +23,7 @@ def get_expected_fishing_locations():
                 gps,
             )
         )
+
     return expected_fishing_locations
 
 
@@ -187,7 +188,6 @@ def get_expected_location_ids():
         "461067",
         "461304",
         "461211",
-        "461171",
         "461068",
         "461225",
         "461069",
@@ -202,7 +202,6 @@ def get_expected_location_ids():
         "461071",
         "461072",
         "461073",
-        "461208",
         "461074",
         "461075",
         "461185",
@@ -273,6 +272,8 @@ def get_expected_location_ids():
         "461157",
         "461182",
         "461400",
+        "461232",
+        "461233",
     ]
 
 
@@ -437,7 +438,6 @@ def get_expected_location_names():
         "KLIMŠÁK 1",
         "KLIMŠÁK 1M",
         "KOČKŮV RYBNÍK 1",
-        "KOVALOVICKÝ POTOK 1",
         "KŘETÍNKA 1",
         "KŘOVAČKA 1",
         "KYJOVKA 2",
@@ -452,7 +452,6 @@ def get_expected_location_names():
         "KYJOVKA 3",
         "KYJOVKA 3A",
         "KYJOVKA 3B",
-        "KYJOVKA 3C",
         "KYJOVKA 4A",
         "LÍŠEŇSKÁ ŘÍČKA 1",
         "LOUČKA 1A",
@@ -523,6 +522,8 @@ def get_expected_location_names():
         "ŽELETAVKA 2A",
         "ŽELETAVKA 2B",
         "ŽELETAVKA 2C",
+        "JEVIŠOVKA 3A",
+        "FRYŠÁVKA 1A",
     ]
 
 
@@ -688,7 +689,6 @@ def get_expected_headquarters():
         "RÁJEC - JESTŘEBÍ",
         "RÁJEC - JESTŘEBÍ",
         "BOSKOVICE",
-        "KOVALOVICE",
         "LETOVICE",
         "SLAVKOV",
         "LANŽHOT",
@@ -703,7 +703,6 @@ def get_expected_headquarters():
         "KYJOV",
         "KYJOV",
         "ŽDÁNICE",
-        "KYJOV",
         "OSVĚTIMANY",
         "BRNO 4",
         "DOLNÍ LOUČKY",
@@ -774,6 +773,8 @@ def get_expected_headquarters():
         "JEMNICE",
         "ŽELETAVA",
         "JEMNICE",
+        "JEVIŠOVICE",
+        "NOVÉ MĚSTO NA MORAVĚ",
     ]
 
 
@@ -938,7 +939,6 @@ def get_expected_area():
         0.6,
         1.0,
         0.58,
-        1.7,
         104.0,
         1.02,
         2.6,
@@ -953,7 +953,6 @@ def get_expected_area():
         15.81,
         11.6,
         1.3,
-        3.29,
         8.4,
         17.5,
         1.6,
@@ -1024,6 +1023,8 @@ def get_expected_area():
         20.4,
         4.3,
         7.9,
+        1.0,
+        0.7,
     ]
 
 
@@ -1472,7 +1473,6 @@ def get_expected_gps():
         [(GPSCoordinate(49, 24, 24.90, "N"), GPSCoordinate(16, 39, 53.33, "E"))],
         [(GPSCoordinate(49, 24, 31.25, "N"), GPSCoordinate(16, 38, 09.27, "E"))],
         [(GPSCoordinate(49, 30, 49.50, "N"), GPSCoordinate(16, 36, 04.93, "E"))],
-        [(GPSCoordinate(49, 12, 30.06, "N"), GPSCoordinate(16, 48, 39.87, "E"))],
         [(GPSCoordinate(49, 33, 13.58, "N"), GPSCoordinate(16, 33, 23.72, "E")),
          (GPSCoordinate(49, 33, 57.95, "N"), GPSCoordinate(16, 30, 23.40, "E"))],
         [(GPSCoordinate(49, 8, 28.90, "N"), GPSCoordinate(17, 00, 26.70, "E"))],
@@ -1512,9 +1512,6 @@ def get_expected_gps():
          (GPSCoordinate(48, 59, 27.53, "N"), GPSCoordinate(17, 6, 15.09, "E")),
          (GPSCoordinate(48, 59, 32.41, "N"), GPSCoordinate(17, 6, 16.38, "E"))],
         [(GPSCoordinate(49, 4, 19.13, "N"), GPSCoordinate(17, 3, 13.43, "E"))],
-        [(GPSCoordinate(49, 2, 22.06, "N"), GPSCoordinate(17, 11, 02.90, "E")),
-         (GPSCoordinate(49, 3, 00.19, "N"), GPSCoordinate(17, 11, 02.96, "E")),
-         (GPSCoordinate(48, 57, 23, "N"), GPSCoordinate(17, 8, 14, "E"))],
         [(GPSCoordinate(49, 3, 36.60, "N"), GPSCoordinate(17, 14, 21.93, "E")),
          (GPSCoordinate(49, 4, 14.93, "N"), GPSCoordinate(17, 13, 24.16, "E"))],
         [(GPSCoordinate(49, 4, 17.91, "N"), GPSCoordinate(16, 41, 33.91, "E")),
@@ -1713,4 +1710,6 @@ def get_expected_gps():
         [(GPSCoordinate(49, 8, 53.56, "N"), GPSCoordinate(15, 40, 23.27, "E")),
          (GPSCoordinate(49, 8, 04.95, "N"), GPSCoordinate(15, 39, 38.83, "E"))],
         [(GPSCoordinate(49, 1, 54.80, "N"), GPSCoordinate(15, 33, 59.90, "E"))],
+        [(GPSCoordinate(48, 57, 14.6304, "N"), GPSCoordinate(15, 59, 43.4724, "E"))],
+        [(GPSCoordinate(49, 34, 47.70, "N"), GPSCoordinate(16, 3, 49.08, "E"))],
     ]
