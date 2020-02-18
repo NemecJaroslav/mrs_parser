@@ -5,6 +5,18 @@ from production_code.MRS.common.constants import Constants
 
 
 class MRSParser(Parser):
+    def _get_justified_close_locations(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_locations_list_url(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_location_url_pattern(self):
+        raise NotImplementedError("Must be implemented")
+
     def _get_locations_url(self):
         locations_url = []
         decoded_page = Parser._get_decoded_source_page(
