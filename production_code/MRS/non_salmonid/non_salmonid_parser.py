@@ -7,12 +7,10 @@ class NonSalmonidParser(MRSParser):
     def __init__(self):
         super(NonSalmonidParser, self).__init__()
 
-    @staticmethod
-    def _get_locations_list_url():
+    def _get_locations_list_url(self):
         return NonSalmonidConstants.LOCATIONS_LIST_URL
 
-    @staticmethod
-    def _get_location_url_pattern():
+    def _get_location_url_pattern(self):
         return NonSalmonidConstants.LOCATION_URL_PATTERN
 
     def _get_incorrect_gps(self):

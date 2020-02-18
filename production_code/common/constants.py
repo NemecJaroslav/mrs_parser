@@ -56,5 +56,4 @@ class Constants(object):
     SPACE = " "
     EMPTY_STRING = ""
     NEW_LINE = "\n"
-    UTF8 = "utf-8"
     TIMES = "x"

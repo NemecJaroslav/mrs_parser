@@ -1,5 +1,4 @@
 import re
-import requests
 import itertools
 from collections import defaultdict, namedtuple
 from geopy.distance import great_circle
@@ -31,6 +30,10 @@ class Parser(object):
         raise NotImplementedError("Must be implemented")
 
     def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    @staticmethod
+    def _get_decoded_source_page(url):
         raise NotImplementedError("Must be implemented")
 
     def parse(self):
@@ -221,10 +224,6 @@ class Parser(object):
     @staticmethod
     def _get_distance_in_km(location_1, location_2):
         return great_circle(location_1, location_2).km
-
-    @staticmethod
-    def _get_decoded_source_page(url):
-        return requests.get(url).content.decode(Constants.UTF8)
 
     @staticmethod
     def _verify_uniqueness(items):
