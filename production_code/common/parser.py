@@ -24,6 +24,15 @@ class Parser(object):
         self._fishing_locations = []
         self._headquarter_to_fishing_locations = defaultdict(list)
 
+    def _get_justified_close_locations(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_locations_url(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
     def parse(self):
         for location_url in self._get_locations_url():
             decoded_page = self._get_decoded_source_page(location_url)
@@ -107,9 +116,6 @@ class Parser(object):
         suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
         self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
 
-    def _get_justified_close_locations(self):
-        raise NotImplementedError("Must be implemented")
-
     def _get_suspiciously_close_gps_locations_within_one_fishing_location(self, distance_limit):
         suspiciously_close_gps_locations = []
         for fishing_location in self._fishing_locations:
@@ -174,18 +180,6 @@ class Parser(object):
         print(Constants.UNIQUENESS_NAME_CHECK_OUTPUT)
         self._verify_uniqueness(
             [item.name for item in self._fishing_locations])
-
-    def _get_locations_list_url(self):
-        raise NotImplementedError("Must be implemented")
-
-    def _get_location_url_pattern(self):
-        raise NotImplementedError("Must be implemented")
-
-    def _get_locations_url(self):
-        raise NotImplementedError("Must be implemented")
-
-    def _get_incorrect_gps(self):
-        raise NotImplementedError("Must be implemented")
 
     def _convert_string_to_gps(self, gps_strings):
         result = []
