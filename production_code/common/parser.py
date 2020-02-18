@@ -32,8 +32,19 @@ class Parser(object):
     def _get_incorrect_gps(self):
         raise NotImplementedError("Must be implemented")
 
-    @staticmethod
-    def _get_decoded_source_page(url):
+    def _get_decoded_source_page(self, url):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_location_id(self, context):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_location_name(self, context):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_headquarter(self, context):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_area(self, context):
         raise NotImplementedError("Must be implemented")
 
     def parse(self):
@@ -234,16 +245,6 @@ class Parser(object):
                     print(item + Constants.SPACE + str(items.count(item)) + Constants.TIMES)
 
     @staticmethod
-    def _get_location_id(context):
-        return re.search(Constants.LOCATION_ID_PATTERN, context).group(
-            Constants.LOCATION_ID_PATTERN_GROUP_NAME)
-
-    @staticmethod
-    def _get_location_name(context):
-        return re.search(Constants.LOCATION_NAME_PATTERN, context).group(
-            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
-
-    @staticmethod
     def _get_gps(context):
         gps = []
         for gps_pattern in Constants.GPS_PATTERNS:
@@ -252,16 +253,6 @@ class Parser(object):
                     Constants.NON_BREAKING_SPACE, Constants.SPACE)
                 gps.append(current_gps)
         return gps
-
-    @staticmethod
-    def _get_headquarter(context):
-        return re.search(Constants.HEADQUARTER_PATTERN, context).group(
-            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
-
-    @staticmethod
-    def _get_area(context):
-        return re.search(Constants.AREA_PATTERN, context).group(
-            Constants.AREA_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _string_area_to_float(area):

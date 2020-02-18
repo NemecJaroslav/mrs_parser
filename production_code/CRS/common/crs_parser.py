@@ -10,19 +10,27 @@ from production_code.CRS.common.constants import Constants
 
 
 class CRSParser(Parser):
-    def _get_decoded_source_page(self, url):
+    def __init__(self):
+        super(CRSParser, self).__init__()
         firefox_capabilities = DesiredCapabilities.FIREFOX
         firefox_capabilities['marionette'] = True
         binary = FirefoxBinary(r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe")
-        driver = webdriver.Firefox(
+        self._driver = webdriver.Firefox(
             executable_path=r"C:\Users\jnemec\Documents\geckodriver-v0.26.0-win32\geckodriver.exe",
             capabilities=firefox_capabilities, firefox_binary=binary)
-        driver.implicitly_wait(3)
-        driver.get(self._get_locations_list_url())
-        driver.execute_script(url)
-        sleep(0.1)
-        value = driver.execute_script("return document.documentElement.outerHTML")
-        driver.quit()
+        self._driver.implicitly_wait(3)
+        self._driver.get(self._get_locations_list_url())
+
+    def __del__(self):
+        self._driver.quit()
+
+    def _get_decoded_source_page(self, url):
+        print(url)
+        self._driver.execute_script(url)
+        sleep(1)
+        value = self._driver.execute_script("return document.documentElement.outerHTML")
+        self._driver.execute_script("window.history.back();")
+        sleep(1)
         return value
 
     @staticmethod
@@ -40,6 +48,26 @@ class CRSParser(Parser):
 
     def _get_locations_list_url(self):
         raise NotImplementedError("Must be implemented")
+
+    def _get_location_id(self, context):
+        return ""
+        # return re.search(Constants.LOCATION_ID_PATTERN, context).group(
+        #     Constants.LOCATION_ID_PATTERN_GROUP_NAME)
+
+    def _get_location_name(self, context):
+        return ""
+        # return re.search(Constants.LOCATION_NAME_PATTERN, context).group(
+        #     Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+
+    def _get_headquarter(self, context):
+        return ""
+        # return re.search(Constants.HEADQUARTER_PATTERN, context).group(
+        #     Constants.HEADQUARTER_PATTERN_GROUP_NAME)
+
+    def _get_area(self, context):
+        return "0,0"
+        # return re.search(Constants.AREA_PATTERN, context).group(
+        #     Constants.AREA_PATTERN_GROUP_NAME)
 
     def _get_locations_url(self):
         locations_url = []

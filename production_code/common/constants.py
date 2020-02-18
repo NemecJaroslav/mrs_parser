@@ -1,23 +1,6 @@
 class Constants(object):
-    LOCATION_ID_PATTERN_GROUP_NAME = "location_id"
-    LOCATION_ID_PATTERN = ("ev. číslo revíru:.*?(?P<"
-                           + LOCATION_ID_PATTERN_GROUP_NAME
-                           + ">\\d{3}\\s*\\d{3})<")
-    LOCATION_NAME_PATTERN_GROUP_NAME = "location_name"
-    LOCATION_NAME_PATTERN = ("<title>(?P<"
-                             + LOCATION_NAME_PATTERN_GROUP_NAME
-                             + ">.*?)</title>")
-    HEADQUARTER_PATTERN_GROUP_NAME = "headquarter"
-    HEADQUARTER_PATTERN = "hospodařením:.*?>" \
-                          "(?P<" + HEADQUARTER_PATTERN_GROUP_NAME\
-                          + ">[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž]" \
-                          "[a-zA-z0-9ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž\\s.,-]+)"
     HEADQUARTER_AND_THEIR_LOCATIONS_OUTPUT = "{}, {} location(s):"
     HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
-    AREA_PATTERN_GROUP_NAME = "area"
-    AREA_PATTERN = "výměra:.*?(?P<"\
-                   + AREA_PATTERN_GROUP_NAME\
-                   + ">[0-9][0-9,\\s]*)\\s+ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
     GPS = "[\\d°”‘´'\".\\s]+N[\\s,&nbsp;]*[\\d°\"‘”´'.\\s]+E"
