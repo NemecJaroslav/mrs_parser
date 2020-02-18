@@ -1,4 +1,5 @@
 import re
+import requests
 import itertools
 from collections import defaultdict, namedtuple
 from geopy.distance import great_circle
@@ -30,9 +31,6 @@ class Parser(object):
         raise NotImplementedError("Must be implemented")
 
     def _get_incorrect_gps(self):
-        raise NotImplementedError("Must be implemented")
-
-    def _get_decoded_source_page(self, url):
         raise NotImplementedError("Must be implemented")
 
     def _get_location_id(self, context):
@@ -271,3 +269,7 @@ class Parser(object):
     @staticmethod
     def _print_separated_list(li, separator):
         print(separator.join([str(item) for item in li]))
+
+    @staticmethod
+    def _get_decoded_source_page(url):
+        return requests.get(url).content.decode(Constants.UTF8)

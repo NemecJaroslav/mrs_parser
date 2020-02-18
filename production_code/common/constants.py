@@ -1,4 +1,9 @@
 class Constants(object):
+    LOCATION_URL_PATTERN_GROUP_NAME = "location_url"
+    LOCATION_ID_PATTERN_GROUP_NAME = "location_id"
+    LOCATION_NAME_PATTERN_GROUP_NAME = "location_name"
+    HEADQUARTER_PATTERN_GROUP_NAME = "headquarter"
+    AREA_PATTERN_GROUP_NAME = "area"
     HEADQUARTER_AND_THEIR_LOCATIONS_OUTPUT = "{}, {} location(s):"
     HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
     GPS_GROUP_NAME = "gps_group"
@@ -40,3 +45,4 @@ class Constants(object):
     EMPTY_STRING = ""
     NEW_LINE = "\n"
     TIMES = "x"
+    UTF8 = "utf-8"

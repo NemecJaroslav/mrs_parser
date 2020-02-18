@@ -1,3 +1,4 @@
+from production_code.common.constants import Constants as CommonConstants
 from production_code.MRS.common.constants import Constants
 
 
@@ -7,7 +8,7 @@ class NonSalmonidConstants(object):
             + "/index.php/kontakty/33-seznam-reviru/"
             + "142-seznam-rybarskych-reviru-mimopstruhovych")
     LOCATION_URL_PATTERN = ("(?P<"
-                            + Constants.LOCATION_URL_PATTERN_GROUP_NAME
+                            + CommonConstants.LOCATION_URL_PATTERN_GROUP_NAME
                             + ">/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>")
 
     # TODO: incorrect GPS locations, Dyje 3A
