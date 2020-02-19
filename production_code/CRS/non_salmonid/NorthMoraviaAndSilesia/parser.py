@@ -21,7 +21,7 @@ class NorthMoraviaAndSilesiaParser(Parser):
                 locations_url.append(
                     NorthMoraviaAndSilesiaConstants.NORTHMORAVIAANDSILESIA_HOME_PAGE
                     + match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME))
-        return set(locations_url)
+        return sorted(set(locations_url))
 
     def _get_incorrect_gps(self):
         return NorthMoraviaAndSilesiaConstants.INCORRECT_GPS
@@ -31,11 +31,15 @@ class NorthMoraviaAndSilesiaParser(Parser):
             Constants.LOCATION_ID_PATTERN_GROUP_NAME)
 
     def _get_location_name(self, context):
-        return ""
+        return re.search(NorthMoraviaAndSilesiaConstants.LOCATION_NAME_PATTERN, context).group(
+            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
 
     def _get_headquarter(self, context):
-        return ""
+        return re.search(NorthMoraviaAndSilesiaConstants.HEADQUARTER_PATTERN, context).group(
+            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
 
     def _get_area(self, context):
-        return "0,0"
+        return re.search(NorthMoraviaAndSilesiaConstants.AREA_PATTERN, context).group(
+            Constants.AREA_PATTERN_GROUP_NAME)
+
 
