@@ -248,7 +248,7 @@ class Parser(object):
         for gps_pattern in Constants.GPS_PATTERNS:
             for match in re.finditer(gps_pattern, context):
                 current_gps = match.group(Constants.GPS_GROUP_NAME).replace(
-                    Constants.NON_BREAKING_SPACE, Constants.SPACE)
+                    Constants.NON_BREAKING_SPACE, Constants.SPACE).strip()
                 gps.append(current_gps)
         return gps
 
