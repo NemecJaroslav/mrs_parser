@@ -249,7 +249,7 @@ class Parser(object):
             for match in re.finditer(gps_pattern, context):
                 current_gps = match.group(Constants.GPS_GROUP_NAME).replace(
                     Constants.NON_BREAKING_SPACE, Constants.SPACE).strip()
-                gps.append(current_gps)
+                gps.append(Parser._replace_comma_with_dot(current_gps))
         return gps
 
     @staticmethod
@@ -259,7 +259,7 @@ class Parser(object):
 
     @staticmethod
     def _replace_comma_with_dot(string):
-        return re.sub(Constants.COMMA, Constants.DOT, string)
+        return re.sub(Constants.COMMA_IN_NUMBER, Constants.DOT_IN_NUMBER, string)
 
     @staticmethod
     def _remove_white_characters(string):

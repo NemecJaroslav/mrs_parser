@@ -8,7 +8,7 @@ class Constants(object):
     HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
-    GPS = "[\\d°”‘´'\".\\s]+N[\\s,&nbsp;]*[\\d°\"‘”´'.\\s]+E"
+    GPS = "[\\d°”‘´'\".\\s,]+N[\\s,&nbsp;]*[\\d°\"‘”´'.\\s,]+E"
     GPS_PATTERNS = [
         "(?P<" + GPS_GROUP_NAME + ">" + GPS + ")"
     ]
@@ -40,7 +40,9 @@ class Constants(object):
     FISHING_SUMMARY_TRANSLATION_ERROR = "ERROR"
     AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"
     COMMA = ","
+    COMMA_IN_NUMBER = r"(\d+)(,)(\d+)"
     DOT = "."
+    DOT_IN_NUMBER = r"\1.\3"
     SPACE = " "
     EMPTY_STRING = ""
     NEW_LINE = "\n"
