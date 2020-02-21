@@ -37,6 +37,8 @@ def get_expected_location_ids():
         "471007",
         "471008",
         "471009",
+        "471010",
+        "471011",
     ]
 
 
@@ -50,6 +52,8 @@ def get_expected_location_names():
         "BEČVA 3",
         "BEČVA 3 A",
         "BEČVA 4",
+        "BEČVA 4 A",
+        "BEČVA 5",
     ]
 
 
@@ -63,6 +67,8 @@ def get_expected_headquarters():
         "MO LIPNÍK NAD BEČVOU",
         "MO LIPNÍK NAD BEČVOU",
         "MO HRANICE NA MORAVĚ",  # 32 vs 160 ascii after "NA"
+        "MO HRANICE NA MORAVĚ",  # 32 vs 160 ascii after "NA"
+        "MO HUSTOPEČE NAD BEČVOU",
     ]
 
 
@@ -76,6 +82,8 @@ def get_expected_area():
         23.0,
         4.35,
         35.0,
+        26.0,
+        16.0,
     ]
 
 
@@ -105,4 +113,10 @@ def get_expected_gps():
          (GPSCoordinate(49, 31, 33.498, "N"), GPSCoordinate(17, 38, 43.217, "E"))],
         [(GPSCoordinate(49, 31, 42.068, "N"), GPSCoordinate(17, 39, 3.557, "E")),
          (GPSCoordinate(49, 31, 46.604, "N"), GPSCoordinate(17, 47, 19.809, "E"))],
+        [(GPSCoordinate(49, 32, 32.095, "N"), GPSCoordinate(17, 42, 38.124, "E")),
+         (GPSCoordinate(49, 32, 32.65, "N"), GPSCoordinate(17, 43, 16.888, "E")),
+         (GPSCoordinate(49, 32, 47.401, "N"), GPSCoordinate(17, 46, 58.385, "E"))],
+        [(GPSCoordinate(49, 31, 46.651, "N"), GPSCoordinate(17, 47, 19.862, "E")),
+         (GPSCoordinate(49, 30, 37.001, "N"), GPSCoordinate(17, 52, 38.427, "E")),
+         (GPSCoordinate(49, 31, 48.682, "N"), GPSCoordinate(17, 48, 23.83, "E"))],
     ]
