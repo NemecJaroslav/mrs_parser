@@ -49,6 +49,9 @@ def get_expected_location_ids():
         "471020",
         "471021",
         "471022",
+        "471023",
+        "471024",
+        "471025",
     ]
 
 
@@ -74,6 +77,9 @@ def get_expected_location_names():
         "BUDIŠOVKA 1 A",
         "BYSTŘICE HANÁCKÁ 1",
         "BYSTŘICE HANÁCKÁ 2 A",
+        "BYSTŘICE VALAŠSKÁ 1 A",
+        "ČERNÝ POTOK 1 A",
+        "ČIŽINA 1 A",
     ]
 
 
@@ -99,6 +105,9 @@ def get_expected_headquarters():
         "MO VÍTKOV",
         "MO OLOMOUC",
         "MO VELKÁ BYSTŘICE",
+        "MO VSETÍN",
+        "MO BRUNTÁL",
+        "MO KRNOV",
     ]
 
 
@@ -124,6 +133,9 @@ def get_expected_area():
         12.0,
         5.0,
         2.2,
+        19.0,
+        1.5,
+        23.2,
     ]
 
 
@@ -189,4 +201,9 @@ def get_expected_gps():
         [(GPSCoordinate(49, 37, 24.67, "N"), GPSCoordinate(17, 21, 56.106, "E")),
          (GPSCoordinate(49, 33, 52.876, "N"), GPSCoordinate(17, 23, 5.242, "E")),
          (GPSCoordinate(49, 36, 23.268, "N"), GPSCoordinate(17, 20, 55.276, "E"))],
+        [(GPSCoordinate(49, 25, 25.211, "N"), GPSCoordinate(18, 1, 11.439, "E"))],
+        [(GPSCoordinate(49, 59, 2.579, "N"), GPSCoordinate(17, 27, 45.154, "E"))],
+        [(GPSCoordinate(50, 1, 13.101, "N"), GPSCoordinate(17, 46, 37.647, "E")),
+         (GPSCoordinate(49, 57, 9.967, "N"), GPSCoordinate(17, 33, 14.271, "E")),
+         (GPSCoordinate(50, 1, 47.276, "N"), GPSCoordinate(17, 43, 12.342, "E"))],
     ]
