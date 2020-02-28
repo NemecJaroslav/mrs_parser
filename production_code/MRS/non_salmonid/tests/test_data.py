@@ -1111,7 +1111,7 @@ def get_expected_gps():
          (GPSCoordinate(48, 50, 8.16, "N"), GPSCoordinate(16, 45, 26.30, "E")),
          (GPSCoordinate(48, 50, 03.03, "N"), GPSCoordinate(16, 46, 15.00, "E")),
          (GPSCoordinate(48, 51, 1.99, "N"), GPSCoordinate(16, 47, 17.05, "E")),
-         (GPSCoordinate(48, 49, 40.152, "N"), GPSCoordinate(16, 47, 19.657, "E")),
+         (GPSCoordinate(48, 49, 7.513, "N"), GPSCoordinate(16, 47, 58.833, "E")),
          (GPSCoordinate(48, 51, 04.61, "N"), GPSCoordinate(16, 49, 35.74, "E")),
          (GPSCoordinate(48, 50, 49.38, "N"), GPSCoordinate(16, 48, 34.14, "E")),
          (GPSCoordinate(48, 50, 33.78, "N"), GPSCoordinate(16, 48, 57.57, "E"))],
