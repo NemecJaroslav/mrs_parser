@@ -69,6 +69,11 @@ def get_expected_location_ids():
         "471042",
         "471043",
         "471044",
+        "471045",
+        "471046",
+        "471047",
+        "471048",
+        "471049",
     ]
 
 
@@ -114,6 +119,11 @@ def get_expected_location_names():
         "LUČINA 1 A",
         "LUČINA 2 A",
         "MORAVA 14",
+        "MORAVA 14 A",
+        "MORAVA 15",
+        "MORAVA 16",
+        "MORAVA 17 A",
+        "MORAVA 18",
     ]
 
 
@@ -159,6 +169,11 @@ def get_expected_headquarters():
         "MO OSTRAVA",
         "MO LUČINA",
         "MO TOVAČOV",
+        "MO TOVAČOV",
+        "MO TOVAČOV",
+        "MO TOVAČOV",
+        "MO TOVAČOV",
+        "MO OLOMOUC",
     ]
 
 
@@ -204,6 +219,11 @@ def get_expected_area():
         1.3,
         248.0,
         46.0,
+        2.0,
+        40.0,
+        27.0,
+        42.0,
+        75.0,
     ]
 
 
@@ -307,4 +327,29 @@ def get_expected_gps():
          (GPSCoordinate(49, 23, 42.922, "N"), GPSCoordinate(17, 18, 18.294, "E")),
          (GPSCoordinate(49, 21, 14.153, "N"), GPSCoordinate(17, 19, 7.012, "E")),
          (GPSCoordinate(49, 23, 50.664, "N"), GPSCoordinate(17, 17, 37.496, "E"))],
+        [(GPSCoordinate(49, 22, 12.282, "N"), GPSCoordinate(17, 18, 25.98, "E"))],
+        [(GPSCoordinate(49, 23, 43.017, "N"), GPSCoordinate(17, 18, 18.373, "E")),
+         (GPSCoordinate(49, 27, 56.205, "N"), GPSCoordinate(17, 18, 17.804, "E")),
+         (GPSCoordinate(49, 23, 50.623, "N"), GPSCoordinate(17, 17, 37.097, "E")),
+         (GPSCoordinate(49, 27, 56.554, "N"), GPSCoordinate(17, 17, 24.354, "E")),
+         (GPSCoordinate(49, 25, 5.969, "N"), GPSCoordinate(17, 19, 16.072, "E")),
+         (GPSCoordinate(49, 25, 54.128, "N"), GPSCoordinate(17, 20, 1.844, "E")),
+         (GPSCoordinate(49, 28, 22.61, "N"), GPSCoordinate(17, 19, 8.269, "E"))],
+        [(GPSCoordinate(49, 27, 56.681, "N"), GPSCoordinate(17, 18, 17.454, "E")),
+         (GPSCoordinate(49, 30, 42.676, "N"), GPSCoordinate(17, 15, 38.985, "E")),
+         (GPSCoordinate(49, 27, 56.809, "N"), GPSCoordinate(17, 17, 23.77, "E")),
+         (GPSCoordinate(49, 29, 45.844, "N"), GPSCoordinate(17, 16, 30.785, "E"))],
+        [(GPSCoordinate(49, 25, 18.135, "N"), GPSCoordinate(17, 18, 15.11, "E"))],
+        [(GPSCoordinate(49, 30, 42.89, "N"), GPSCoordinate(17, 15, 38.845, "E")),
+         (GPSCoordinate(49, 41, 32.373, "N"), GPSCoordinate(17, 8, 12.705, "E")),
+         (GPSCoordinate(49, 34, 58.187, "N"), GPSCoordinate(17, 15, 41.028, "E")),
+         (GPSCoordinate(49, 40, 55.607, "N"), GPSCoordinate(17, 7, 15.144, "E")),
+         (GPSCoordinate(49, 32, 4.915, "N"), GPSCoordinate(17, 16, 13.904, "E")),
+         (GPSCoordinate(49, 31, 47.455, "N"), GPSCoordinate(17, 16, 50.312, "E")),
+         (GPSCoordinate(49, 41, 6.093, "N"), GPSCoordinate(17, 8, 42.523, "E")),
+         (GPSCoordinate(49, 41, 20.43, "N"), GPSCoordinate(17, 7, 16.874, "E")),
+         (GPSCoordinate(49, 37, 8.766, "N"), GPSCoordinate(17, 15, 25.115, "E")),
+         (GPSCoordinate(49, 39, 14.679, "N"), GPSCoordinate(17, 16, 41.073, "E")),
+         (GPSCoordinate(49, 35, 10.4172, "N"), GPSCoordinate(17, 15, 43.1892, "E")),
+         (GPSCoordinate(49, 33, 48.4164, "N"), GPSCoordinate(17, 15, 54.9792, "E"))],
     ]
