@@ -39,7 +39,8 @@ class NorthMoraviaAndSilesiaParser(Parser):
             Constants.HEADQUARTER_PATTERN_GROUP_NAME)
 
     def _get_area(self, context):
-        return re.search(NorthMoraviaAndSilesiaConstants.AREA_PATTERN, context).group(
-            Constants.AREA_PATTERN_GROUP_NAME)
-
-
+        search_result = re.search(NorthMoraviaAndSilesiaConstants.AREA_PATTERN, context)
+        if search_result is None:
+            print(NorthMoraviaAndSilesiaConstants.EMPTY_AREA_WARNING)
+            return NorthMoraviaAndSilesiaConstants.EMPTY_AREA
+        return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
