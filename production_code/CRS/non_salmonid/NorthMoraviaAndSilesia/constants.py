@@ -32,5 +32,3 @@ class NorthMoraviaAndSilesiaConstants(object):
                            + Constants.HEADQUARTER_PATTERN_GROUP_NAME + ">.*MO.*)</title>")
     AREA_PATTERN = ("<p><strong>(?:[\\d\\s,]*km)*\\s*(?P<"
                     + Constants.AREA_PATTERN_GROUP_NAME + ">\\d[,\\d]*)\\s*ha\\s*(?:[\\d\\s,]*km)*</strong></p>")
-    EMPTY_AREA = "0,0"
-    EMPTY_AREA_WARNING = "No area found."

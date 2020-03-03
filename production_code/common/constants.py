@@ -48,3 +48,5 @@ class Constants(object):
     NEW_LINE = "\n"
     TIMES = "x"
     UTF8 = "utf-8"
+    EMPTY_AREA = "0,0"
+    EMPTY_AREA_WARNING = "No area found."

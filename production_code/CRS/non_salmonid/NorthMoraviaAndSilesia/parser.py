@@ -26,21 +26,22 @@ class NorthMoraviaAndSilesiaParser(Parser):
     def _get_incorrect_gps(self):
         return NorthMoraviaAndSilesiaConstants.INCORRECT_GPS
 
-    def _get_location_id(self, context):
-        return re.search(NorthMoraviaAndSilesiaConstants.LOCATION_ID_PATTERN, context).group(
-            Constants.LOCATION_ID_PATTERN_GROUP_NAME)
+    def _get_location_id(self,
+                         context,
+                         location_id_pattern=NorthMoraviaAndSilesiaConstants.LOCATION_ID_PATTERN):
+        return super(NorthMoraviaAndSilesiaParser, self)._get_location_id(context, location_id_pattern)
 
-    def _get_location_name(self, context):
-        return re.search(NorthMoraviaAndSilesiaConstants.LOCATION_NAME_PATTERN, context).group(
-            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+    def _get_location_name(self, 
+                           context,
+                           location_name_pattern=NorthMoraviaAndSilesiaConstants.LOCATION_NAME_PATTERN):
+        return super(NorthMoraviaAndSilesiaParser, self)._get_location_name(context, location_name_pattern)
 
-    def _get_headquarter(self, context):
-        return re.search(NorthMoraviaAndSilesiaConstants.HEADQUARTER_PATTERN, context).group(
-            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
+    def _get_headquarter(self, 
+                         context,
+                         headquarter_pattern=NorthMoraviaAndSilesiaConstants.HEADQUARTER_PATTERN):
+        return super(NorthMoraviaAndSilesiaParser, self)._get_headquarter(context, headquarter_pattern)
 
-    def _get_area(self, context):
-        search_result = re.search(NorthMoraviaAndSilesiaConstants.AREA_PATTERN, context)
-        if search_result is None:
-            print(NorthMoraviaAndSilesiaConstants.EMPTY_AREA_WARNING)
-            return NorthMoraviaAndSilesiaConstants.EMPTY_AREA
-        return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
+    def _get_area(self,
+                  context,
+                  area_pattern=NorthMoraviaAndSilesiaConstants.AREA_PATTERN):
+        return super(NorthMoraviaAndSilesiaParser, self)._get_area(context, area_pattern)

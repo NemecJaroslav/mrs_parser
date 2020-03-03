@@ -18,21 +18,25 @@ class MRSParser(Parser):
     def _get_location_url_pattern(self):
         raise NotImplementedError("Must be implemented")
 
-    def _get_location_id(self, context):
-        return re.search(MRSConstants.LOCATION_ID_PATTERN, context).group(
-            Constants.LOCATION_ID_PATTERN_GROUP_NAME)
+    def _get_location_id(self, 
+                         context,
+                         location_id_pattern=MRSConstants.LOCATION_ID_PATTERN):
+        return super(MRSParser, self)._get_location_id(context, location_id_pattern)
 
-    def _get_location_name(self, context):
-        return re.search(MRSConstants.LOCATION_NAME_PATTERN, context).group(
-            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+    def _get_location_name(self, 
+                           context,
+                           location_name_pattern=MRSConstants.LOCATION_NAME_PATTERN):
+        return super(MRSParser, self)._get_location_name(context, location_name_pattern)
 
-    def _get_headquarter(self, context):
-        return re.search(MRSConstants.HEADQUARTER_PATTERN, context).group(
-            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
+    def _get_headquarter(self, 
+                         context,
+                         headquarter_pattern=MRSConstants.HEADQUARTER_PATTERN):
+        return super(MRSParser, self)._get_headquarter(context, headquarter_pattern)
 
-    def _get_area(self, context):
-        return re.search(MRSConstants.AREA_PATTERN, context).group(
-            Constants.AREA_PATTERN_GROUP_NAME)
+    def _get_area(self, 
+                  context,
+                  area_pattern=MRSConstants.AREA_PATTERN):
+        return super(MRSParser, self)._get_area(context, area_pattern)
 
     def _get_locations_url(self):
         locations_url = []
