@@ -1,8 +1,6 @@
 import re
 
 from production_code.common.parser import Parser
-from production_code.common.constants import Constants
-
 from production_code.CRS.non_salmonid.NorthMoraviaAndSilesia.constants import NorthMoraviaAndSilesiaConstants
 
 
@@ -20,7 +18,7 @@ class NorthMoraviaAndSilesiaParser(Parser):
             for match in re.finditer(self._get_location_url_pattern(), decoded_page):
                 locations_url.append(
                     NorthMoraviaAndSilesiaConstants.NORTHMORAVIAANDSILESIA_HOME_PAGE
-                    + match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME))
+                    + self._get_location_url(match))
         return sorted(set(locations_url))
 
     def _get_incorrect_gps(self):

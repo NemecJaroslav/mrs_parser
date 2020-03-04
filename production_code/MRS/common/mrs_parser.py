@@ -1,7 +1,6 @@
 import re
 
 from production_code.common.parser import Parser
-from production_code.common.constants import Constants
 from production_code.MRS.common.constants import MRSConstants
 
 
@@ -45,5 +44,5 @@ class MRSParser(Parser):
         for match in re.finditer(self._get_location_url_pattern(), decoded_page):
             locations_url.append(
                 MRSConstants.MRS_HOME_PAGE
-                + match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME))
+                + self._get_location_url(match))
         return locations_url

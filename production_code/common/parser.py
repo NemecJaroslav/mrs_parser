@@ -288,3 +288,7 @@ class Parser(object):
     @staticmethod
     def _get_decoded_source_page(url):
         return requests.get(url).content.decode(Constants.UTF8)
+
+    @staticmethod
+    def _get_location_url(match):
+        return match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME)
