@@ -1,4 +1,4 @@
-class Constants(object):
+class Constants:
     LOCATION_URL_PATTERN_GROUP_NAME = "location_url"
     LOCATION_ID_PATTERN_GROUP_NAME = "location_id"
     LOCATION_NAME_PATTERN_GROUP_NAME = "location_name"

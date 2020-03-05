@@ -1,7 +1,7 @@
 from production_code.common.constants import Constants
 
 
-class FishingSummary(object):
+class FishingSummary:
     def __init__(self, identifier, name, visits_count):
         self.identifier = identifier
         self.name = name

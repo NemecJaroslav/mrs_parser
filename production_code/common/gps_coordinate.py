@@ -1,7 +1,7 @@
 from production_code.common.constants import Constants
 
 
-class GPSCoordinate(object):
+class GPSCoordinate:
     def __init__(self, degrees, minutes, seconds, direction):
         self.degrees = degrees
         self.minutes = minutes

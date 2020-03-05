@@ -1,7 +1,7 @@
 from production_code.common.constants import Constants
 
 
-class FishingLocation(object):
+class FishingLocation:
     def __init__(self, identifier, name, headquarter, area, gps_locations):
         self.identifier = identifier
         self.name = name

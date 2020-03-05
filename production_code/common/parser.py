@@ -1,7 +1,7 @@
 import re
-import requests
 import itertools
 from collections import defaultdict, namedtuple
+import requests
 from geopy.distance import great_circle
 
 from production_code.common.constants import Constants
@@ -10,7 +10,7 @@ from production_code.common.fishing_location import FishingLocation
 from production_code.common.fishing_summary import FishingSummary
 
 
-class Parser(object):
+class Parser:
     suitable_fishing_location = namedtuple(
         Constants.SUITABLE_FISHING_LOCATION,
         Constants.SUITABLE_FISHING_LOCATION_MEMBERS)
@@ -51,8 +51,8 @@ class Parser(object):
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
             for dms_1, dms_2 in fishing_location.gps_locations:
-                dd = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
-                distance = self._get_distance_in_km(start_point, dd)
+                end_point = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
+                distance = self._get_distance_in_km(start_point, end_point)
                 if (distance_limit.min_distance
                         <= distance < distance_limit.max_distance):
                     suitable_fishing_locations.append(
@@ -60,7 +60,7 @@ class Parser(object):
                             fishing_location.identifier,
                             fishing_location.name,
                             fishing_location.headquarter,
-                            dd,
+                            end_point,
                             distance)
                         )
         suitable_fishing_locations.sort(key=lambda x: x.distance)
@@ -110,9 +110,9 @@ class Parser(object):
              for visit in set(visits)], len(visits))
 
     def print_suspiciously_close_gps_locations(self, distance_limit):
-        suspiciously_close_gps_locations = (self._get_suspiciously_close_gps_locations_within_one_fishing_location(
-            distance_limit) + self._get_suspiciously_close_gps_locations_between_different_fishing_locations(
-            distance_limit))
+        suspiciously_close_gps_locations = (
+            self._get_suspiciously_close_gps_locations_within_one_fishing_location(distance_limit)
+            + self._get_suspiciously_close_gps_locations_between_different_fishing_locations(distance_limit))
         suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
         self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
 
@@ -230,13 +230,13 @@ class Parser(object):
 
     @staticmethod
     def _dms_to_dd(dms):
-        dd = (dms.degrees
-              + dms.minutes / Constants.MINUTES_IN_HOUR
-              + dms.seconds / Constants.SECONDS_IN_HOUR)
+        gps_in_dd = (dms.degrees
+                     + dms.minutes / Constants.MINUTES_IN_HOUR
+                     + dms.seconds / Constants.SECONDS_IN_HOUR)
         if (dms.direction == Constants.WEST
                 or dms.direction == Constants.SOUTH):
-            return -dd
-        return dd
+            return -gps_in_dd
+        return gps_in_dd
 
     @staticmethod
     def _get_distance_in_km(location_1, location_2):
@@ -275,8 +275,8 @@ class Parser(object):
                       Constants.EMPTY_STRING, string)
 
     @staticmethod
-    def _print_separated_list(li, separator):
-        print(separator.join([str(item) for item in li]))
+    def _print_separated_list(list_to_print, separator):
+        print(separator.join([str(item) for item in list_to_print]))
 
     @staticmethod
     def _get_decoded_source_page(url):
