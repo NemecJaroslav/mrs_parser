@@ -33,33 +33,6 @@ class Parser(object):
     def _get_incorrect_gps(self):
         raise NotImplementedError("Must be implemented")
 
-    def _get_location_id(self,
-                         context,
-                         location_id_pattern=Constants.EMPTY_STRING):
-        return re.search(location_id_pattern, context).group(
-            Constants.LOCATION_ID_PATTERN_GROUP_NAME)
-
-    def _get_location_name(self,
-                           context,
-                           location_name_pattern=Constants.EMPTY_STRING):
-        return re.search(location_name_pattern, context).group(
-            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
-
-    def _get_headquarter(self,
-                         context,
-                         headquarter_pattern=Constants.EMPTY_STRING):
-        return re.search(headquarter_pattern, context).group(
-            Constants.HEADQUARTER_PATTERN_GROUP_NAME)
-
-    def _get_area(self,
-                  context,
-                  area_pattern=Constants.EMPTY_STRING):
-        search_result = re.search(area_pattern, context)
-        if search_result is None:
-            print(Constants.EMPTY_AREA_WARNING)
-            return Constants.EMPTY_AREA
-        return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
-
     def parse(self):
         for location_url in self._get_locations_url():
             decoded_page = self._get_decoded_source_page(location_url)
@@ -234,6 +207,26 @@ class Parser(object):
             Parser._print_separated_list(invalid_gps,
                                          Constants.NEW_LINE)
         return result
+
+    @staticmethod
+    def _get_location_id(context, location_id_pattern=Constants.EMPTY_STRING):
+        return re.search(location_id_pattern, context).group(Constants.LOCATION_ID_PATTERN_GROUP_NAME)
+
+    @staticmethod
+    def _get_location_name(context, location_name_pattern=Constants.EMPTY_STRING):
+        return re.search(location_name_pattern, context).group(Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+
+    @staticmethod
+    def _get_headquarter(context, headquarter_pattern=Constants.EMPTY_STRING):
+        return re.search(headquarter_pattern, context).group(Constants.HEADQUARTER_PATTERN_GROUP_NAME)
+
+    @staticmethod
+    def _get_area(context, area_pattern=Constants.EMPTY_STRING):
+        search_result = re.search(area_pattern, context)
+        if search_result is None:
+            print(Constants.EMPTY_AREA_WARNING)
+            return Constants.EMPTY_AREA
+        return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _dms_to_dd(dms):
