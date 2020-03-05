@@ -1,7 +1,7 @@
 from production_code.common.constants import Constants
 
 
-class NorthMoraviaAndSilesiaConstants(object):
+class NorthMoraviaAndSilesiaConstants:
     JUSTIFIED_CLOSE_LOCATIONS = []
     INCORRECT_GPS = {
         "49.5862275N, 17.2619967E":

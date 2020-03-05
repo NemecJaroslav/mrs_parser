@@ -4,9 +4,6 @@ from .justified_close_locations import justified_close_locations
 
 
 class SalmonidParser(MRSParser):
-    def __init__(self):
-        super(SalmonidParser, self).__init__()
-
     def _get_locations_list_url(self):
         return SalmonidConstants.LOCATIONS_LIST_URL
 

@@ -2,11 +2,11 @@ from production_code.common.constants import Constants
 from production_code.MRS.common.constants import MRSConstants
 
 
-class NonSalmonidConstants(object):
+class NonSalmonidConstants:
     LOCATIONS_LIST_URL = (
-            MRSConstants.MRS_HOME_PAGE
-            + "/index.php/kontakty/33-seznam-reviru/"
-            + "142-seznam-rybarskych-reviru-mimopstruhovych")
+        MRSConstants.MRS_HOME_PAGE
+        + "/index.php/kontakty/33-seznam-reviru/"
+        + "142-seznam-rybarskych-reviru-mimopstruhovych")
     LOCATION_URL_PATTERN = ("(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME
                             + ">/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>")
