@@ -149,6 +149,8 @@ def get_expected_location_ids():
         "471125",
         "471126",
         "471127",
+        "471128",
+        "471129",
     ]
 
 
@@ -274,6 +276,8 @@ def get_expected_location_names():
         "SEDLNIČKA 1 A",
         "SETINA 1 A",
         "SITKA 1",
+        "STAŘÍČ 1 A",
+        "STONÁVKA 1",
     ]
 
 
@@ -399,6 +403,8 @@ def get_expected_headquarters():
         "MO PŘÍBOR",
         "MO BÍLOVEC",
         "MO ŠTERNBERK",
+        "MO JESENÍK",
+        "MO KARVINÁ",
     ]
 
 
@@ -524,6 +530,8 @@ def get_expected_area():
         7.0,
         7.0,
         4.5,
+        1.5,
+        5.0,
     ]
 
 
@@ -865,4 +873,8 @@ def get_expected_gps():
          (GPSCoordinate(49, 45, 9.842, "N"), GPSCoordinate(18, 4, 7.332, "E"))],
         [(GPSCoordinate(49, 38, 20.836, "N"), GPSCoordinate(17, 14, 36.113, "E")),
          (GPSCoordinate(49, 43, 25.511, "N"), GPSCoordinate(17, 17, 8.295, "E"))],
+        [(GPSCoordinate(50, 13, 26.137, "N"), GPSCoordinate(17, 11, 27.63, "E"))],
+        [(GPSCoordinate(49, 51, 3.059, "N"), GPSCoordinate(18, 30, 45.854, "E")),
+         (GPSCoordinate(49, 49, 32.22, "N"), GPSCoordinate(18, 31, 31.762, "E"))],
+
     ]
