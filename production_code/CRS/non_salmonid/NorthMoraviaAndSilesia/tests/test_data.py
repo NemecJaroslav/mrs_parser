@@ -109,6 +109,14 @@ def get_expected_location_ids():
         "471082",
         "471083",
         "471084",
+        "471085",
+        "471086",
+        "471087",
+        "471088",
+        "471089",
+        "471090",
+        "471091",
+        "471092",
     ]
 
 
@@ -194,6 +202,14 @@ def get_expected_location_names():
         "OLŠE 2 A",
         "OLŠE 3",
         "OLŠE 3 A",
+        "OLŠE 4",
+        "OLŠE 4 A",
+        "OLŠE 5",
+        "ONDŘEJNICE 1",
+        "ONDŘEJNICE 1 A",
+        "OPAVA 1",
+        "OPAVA 2",
+        "OPAVA 2 A",
     ]
 
 
@@ -279,6 +295,14 @@ def get_expected_headquarters():
         "MO KARVINÁ",
         "MO KARVINÁ",
         "MO KARVINÁ",
+        "MO ČESKÝ TĚŠÍN",
+        "MO ČESKÝ TĚŠÍN",
+        "MO TŘINEC",
+        "MO STARÁ VES N. O.",
+        "MO STARÁ VES N. O.",
+        "MO OSTRAVA",
+        "MO HLUČÍN",
+        "MO HLUČÍN",
     ]
 
 
@@ -364,6 +388,14 @@ def get_expected_area():
         2.0,
         17.0,
         65.0,
+        12.0,
+        12.5,
+        7.0,
+        2.5,
+        10.5,
+        21.0,
+        30.0,
+        135.0,
     ]
 
 
@@ -601,4 +633,26 @@ def get_expected_gps():
         [(GPSCoordinate(49, 53, 5.86, "N"), GPSCoordinate(18, 29, 46.599, "E")),
          (GPSCoordinate(49, 51, 2.43, "N"), GPSCoordinate(18, 31, 53.91, "E")),
          (GPSCoordinate(49, 51, 2.43, "N"), GPSCoordinate(18, 31, 53.91, "E"))],
+        [(GPSCoordinate(49, 48, 28.211, "N"), GPSCoordinate(18, 35, 0.291, "E")),
+         (GPSCoordinate(49, 42, 57.299, "N"), GPSCoordinate(18, 37, 43.798, "E"))],
+        [(GPSCoordinate(49, 43, 33.665, "N"), GPSCoordinate(18, 37, 28.575, "E")),
+         (GPSCoordinate(49, 43, 39.422, "N"), GPSCoordinate(18, 37, 28.579, "E")),
+         (GPSCoordinate(49, 44, 50.878, "N"), GPSCoordinate(18, 36, 17.754, "E"))],
+        [(GPSCoordinate(49, 42, 56.727, "N"), GPSCoordinate(18, 37, 43.955, "E")),
+         (GPSCoordinate(49, 41, 4.012, "N"), GPSCoordinate(18, 39, 6.612, "E"))],
+        [(GPSCoordinate(49, 45, 11.151, "N"), GPSCoordinate(18, 10, 54.1, "E")),
+         (GPSCoordinate(49, 43, 16.326, "N"), GPSCoordinate(18, 11, 41.415, "E"))],
+        [(GPSCoordinate(49, 44, 32.603, "N"), GPSCoordinate(18, 11, 8.419, "E")),
+         (GPSCoordinate(49, 40, 3.899, "N"), GPSCoordinate(18, 15, 24.083, "E")),
+         (GPSCoordinate(49, 42, 19.095, "N"), GPSCoordinate(18, 13, 58.452, "E")),
+         (GPSCoordinate(49, 42, 18.06, "N"), GPSCoordinate(18, 13, 39.556, "E"))],
+        [(GPSCoordinate(49, 50, 0.944, "N"), GPSCoordinate(18, 13, 16.4, "E")),
+         (GPSCoordinate(49, 53, 11.414, "N"), GPSCoordinate(18, 10, 0.377, "E"))],
+        [(GPSCoordinate(49, 53, 11.465, "N"), GPSCoordinate(18, 10, 0.28, "E")),
+         (GPSCoordinate(49, 54, 25.72, "N"), GPSCoordinate(18, 4, 3.15, "E")),
+         (GPSCoordinate(49, 54, 26.894, "N"), GPSCoordinate(18, 4, 2.221, "E")),
+         (GPSCoordinate(49, 54, 13.885, "N"), GPSCoordinate(18, 7, 31.477, "E")),
+         (GPSCoordinate(49, 54, 16.091, "N"), GPSCoordinate(18, 6, 49.849, "E")),
+         (GPSCoordinate(49, 54, 18.849, "N"), GPSCoordinate(18, 5, 33.478, "E"))],
+        [(GPSCoordinate(49, 53, 28.963, "N"), GPSCoordinate(18, 10, 40.179, "E"))],
     ]
