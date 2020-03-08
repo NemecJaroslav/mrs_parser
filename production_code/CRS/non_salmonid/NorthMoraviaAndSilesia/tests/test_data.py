@@ -179,6 +179,16 @@ def get_expected_location_ids():
         "471164",
         "471165",
         "471167",
+        "471168",
+        "471169",
+        "471170",
+        "471171",
+        "471173",
+        "471174",
+        "471175",
+        "471176",
+        "471177",
+        "471178",
     ]
 
 
@@ -334,6 +344,16 @@ def get_expected_location_names():
         "OPAVA 2 B",
         "BABICE 1 A",
         "LUKAVEC 1 A",
+        "BYSTŘICE HANÁCKÁ 2 B",
+        "BUKOVÝ RYBNÍK 1 A",
+        "EMAUZY 1 A",
+        "ODRA 1 B",
+        "MAJETÍN 1 A",
+        "OLEŠNÁ 2",
+        "PILÍK 1 A",
+        "ONDŘEJNICE 1 B",
+        "KATEŘINA 1 A",
+        "PILÍK 1 B",
     ]
 
 
@@ -489,6 +509,16 @@ def get_expected_headquarters():
         "MO HLUČÍN",
         "MO ŠTERNBERK",
         "MO LIPNÍK NAD BEČVOU",
+        "MO VELKÁ BYSTŘICE",
+        "MO BRUNTÁL",
+        "MO VÍTKOV",
+        "MO BOHUMÍN",
+        "MO BRODEK U PŘEROVA",  # 32 vs 160 ascii after "U"
+        "MO FRÝDEK-MÍSTEK",
+        "MO PASKOV",
+        "MO STARÁ VES",
+        "MO KARVINÁ",
+        "MO PASKOV",
     ]
 
 
@@ -644,6 +674,16 @@ def get_expected_area():
         2.0,
         4.0,
         1.7,
+        3.7,
+        5.0,
+        3.0,
+        55.0,
+        3.0,
+        3.0,
+        4.97,
+        4.1,
+        5.0,
+        5.4,
     ]
 
 
@@ -1049,4 +1089,15 @@ def get_expected_gps():
          (GPSCoordinate(49, 54, 30.274, "N"), GPSCoordinate(18, 5, 44.665, "E"))],
         [(GPSCoordinate(49, 44, 32.091, "N"), GPSCoordinate(17, 15, 50.119, "E"))],
         [(GPSCoordinate(49, 32, 31.866, "N"), GPSCoordinate(17, 30, 33.94, "E"))],
+        [(GPSCoordinate(49, 36, 3.184, "N"), GPSCoordinate(17, 21, 40.476, "E"))],
+        [(GPSCoordinate(50, 0, 24.408, "N"), GPSCoordinate(17, 27, 30.87, "E"))],
+        [(GPSCoordinate(49, 37, 56.371, "N"), GPSCoordinate(17, 50, 14.1, "E"))],
+        [(GPSCoordinate(49, 55, 13.198, "N"), GPSCoordinate(18, 20, 44.004, "E")),
+         (GPSCoordinate(49, 55, 23.758, "N"), GPSCoordinate(18, 19, 51.421, "E"))],
+        [(GPSCoordinate(49, 30, 44.893, "N"), GPSCoordinate(17, 19, 12.858, "E"))],
+        [],
+        [(GPSCoordinate(49, 45, 15.908, "N"), GPSCoordinate(18, 17, 0.973, "E"))],
+        [(GPSCoordinate(49, 41, 59.59, "N"), GPSCoordinate(18, 14, 16.369, "E"))],
+        [(GPSCoordinate(49, 48, 46.197, "N"), GPSCoordinate(18, 30, 47.445, "E"))],
+        [(GPSCoordinate(49, 45, 11.738, "N"), GPSCoordinate(18, 16, 52.392, "E"))],
     ]
