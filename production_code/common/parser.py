@@ -19,6 +19,10 @@ class Parser:
         Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION,
         Constants.SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS
     )
+    headquarters_locations_distance = namedtuple(
+        Constants.HEADQUARTERS_LOCATIONS_DISTANCE,
+        Constants.HEADQUARTERS_LOCATIONS_DISTANCE_MEMBERS
+    )
 
     def __init__(self):
         self._fishing_locations = []
@@ -31,6 +35,9 @@ class Parser:
         raise NotImplementedError("Must be implemented")
 
     def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_headquarter_gps(self, headquarter):
         raise NotImplementedError("Must be implemented")
 
     def parse(self):
@@ -92,6 +99,19 @@ class Parser:
                 sum([fishing_location.area
                      for fishing_location
                      in self._headquarter_to_fishing_locations[headquarter]])))
+
+    def print_all_headquarters_and_distance_to_their_locations(self):
+        result = []
+        for headquarter in self._headquarter_to_fishing_locations:
+            headquarter_gps = self._get_headquarter_gps(headquarter)
+            for location in self._headquarter_to_fishing_locations[headquarter]:
+                for dms_1, dms_2 in location.gps_locations:
+                    end_point = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
+                    result.append(self.headquarters_locations_distance(
+                        headquarter, location.name, end_point,
+                        self._get_distance_in_km(headquarter_gps, end_point)))
+        result.sort(key=lambda x: x.distance)
+        self._print_separated_list(result, Constants.NEW_LINE)
 
     def print_fishing_summary_given_by_id(self, visits):
         visits = [self._remove_white_characters(visit) for visit in visits]

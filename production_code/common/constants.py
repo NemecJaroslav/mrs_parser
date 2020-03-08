@@ -36,6 +36,8 @@ class Constants:
     SUITABLE_FISHING_LOCATION_MEMBERS = "id name headquarter gps distance"
     SUSPICIOUSLY_CLOSE_GPS_LOCATION = "suspiciously_close_gps_location"
     SUSPICIOUSLY_CLOSE_GPS_LOCATION_MEMBERS = "location_1 location_2 gps_1 gps_2 distance"
+    HEADQUARTERS_LOCATIONS_DISTANCE = "headquarters_locations_distance"
+    HEADQUARTERS_LOCATIONS_DISTANCE_MEMBERS = "headquarter name gps distance"
     FISHING_SUMMARY_TOTAL_VISITS_COUNT_OUTPUT = "Total visits count = {}"
     FISHING_SUMMARY_TRANSLATION_ERROR = "ERROR"
     AT_LEAST_ONE_WHITE_CHARACTER = "\\s+"

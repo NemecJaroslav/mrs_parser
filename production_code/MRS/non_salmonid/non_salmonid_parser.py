@@ -15,3 +15,6 @@ class NonSalmonidParser(MRSParser):
 
     def _get_justified_close_locations(self):
         return justified_close_locations
+
+    def _get_headquarter_gps(self, headquarter):
+        return NonSalmonidConstants.HEADQUARTER_GPS[headquarter]
