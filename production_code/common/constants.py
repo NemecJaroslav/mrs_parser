@@ -8,7 +8,7 @@ class Constants:
     HEADQUARTER_AND_THEIR_AREA_OUTPUT = "{}, {} ha"
     GPS_GROUP_NAME = "gps_group"
     NON_BREAKING_SPACE = "&nbsp;"
-    GPS = "[\\d°”‘´'\".\\s,]+N[\\s,&nbsp;]*[\\d°\"‘”´'.\\s,]+E"
+    GPS = "[\\d°”‘´'\".\\s,“]+N[\\s,&nbsp;]*[\\d°\"‘”´'.\\s,“]+E"
     GPS_PATTERNS = [
         "(?P<" + GPS_GROUP_NAME + ">" + GPS + ")"
     ]
