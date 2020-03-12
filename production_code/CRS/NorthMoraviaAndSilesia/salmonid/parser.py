@@ -2,19 +2,13 @@ import re
 
 from production_code.common.parser import Parser
 from production_code.CRS.NorthMoraviaAndSilesia.common.constants import NorthMoraviaAndSilesiaCommonConstants
-from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.constants import NorthMoraviaAndSilesiaConstants
+from production_code.CRS.NorthMoraviaAndSilesia.salmonid.constants import NorthMoraviaAndSilesiaSalmonidConstants
 
 
-class NorthMoraviaAndSilesiaParser(Parser):
-    def _get_justified_close_locations(self):
-        return NorthMoraviaAndSilesiaConstants.JUSTIFIED_CLOSE_LOCATIONS
-
-    def _get_location_url_pattern(self):
-        return NorthMoraviaAndSilesiaConstants.LOCATION_URL_PATTERN
-
+class NorthMoraviaAndSilesiaSalmonidParser(Parser):
     def _get_locations_url(self):
         locations_url = []
-        for location_list in NorthMoraviaAndSilesiaConstants.LOCATIONS_PER_PAGE:
+        for location_list in NorthMoraviaAndSilesiaSalmonidConstants.LOCATIONS_PER_PAGE:
             decoded_page = self._get_decoded_source_page(location_list)
             for match in re.finditer(self._get_location_url_pattern(), decoded_page):
                 locations_url.append(
@@ -22,8 +16,11 @@ class NorthMoraviaAndSilesiaParser(Parser):
                     + self._get_location_url(match))
         return sorted(set(locations_url))
 
+    def _get_location_url_pattern(self):
+        return NorthMoraviaAndSilesiaSalmonidConstants.LOCATION_URL_PATTERN
+
     def _get_incorrect_gps(self):
-        return NorthMoraviaAndSilesiaConstants.INCORRECT_GPS
+        return NorthMoraviaAndSilesiaSalmonidConstants.INCORRECT_GPS
 
     @staticmethod
     def _get_location_id(context, location_id_pattern=NorthMoraviaAndSilesiaCommonConstants.LOCATION_ID_PATTERN):
