@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from production_code.CRS.non_salmonid.NorthMoraviaAndSilesia.parser import NorthMoraviaAndSilesiaParser
-from production_code.CRS.non_salmonid.NorthMoraviaAndSilesia.tests.test_data import get_expected_fishing_locations
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import NorthMoraviaAndSilesiaParser
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.tests.test_data import get_expected_fishing_locations
 
 
 class TestNorthMoraviaAndSilesiaParser(TestCase):

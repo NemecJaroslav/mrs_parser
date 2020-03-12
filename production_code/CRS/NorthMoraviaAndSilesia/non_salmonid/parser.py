@@ -1,7 +1,7 @@
 import re
 
 from production_code.common.parser import Parser
-from production_code.CRS.non_salmonid.NorthMoraviaAndSilesia.constants import NorthMoraviaAndSilesiaConstants
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.constants import NorthMoraviaAndSilesiaConstants
 
 
 class NorthMoraviaAndSilesiaParser(Parser):
