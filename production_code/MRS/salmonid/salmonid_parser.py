@@ -11,7 +11,7 @@ class SalmonidParser(MRSParser):
         return SalmonidConstants.INCORRECT_GPS
 
     def _get_headquarter_gps(self, headquarter):
-        raise NotImplementedError("Must be implemented")
+        return SalmonidConstants.HEADQUARTER_GPS[headquarter]
 
     def _get_locations_list_url(self):
         return SalmonidConstants.LOCATIONS_LIST_URL

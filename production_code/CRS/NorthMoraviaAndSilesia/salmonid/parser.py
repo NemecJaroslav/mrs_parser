@@ -4,13 +4,13 @@ from production_code.CRS.NorthMoraviaAndSilesia.salmonid.constants import NorthM
 
 class NorthMoraviaAndSilesiaSalmonidParser(NorthMoraviaAndSilesiaParser):
     def _get_justified_close_locations(self):
-        raise NotImplementedError("Must be implemented")
+        return NorthMoraviaAndSilesiaSalmonidConstants.JUSTIFIED_CLOSE_LOCATIONS
 
     def _get_incorrect_gps(self):
         return NorthMoraviaAndSilesiaSalmonidConstants.INCORRECT_GPS
 
     def _get_headquarter_gps(self, headquarter):
-        raise NotImplementedError("Must be implemented")
+        return NorthMoraviaAndSilesiaSalmonidConstants.HEADQUARTER_GPS[headquarter]
 
     @staticmethod
     def _get_locations_per_page():

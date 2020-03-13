@@ -10,7 +10,7 @@ class NorthMoraviaAndSilesiaNonSalmonidParser(NorthMoraviaAndSilesiaParser):
         return NorthMoraviaAndSilesiaConstants.INCORRECT_GPS
 
     def _get_headquarter_gps(self, headquarter):
-        raise NotImplementedError("Must be implemented")
+        return NorthMoraviaAndSilesiaConstants.HEADQUARTER_GPS[headquarter]
 
     @staticmethod
     def _get_locations_per_page():
