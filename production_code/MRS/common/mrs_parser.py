@@ -8,7 +8,20 @@ class MRSParser(Parser):
     def _get_justified_close_locations(self):
         raise NotImplementedError("Must be implemented")
 
+    def _get_locations_url(self):
+        locations_url = []
+        decoded_page = self._get_decoded_source_page(
+            self._get_locations_list_url())
+        for match in re.finditer(self._get_location_url_pattern(), decoded_page):
+            locations_url.append(
+                MRSConstants.MRS_HOME_PAGE
+                + self._get_location_url(match))
+        return locations_url
+
     def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_headquarter_gps(self, headquarter):
         raise NotImplementedError("Must be implemented")
 
     def _get_locations_list_url(self):
@@ -32,13 +45,3 @@ class MRSParser(Parser):
     @staticmethod
     def _get_area(context, area_pattern=MRSConstants.AREA_PATTERN):
         return Parser._get_area(context, area_pattern)
-
-    def _get_locations_url(self):
-        locations_url = []
-        decoded_page = self._get_decoded_source_page(
-            self._get_locations_list_url())
-        for match in re.finditer(self._get_location_url_pattern(), decoded_page):
-            locations_url.append(
-                MRSConstants.MRS_HOME_PAGE
-                + self._get_location_url(match))
-        return locations_url

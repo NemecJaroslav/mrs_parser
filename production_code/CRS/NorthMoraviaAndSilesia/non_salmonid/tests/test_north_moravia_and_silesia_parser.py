@@ -1,12 +1,12 @@
 from unittest import TestCase
 
-from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import NorthMoraviaAndSilesiaParser
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import NorthMoraviaAndSilesiaNonSalmonidParser
 from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.tests.test_data import get_expected_fishing_locations
 
 
 class TestNorthMoraviaAndSilesiaParser(TestCase):
     def setUp(self):
-        self.parser = NorthMoraviaAndSilesiaParser()
+        self.parser = NorthMoraviaAndSilesiaNonSalmonidParser()
         self.parser.parse()
 
     def test_parse(self):
