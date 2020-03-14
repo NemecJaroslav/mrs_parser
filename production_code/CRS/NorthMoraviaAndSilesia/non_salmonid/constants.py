@@ -8,6 +8,14 @@ class NorthMoraviaAndSilesiaConstants:
             "49° 35' 10.4172'' N, 17° 15' 43.1892'' E",
         "49.5634489N, 17.2652725E":
             "49° 33' 48.4164'' N, 17° 15' 54.9792'' E",
+        # ONDŘEJNICE 1C - MO Stará Ves n.O.
+        "48°71'83.44\"N, 18°20'54.70\"E":
+            "49° 43' 18.8688'' N, 18° 12' 56.0952'' E",
+        "48°71‘82.30“N,\n18°20‘54.64“E":
+            "49° 43' 19.3044'' N, 18° 12' 52.9272'' E",
+        # OLŠE 3B
+        "49°83'81.20\"N, 18°54'79.36\"E":
+            "49°50'13.842\"N, 18°33'0.414\"E",
     }
     LOCATIONS_PER_PAGE = [
         "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=0",
