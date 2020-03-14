@@ -1295,9 +1295,9 @@ def get_expected_gps():
          (GPSCoordinate(49, 34, 13.257, "N"), GPSCoordinate(17, 3, 4.175, "E"))],
         [],
         [],
-        [(GPSCoordinate(49, 83, 81.20, "N"), GPSCoordinate(18, 54, 79.36, "E"))],
-        [(GPSCoordinate(48, 71, 83.44, "N"), GPSCoordinate(18, 20, 54.70, "E")),
-         (GPSCoordinate(48, 71, 82.30, "N"), GPSCoordinate(18, 20, 54.64, "E"))],
+        [(GPSCoordinate(49, 50, 13.842, "N"), GPSCoordinate(18, 33, 0.414, "E"))],
+        [(GPSCoordinate(49, 43, 18.8688, "N"), GPSCoordinate(18, 12, 56.0952, "E")),
+         (GPSCoordinate(49, 43, 19.3044, "N"), GPSCoordinate(18, 12, 52.9272, "E"))],
         [],
         [],
     ]
