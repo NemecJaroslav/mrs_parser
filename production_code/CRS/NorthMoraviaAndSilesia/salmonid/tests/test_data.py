@@ -98,6 +98,8 @@ def get_expected_location_ids():
         "473070",
         "473071",
         "473072",
+        "473073",
+        "473074",
     ]
 
 
@@ -172,6 +174,8 @@ def get_expected_location_names():
         "OPAVICE (ZLATÁ) 1",
         "OPAVICE (ZLATÁ) 2",
         "OSKAVA 4",
+        "OSLAVA ŠTERNBERSKÁ 1",
+        "OSOBLAHA 2",
     ]
 
 
@@ -246,6 +250,8 @@ def get_expected_headquarters():
         "MO KRNOV",
         "MO KRNOV",
         "MO UNIČOV",
+        "MO ŠTERNBERK",
+        "MO KRNOV",
     ]
 
 
@@ -320,6 +326,8 @@ def get_expected_area():
         8.0,
         8.0,
         8.0,
+        7.5,
+        9.0,
     ]
 
 
@@ -488,4 +496,8 @@ def get_expected_gps():
         [(GPSCoordinate(49, 49, 6.518, "N"), GPSCoordinate(17, 6, 35.729, "E")),
          (GPSCoordinate(49, 55, 51.027, "N"), GPSCoordinate(17, 9, 15.252, "E")),
          (GPSCoordinate(49, 53, 26.968, "N"), GPSCoordinate(17, 7, 42.545, "E"))],
+        [(GPSCoordinate(49, 47, 44.678, "N"), GPSCoordinate(17, 7, 41.633, "E")),
+         (GPSCoordinate(49, 54, 40.897, "N"), GPSCoordinate(17, 17, 52.372, "E"))],
+        [(GPSCoordinate(50, 14, 7.591, "N"), GPSCoordinate(17, 41, 3.221, "E")),
+         (GPSCoordinate(50, 12, 41.554, "N"), GPSCoordinate(17, 25, 25.808, "E"))],
     ]
