@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser.parse()
 
     parser.print_all_headquarters_and_their_locations()
-    parser.print_suitable_fishing_locations((49.1806731, 16.6801281), DistanceLimit(0., 30.))
+    parser.print_suitable_fishing_locations((49.1806731, 16.6801281), DistanceLimit(0., 3000.))
     parser.print_all_headquarters_and_their_areas()
     parser.print_suspiciously_close_gps_locations(DistanceLimit(0.0, 0.5))
     parser.print_all_headquarters_and_distance_to_their_locations()
