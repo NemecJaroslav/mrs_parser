@@ -22,4 +22,4 @@ if __name__ == "__main__":
     parser.print_suspiciously_close_gps_locations(DistanceLimit(0.0, 0.5))
     parser.print_all_headquarters_and_distance_to_their_locations()
     parser.print_fishing_summary_given_by_id(["473024", "473029"])
-    parser.print_fishing_summary_given_by_name(["DESNÁ 3", "BYSTŘICE HANÁCKÁ 2"])
+    parser.print_fishing_summary_given_by_name(["DESNÁ 3", "BYSTŘICE HANÁCKÁ 2 P"])
