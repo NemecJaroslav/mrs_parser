@@ -1,7 +1,9 @@
 from unittest import TestCase
 
-from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import NorthMoraviaAndSilesiaNonSalmonidParser
-from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.tests.test_data import get_expected_fishing_locations
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import (
+    NorthMoraviaAndSilesiaNonSalmonidParser)
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.tests.test_data import (
+    get_expected_fishing_locations)
 
 
 class TestNorthMoraviaAndSilesiaParser(TestCase):
@@ -21,6 +23,7 @@ class TestNorthMoraviaAndSilesiaParser(TestCase):
         for (expected_fishing_location,
              actual_fishing_location) in zip(expected_fishing_locations,
                                              actual_fishing_locations):
+            print(actual_fishing_location)
             self.assertEqual(expected_fishing_location.identifier,
                              actual_fishing_location.identifier)
             self.assertEqual(expected_fishing_location.name,

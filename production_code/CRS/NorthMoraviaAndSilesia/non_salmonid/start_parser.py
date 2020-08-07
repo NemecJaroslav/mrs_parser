@@ -1,5 +1,6 @@
 from production_code.common.distance_limit import DistanceLimit
-from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import NorthMoraviaAndSilesiaNonSalmonidParser
+from production_code.CRS.NorthMoraviaAndSilesia.non_salmonid.parser import (
+    NorthMoraviaAndSilesiaNonSalmonidParser)
 
 # Marek
 # 49.1686025, 16.5705978

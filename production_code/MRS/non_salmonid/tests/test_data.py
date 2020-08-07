@@ -88,7 +88,7 @@ def get_expected_location_ids():
         "461206",
         "461037",
         "461038",
-        "461309",
+        "",  # Hana 3M
         "461325",
         "461039",
         "461002",
@@ -338,7 +338,7 @@ def get_expected_location_names():
         "HANÁ 1B",
         "HANÁ 2",
         "HANÁ 3",
-        "HANÁ 3M",
+        "404 - ČLÁNEK NEBYL NALEZEN",  # Hana 3M
         "HERDY",
         "HLOUČELA 1",
         "MALÁ BEČVA 1",
@@ -589,7 +589,7 @@ def get_expected_headquarters():
         "NĚMČICE NAD HANOU",
         "VYŠKOV",
         "VYŠKOV",
-        "VYŠKOV",
+        "",  # Hana 3M
         "LEDNICE",
         "PROSTĚJOV",
         "CHROPYNĚ",
@@ -839,7 +839,7 @@ def get_expected_area():
         2.9,
         7.0,
         4.8,
-        1.3,
+        0.0,  # Hana 3M
         4.1,
         60.0,
         10.0,
@@ -1179,7 +1179,7 @@ def get_expected_gps():
          (GPSCoordinate(49, 19, 02.34, "N"), GPSCoordinate(17, 00, 18.19, "E")),
          (GPSCoordinate(49, 20, 26.61, "N"), GPSCoordinate(17, 4, 24.07, "E")),
          (GPSCoordinate(49, 18, 03.74, "N"), GPSCoordinate(17, 6, 29.50, "E"))],
-        [(GPSCoordinate(49, 16, 09.30, "N"), GPSCoordinate(17, 7, 01.14, "E"))],
+        [],  # Hana 3M
         [(GPSCoordinate(48, 49, 29.96, "N"), GPSCoordinate(16, 47, 14.13, "E")),
          (GPSCoordinate(48, 49, 22.84, "N"), GPSCoordinate(16, 47, 07.95, "E")),
          (GPSCoordinate(48, 49, 24.07, "N"), GPSCoordinate(16, 47, 13.05, "E")),

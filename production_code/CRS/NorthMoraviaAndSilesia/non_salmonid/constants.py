@@ -18,16 +18,26 @@ class NorthMoraviaAndSilesiaConstants:
             "49°50'13.842\"N, 18°33'0.414\"E",
     }
     LOCATIONS_PER_PAGE = [
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=0",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=20",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=40",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=60",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=80",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=100",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=120",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=140",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=160",
-        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/filtrovani-polozek.php?recordStart=180",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=0",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=20",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=40",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=60",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=80",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=100",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=120",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=140",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=160",
+        "https://www.rybsvaz-ms.cz/katalog/rybarske-reviry/mimopstruhove-reviry/"
+        "filtrovani-polozek.php?recordStart=180",
     ]
     LOCATION_URL_PATTERN = ("<a href=\"(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME

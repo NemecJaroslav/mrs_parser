@@ -1,5 +1,6 @@
 from production_code.CRS.NorthMoraviaAndSilesia.common.parser import NorthMoraviaAndSilesiaParser
-from production_code.CRS.NorthMoraviaAndSilesia.salmonid.constants import NorthMoraviaAndSilesiaSalmonidConstants
+from production_code.CRS.NorthMoraviaAndSilesia.salmonid.constants import (
+    NorthMoraviaAndSilesiaSalmonidConstants)
 
 
 class NorthMoraviaAndSilesiaSalmonidParser(NorthMoraviaAndSilesiaParser):

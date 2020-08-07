@@ -1,7 +1,8 @@
 import re
 
 from production_code.common.parser import Parser
-from production_code.CRS.NorthMoraviaAndSilesia.common.constants import NorthMoraviaAndSilesiaCommonConstants
+from production_code.CRS.NorthMoraviaAndSilesia.common.constants import (
+    NorthMoraviaAndSilesiaCommonConstants)
 
 
 class NorthMoraviaAndSilesiaParser(Parser):
@@ -33,15 +34,19 @@ class NorthMoraviaAndSilesiaParser(Parser):
         raise NotImplementedError("Must be implemented")
 
     @staticmethod
-    def _get_location_id(context, location_id_pattern=NorthMoraviaAndSilesiaCommonConstants.LOCATION_ID_PATTERN):
+    def _get_location_id(
+            context, location_id_pattern=NorthMoraviaAndSilesiaCommonConstants.LOCATION_ID_PATTERN):
         return Parser._get_location_id(context, location_id_pattern)
 
     @staticmethod
-    def _get_location_name(context, location_name_pattern=NorthMoraviaAndSilesiaCommonConstants.LOCATION_NAME_PATTERN):
+    def _get_location_name(
+            context,
+            location_name_pattern=NorthMoraviaAndSilesiaCommonConstants.LOCATION_NAME_PATTERN):
         return Parser._get_location_name(context, location_name_pattern)
 
     @staticmethod
-    def _get_headquarter(context, headquarter_pattern=NorthMoraviaAndSilesiaCommonConstants.HEADQUARTER_PATTERN):
+    def _get_headquarter(
+            context, headquarter_pattern=NorthMoraviaAndSilesiaCommonConstants.HEADQUARTER_PATTERN):
         return Parser._get_headquarter(context, headquarter_pattern)
 
     @staticmethod

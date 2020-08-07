@@ -51,7 +51,8 @@ class Parser:
                 self._convert_string_to_gps(self._get_gps(decoded_page))
             )
             self._fishing_locations.append(fishing_location)
-            self._headquarter_to_fishing_locations[fishing_location.headquarter].append(fishing_location)
+            self._headquarter_to_fishing_locations[fishing_location.headquarter].append(
+                fishing_location)
         self._perform_self_check()
 
     def print_suitable_fishing_locations(self, start_point, distance_limit):
@@ -130,9 +131,10 @@ class Parser:
              for visit in set(visits)], len(visits))
 
     def print_suspiciously_close_gps_locations(self, distance_limit):
-        suspiciously_close_gps_locations = (
-            self._get_suspiciously_close_gps_locations_within_one_fishing_location(distance_limit)
-            + self._get_suspiciously_close_gps_locations_between_different_fishing_locations(distance_limit))
+        suspiciously_close_gps_locations = \
+            self._get_suspiciously_close_gps_locations_within_one_fishing_location(distance_limit)\
+            + self._get_suspiciously_close_gps_locations_between_different_fishing_locations(
+                distance_limit)
         suspiciously_close_gps_locations.sort(key=lambda x: x.distance)
         self._print_separated_list(suspiciously_close_gps_locations, Constants.NEW_LINE)
 
@@ -148,16 +150,17 @@ class Parser:
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
                         and not (gps_1_dd, gps_2_dd) in self._get_justified_close_locations()):
-                    suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(fishing_location.name,
-                                                                                                 fishing_location.name,
-                                                                                                 gps_1_dd, gps_2_dd,
-                                                                                                 distance))
+                    suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(
+                        fishing_location.name, fishing_location.name, gps_1_dd, gps_2_dd, distance))
         return suspiciously_close_gps_locations
 
-    def _get_suspiciously_close_gps_locations_between_different_fishing_locations(self, distance_limit):
+    def _get_suspiciously_close_gps_locations_between_different_fishing_locations(
+            self, distance_limit):
         suspiciously_close_gps_locations = []
-        for fishing_location_1, fishing_location_2 in itertools.combinations(self._fishing_locations, 2):
-            for gps_1, gps_2 in itertools.product(fishing_location_1.gps_locations, fishing_location_2.gps_locations):
+        for fishing_location_1, fishing_location_2 in itertools.combinations(
+                self._fishing_locations, 2):
+            for gps_1, gps_2 in itertools.product(fishing_location_1.gps_locations,
+                                                  fishing_location_2.gps_locations):
                 gps_1_dms_1, gps_1_dms_2 = gps_1
                 gps_2_dms_1, gps_2_dms_2 = gps_2
                 gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
@@ -167,7 +170,8 @@ class Parser:
                      <= distance <= distance_limit.max_distance)
                         and not (gps_1_dd, gps_2_dd) in self._get_justified_close_locations()):
                     suspiciously_close_gps_locations.append(self.suspiciously_close_gps_location(
-                        fishing_location_1.name, fishing_location_2.name, gps_1_dd, gps_2_dd, distance))
+                        fishing_location_1.name, fishing_location_2.name, gps_1_dd, gps_2_dd,
+                        distance))
         return suspiciously_close_gps_locations
 
     def _print_fishing_summary(self, fishing_summary, total_visits_count):
@@ -230,15 +234,24 @@ class Parser:
 
     @staticmethod
     def _get_location_id(context, location_id_pattern=Constants.EMPTY_STRING):
-        return re.search(location_id_pattern, context).group(Constants.LOCATION_ID_PATTERN_GROUP_NAME)
+        search_result = re.search(location_id_pattern, context)
+        if search_result is None:
+            print(Constants.EMPTY_LOCATION_ID_WARNING)
+            return Constants.EMPTY_LOCATION_ID
+        return search_result.group(Constants.LOCATION_ID_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_location_name(context, location_name_pattern=Constants.EMPTY_STRING):
-        return re.search(location_name_pattern, context).group(Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+        return re.search(location_name_pattern, context).group(
+            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_headquarter(context, headquarter_pattern=Constants.EMPTY_STRING):
-        return re.search(headquarter_pattern, context).group(Constants.HEADQUARTER_PATTERN_GROUP_NAME)
+        search_result = re.search(headquarter_pattern, context)
+        if search_result is None:
+            print(Constants.EMPTY_HEADQUARTER_WARNING)
+            return Constants.EMPTY_HEADQUARTER
+        return search_result.group(Constants.HEADQUARTER_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_area(context, area_pattern=Constants.EMPTY_STRING):
