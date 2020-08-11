@@ -23,7 +23,6 @@ class TestNorthMoraviaAndSilesiaParser(TestCase):
         for (expected_fishing_location,
              actual_fishing_location) in zip(expected_fishing_locations,
                                              actual_fishing_locations):
-            print(actual_fishing_location)
             self.assertEqual(expected_fishing_location.identifier,
                              actual_fishing_location.identifier)
             self.assertEqual(expected_fishing_location.name,
