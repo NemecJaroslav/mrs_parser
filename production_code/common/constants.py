@@ -56,3 +56,8 @@ class Constants:
     EMPTY_HEADQUARTER_WARNING = "No headquarter found."
     EMPTY_AREA = "0,0"
     EMPTY_AREA_WARNING = "No area found."
+    EMPTY_NAME = ""
+    EMPTY_NAME_WARNING = "No location name found."
+    EMPTY_GPS_WARNING = "No GPS found."
+    SELF_CHECK_INFO = "Issues found in: "
+    DELETE_FISHING_LOCATION_WARNING = "Deleting this fishing location."

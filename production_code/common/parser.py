@@ -50,9 +50,12 @@ class Parser:
                 self._string_area_to_float(self._get_area(decoded_page)),
                 self._convert_string_to_gps(self._get_gps(decoded_page))
             )
-            self._fishing_locations.append(fishing_location)
-            self._headquarter_to_fishing_locations[fishing_location.headquarter].append(
-                fishing_location)
+            if self._check_fishing_location(fishing_location):
+                self._fishing_locations.append(fishing_location)
+                self._headquarter_to_fishing_locations[fishing_location.headquarter].append(
+                    fishing_location)
+            else:
+                print(Constants.DELETE_FISHING_LOCATION_WARNING)
         self._perform_self_check()
 
     def print_suitable_fishing_locations(self, start_point, distance_limit):
@@ -236,20 +239,20 @@ class Parser:
     def _get_location_id(context, location_id_pattern=Constants.EMPTY_STRING):
         search_result = re.search(location_id_pattern, context)
         if search_result is None:
-            print(Constants.EMPTY_LOCATION_ID_WARNING)
             return Constants.EMPTY_LOCATION_ID
         return search_result.group(Constants.LOCATION_ID_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_location_name(context, location_name_pattern=Constants.EMPTY_STRING):
-        return re.search(location_name_pattern, context).group(
-            Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
+        search_result = re.search(location_name_pattern, context)
+        if search_result is None:
+            return Constants.EMPTY_NAME
+        return search_result.group(Constants.LOCATION_NAME_PATTERN_GROUP_NAME)
 
     @staticmethod
     def _get_headquarter(context, headquarter_pattern=Constants.EMPTY_STRING):
         search_result = re.search(headquarter_pattern, context)
         if search_result is None:
-            print(Constants.EMPTY_HEADQUARTER_WARNING)
             return Constants.EMPTY_HEADQUARTER
         return search_result.group(Constants.HEADQUARTER_PATTERN_GROUP_NAME)
 
@@ -257,7 +260,6 @@ class Parser:
     def _get_area(context, area_pattern=Constants.EMPTY_STRING):
         search_result = re.search(area_pattern, context)
         if search_result is None:
-            print(Constants.EMPTY_AREA_WARNING)
             return Constants.EMPTY_AREA
         return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
 
@@ -318,3 +320,28 @@ class Parser:
     @staticmethod
     def _get_location_url(match):
         return match.group(Constants.LOCATION_URL_PATTERN_GROUP_NAME)
+
+    @staticmethod
+    def _check_fishing_location(fishing_location):
+        found_issues = []
+        if fishing_location.identifier == Constants.EMPTY_LOCATION_ID:
+            found_issues.append(Constants.EMPTY_LOCATION_ID_WARNING)
+        if fishing_location.name == Constants.EMPTY_NAME:
+            found_issues.append(Constants.EMPTY_NAME_WARNING)
+        if fishing_location.headquarter == Constants.EMPTY_HEADQUARTER:
+            found_issues.append(Constants.EMPTY_HEADQUARTER_WARNING)
+        if fishing_location.area == Constants.EMPTY_AREA:
+            found_issues.append(Constants.EMPTY_AREA_WARNING)
+        if not fishing_location.gps_locations:
+            found_issues.append(Constants.EMPTY_GPS_WARNING)
+        if found_issues:
+            print(Constants.SELF_CHECK_INFO
+                  + fishing_location.identifier
+                  + Constants.COMMA
+                  + fishing_location.name)
+            print(Constants.NEW_LINE.join(found_issues))
+        if (Constants.EMPTY_LOCATION_ID_WARNING in found_issues
+                or Constants.EMPTY_NAME_WARNING in found_issues
+                or Constants.EMPTY_HEADQUARTER_WARNING in found_issues):
+            return False
+        return True

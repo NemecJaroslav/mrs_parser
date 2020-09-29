@@ -212,7 +212,6 @@ def get_expected_fishing_locations():
                          (GPSCoordinate(49, 19, 02.34, "N"), GPSCoordinate(17, 00, 18.19, "E")),
                          (GPSCoordinate(49, 20, 26.61, "N"), GPSCoordinate(17, 4, 24.07, "E")),
                          (GPSCoordinate(49, 18, 03.74, "N"), GPSCoordinate(17, 6, 29.50, "E"))]),
-        FishingLocation("", "404 - ČLÁNEK NEBYL NALEZEN", "", 0.0, []),
         FishingLocation("461325", "HERDY", "LEDNICE", 4.1,
                         [(GPSCoordinate(48, 49, 29.96, "N"), GPSCoordinate(16, 47, 14.13, "E")),
                          (GPSCoordinate(48, 49, 22.84, "N"), GPSCoordinate(16, 47, 07.95, "E")),
