@@ -180,7 +180,7 @@ def get_expected_fishing_locations():
                          (GPSCoordinate(49, 9, 38.64, "N"), GPSCoordinate(15, 28, 26.31, "E")),
                          (GPSCoordinate(49, 9, 49.69, "N"), GPSCoordinate(15, 28, 15.06, "E"))]),
         FishingLocation("461034", "DYJE 19A", "TELČ", 1.6,
-                        [(GPSCoordinate(49, 12, 15.36, "N"), GPSCoordinate(15, 30, 31.14, "E"))]),
+                        [(GPSCoordinate(49, 12, 27.63792, "N"), GPSCoordinate(15, 30, 39.11112, "E"))]),
         FishingLocation("461198", "DYJE 19B", "TELČ", 17.0,
                         [(GPSCoordinate(49, 7, 42.58, "N"), GPSCoordinate(15, 27, 19.97, "E"))]),
         FishingLocation("461219", "DYJE 19C", "TELČ", 2.5,
