@@ -340,8 +340,6 @@ class Parser:
                   + Constants.COMMA
                   + fishing_location.name)
             print(Constants.NEW_LINE.join(found_issues))
-        if (Constants.EMPTY_LOCATION_ID_WARNING in found_issues
-                or Constants.EMPTY_NAME_WARNING in found_issues
-                or Constants.EMPTY_HEADQUARTER_WARNING in found_issues):
-            return False
-        return True
+        return (Constants.EMPTY_LOCATION_ID_WARNING not in found_issues
+                and Constants.EMPTY_NAME_WARNING not in found_issues
+                and Constants.EMPTY_HEADQUARTER_WARNING not in found_issues)
