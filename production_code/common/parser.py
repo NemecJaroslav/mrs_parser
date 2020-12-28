@@ -330,7 +330,8 @@ class Parser:
             found_issues.append(Constants.EMPTY_NAME_WARNING)
         if fishing_location.headquarter == Constants.EMPTY_HEADQUARTER:
             found_issues.append(Constants.EMPTY_HEADQUARTER_WARNING)
-        if fishing_location.area == Constants.EMPTY_AREA:
+        if fishing_location.area == Parser._string_area_to_float(
+                Constants.EMPTY_AREA):
             found_issues.append(Constants.EMPTY_AREA_WARNING)
         if not fishing_location.gps_locations:
             found_issues.append(Constants.EMPTY_GPS_WARNING)
