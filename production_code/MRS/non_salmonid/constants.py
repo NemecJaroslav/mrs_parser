@@ -9,7 +9,7 @@ class NonSalmonidConstants:
         + "142-seznam-rybarskych-reviru-mimopstruhovych")
     LOCATION_URL_PATTERN = ("(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME
-                            + ">/index.php/14-mimopstruhove-reviry/.*?)\".*?</a>")
+                            + ">/index.php/.*?14-mimopstruhove-reviry/.*?)\".*?</a>")
 
     # TODO: incorrect GPS locations, Dyje 3A, Jevišovka 3A
     INCORRECT_GPS = {

@@ -138,7 +138,7 @@ def get_expected_fishing_locations():
                         [(GPSCoordinate(49, 28, 37.77, "N"), GPSCoordinate(16, 7, 04.08, "E")),
                          (GPSCoordinate(49, 33, 24.72, "N"), GPSCoordinate(16, 4, 15.85, "E"))]),
         FishingLocation("463043", "LUBĚ 1", "TIŠNOV", 5.0, []),
-        FishingLocation("463051", "MALÁ JIHLÁVKA 1", "JIHLAVA", 3.2,
+        FishingLocation("463082", "MALÁ JIHLÁVKA 1", "JIHLAVA", 3.2,
                         [(GPSCoordinate(49, 23, 14.90, "N"), GPSCoordinate(15, 36, 20.22, "E")),
                          (GPSCoordinate(49, 19, 55.46, "N"), GPSCoordinate(15, 34, 37.90, "E"))]),
         FishingLocation("463044", "MOJENA 1", "HOLEŠOV", 2.1,
