@@ -5,20 +5,32 @@ from production_code.MRS.non_salmonid.non_salmonid_parser import NonSalmonidPars
 
 
 parsers = [
-    NorthMoraviaAndSilesiaSalmonidParser(),
+    NonSalmonidParser(),
     NorthMoraviaAndSilesiaNonSalmonidParser(),
     SalmonidParser(),
-    NonSalmonidParser(),
+    NorthMoraviaAndSilesiaSalmonidParser(),
 ]
-
-
-def get_available_organisations():
-    return [parser.get_parser_description() for parser in parsers]
 
 
 def prepare_parser(parser_identifier):
     parsers[parser_identifier].parse()
 
 
+def get_available_organisations():
+    return [parser.get_parser_description() for parser in parsers]
+
+
 def get_suitable_fishing_locations(parser_identifier, start_point, distance_limit):
     return parsers[parser_identifier].get_suitable_fishing_locations(start_point, distance_limit)
+
+
+def get_all_headquarters(parser_identifier):
+    return parsers[parser_identifier].get_all_headquarters()
+
+
+def get_total_area_for_given_headquarter(parser_identifier, headquarter):
+    return parsers[parser_identifier].get_total_area_for_given_headquarter(headquarter)
+
+
+def get_fishing_locations_for_given_headquarter(parser_identifier, headquarter):
+    return parsers[parser_identifier].get_fishing_locations_for_given_headquarter(headquarter)

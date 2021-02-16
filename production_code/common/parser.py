@@ -81,6 +81,18 @@ class Parser:
         suitable_fishing_locations.sort(key=lambda x: x.distance)
         return suitable_fishing_locations
 
+    def get_all_headquarters(self):
+        return sorted(self._headquarter_to_fishing_locations.keys())
+
+    def get_total_area_for_given_headquarter(self, headquarter):
+        total_area = 0.0
+        for fishing_location in self.get_fishing_locations_for_given_headquarter(headquarter):
+            total_area += fishing_location.area
+        return total_area
+
+    def get_fishing_locations_for_given_headquarter(self, headquarter):
+        return self._headquarter_to_fishing_locations[headquarter]
+
     def print_all_headquarters_and_their_locations(self):
         for headquarter in sorted(
                 self._headquarter_to_fishing_locations,
