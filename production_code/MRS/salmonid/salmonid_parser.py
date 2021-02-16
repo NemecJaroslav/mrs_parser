@@ -4,6 +4,10 @@ from .justified_close_locations import justified_close_locations
 
 
 class SalmonidParser(MRSParser):
+    @staticmethod
+    def get_parser_description():
+        return "MRS (pstruhove)"
+
     def _get_justified_close_locations(self):
         return justified_close_locations
 

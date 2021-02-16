@@ -4,6 +4,10 @@ from production_code.CRS.NorthMoraviaAndSilesia.salmonid.constants import (
 
 
 class NorthMoraviaAndSilesiaSalmonidParser(NorthMoraviaAndSilesiaParser):
+    @staticmethod
+    def get_parser_description():
+        return "CRS - Severni Morava a Slezsko (pstruhove)"
+
     def _get_justified_close_locations(self):
         return NorthMoraviaAndSilesiaSalmonidConstants.JUSTIFIED_CLOSE_LOCATIONS
 

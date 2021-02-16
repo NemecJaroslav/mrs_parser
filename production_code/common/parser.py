@@ -40,6 +40,10 @@ class Parser:
     def _get_headquarter_gps(self, headquarter):
         raise NotImplementedError("Must be implemented")
 
+    @staticmethod
+    def get_parser_description():
+        raise NotImplementedError("Must be implemented")
+
     def parse(self):
         for location_url in self._get_locations_url():
             decoded_page = self._get_decoded_source_page(location_url)
@@ -58,7 +62,7 @@ class Parser:
                 print(Constants.DELETE_FISHING_LOCATION_WARNING)
         self._perform_self_check()
 
-    def print_suitable_fishing_locations(self, start_point, distance_limit):
+    def get_suitable_fishing_locations(self, start_point, distance_limit):
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
             for dms_1, dms_2 in fishing_location.gps_locations:
@@ -75,7 +79,7 @@ class Parser:
                             distance)
                         )
         suitable_fishing_locations.sort(key=lambda x: x.distance)
-        self._print_separated_list(suitable_fishing_locations, Constants.NEW_LINE)
+        return suitable_fishing_locations
 
     def print_all_headquarters_and_their_locations(self):
         for headquarter in sorted(
