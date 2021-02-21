@@ -7,10 +7,11 @@ from production_code.common.distance_limit import DistanceLimit
 
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QApplication, QVBoxLayout, QPushButton, QHBoxLayout, QComboBox, QLabel, QLineEdit,
-    QTableWidget, QTableWidgetItem, QFormLayout, QAbstractItemView, QHeaderView
+    QTableWidget, QTableWidgetItem, QFormLayout, QAbstractItemView, QHeaderView,
 )
 
 from PyQt5.QtGui import QDoubleValidator, QIntValidator
+from pyqtlet import L, MapWidget
 
 
 # https://realpython.com/python-pyqt-gui-calculator/
@@ -27,13 +28,22 @@ class FishingLocationsWidget(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         self.layout = QVBoxLayout(self)
+        self.mapWidget = MapWidget()
+        self.layout.addWidget(self.mapWidget)
         self.setLayout(self.layout)
+
+        current_position = [49.4880292, 16.6594564]
+
+        self.map = L.map(self.mapWidget)
+        self.map.setView(current_position, 10)
+        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(self.map)
+        self._markers = []
 
         self._choose_organization_combo_box = QComboBox()
         self._choose_organization_combo_box.currentIndexChanged.connect(self._organisation_changed)
-        self._choose_current_position_latitude = QLineEdit("49.1806731")
+        self._choose_current_position_latitude = QLineEdit(str(current_position[0]))
         self._choose_current_position_latitude.setValidator(QDoubleValidator())
-        self._choose_current_position_longitude = QLineEdit("16.6801281")
+        self._choose_current_position_longitude = QLineEdit(str(current_position[1]))
         self._choose_current_position_longitude.setValidator(QDoubleValidator())
         self._choose_distance_limit_min = QLineEdit()
         self._choose_distance_limit_min.setValidator(QIntValidator())
@@ -49,6 +59,7 @@ class FishingLocationsWidget(QWidget):
         self._headquarter_locations_table = QTableWidget()
         self._headquarter_locations_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
+        self._add_current_position_marker()
         self._place_ui_elements()
 
         self._fill_organisation_combo_box(get_available_organisations())
@@ -95,16 +106,30 @@ class FishingLocationsWidget(QWidget):
         outer_layout.addLayout(suitable_locations_vs_headquarters_layout)
         self.layout.addLayout(outer_layout)
 
-    def _fill_suitable_locations_table(self, index):
-        self._suitable_locations_table.clear()
-        self._suitable_locations_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self._suitable_locations_table.horizontalHeader().setStretchLastSection(True)
-        records = self._get_suitable_fishing_locations(index)
+    def _delete_markers(self):
+        for marker in self._markers:
+            self.map.removeLayer(marker)
+        self._markers = []
+
+    def _add_current_position_marker(self):
+        current_position = [float(self._choose_current_position_latitude.text()),
+                            float(self._choose_current_position_longitude.text())]
+        current_position_marker = L.circleMarker(current_position)
+        current_position_marker.bindPopup("Current position")
+        self._markers.append(current_position_marker)
+        self.map.setView(self._markers[-1], 10)
+        self.map.addLayer(self._markers[-1])
+
+    def _fill_suitable_locations_table(self, records):
         self._suitable_locations_table.setRowCount(len(records))
         self._suitable_locations_table.setColumnCount(5)
         self._suitable_locations_table.setHorizontalHeaderLabels(
             ["Identifier", "Name", "Headquarter", "GPS", "Distance [km]"])
         for row_index, record in enumerate(records):
+            marker = L.marker([record.gps[0], record.gps[1]])
+            marker.bindPopup(record.name)
+            self._markers.append(marker)
+            self.map.addLayer(self._markers[-1])
             self._suitable_locations_table.setItem(row_index, 0, QTableWidgetItem(record.id))
             self._suitable_locations_table.setItem(row_index, 1, QTableWidgetItem(record.name))
             self._suitable_locations_table.setItem(row_index, 2, QTableWidgetItem(record.headquarter))
@@ -140,23 +165,34 @@ class FishingLocationsWidget(QWidget):
 
     def _organisation_changed(self, index):
         prepare_parser(index)
-        self._fill_suitable_locations_table(index)
+        self._start_searching_for_suitable_fishing_locations(index)
         self._fill_headquarters_combo_box(get_all_headquarters(index))
 
     def _headquarter_changed(self, headquarter):
         self._fill_headquarter_locations_table(headquarter)
 
     def _button_clicked(self, checked):
-        self._fill_suitable_locations_table(self._choose_organization_combo_box.currentIndex())
+        self._start_searching_for_suitable_fishing_locations(self._choose_organization_combo_box.currentIndex())
+
+    def _start_searching_for_suitable_fishing_locations(self, index):
+        if self._can_suitable_locations_table_be_filled():
+            self._delete_markers()
+            self._add_current_position_marker()
+            self._prepare_suitable_fishing_locations_table()
+
+            self._fill_suitable_locations_table(self._get_suitable_fishing_locations(index))
+
+    def _prepare_suitable_fishing_locations_table(self):
+        self._suitable_locations_table.clear()
+        self._suitable_locations_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self._suitable_locations_table.horizontalHeader().setStretchLastSection(True)
 
     def _get_suitable_fishing_locations(self, index):
-        if self._can_suitable_locations_table_be_filled():
-            return get_suitable_fishing_locations(
-                    index, (float(self._choose_current_position_latitude.text()),
-                            float(self._choose_current_position_longitude.text())),
-                    DistanceLimit(float(self._choose_distance_limit_min.text()),
-                                  float(self._choose_distance_limit_max.text())))
-        return list()
+        return get_suitable_fishing_locations(
+                index, (float(self._choose_current_position_latitude.text()),
+                        float(self._choose_current_position_longitude.text())),
+                DistanceLimit(float(self._choose_distance_limit_min.text()),
+                              float(self._choose_distance_limit_max.text())))
 
     def _can_suitable_locations_table_be_filled(self):
         return (self._choose_current_position_latitude.text()
