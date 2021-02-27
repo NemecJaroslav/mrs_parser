@@ -103,4 +103,5 @@ class NorthMoraviaAndSilesiaConstants:
         "MO JESENÍK": (50.2177233, 17.2070200),
         "MO LOŠTICE": (49.7424722, 16.9219292),
         "VÚS ČRS OSTRAVA": (49.8252550, 18.2513056),
+        "ÚS PRO SEVERNÍ MORAVU A SLEZSKO": (49.8252550, 18.2513056),
     }

@@ -37,7 +37,10 @@ class FishingLocationsWidget(QWidget):
         self.map = L.map(self.mapWidget)
         self.map.setView(current_position, 10)
         L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(self.map)
-        self._markers = []
+        self._current_position_marker = None
+        self._current_position_marker_circle = None
+        self._suitable_fishing_position_markers = []
+        self._headquarter_location_markers = []
 
         self._choose_organization_combo_box = QComboBox()
         self._choose_organization_combo_box.currentIndexChanged.connect(self._organisation_changed)
@@ -53,16 +56,46 @@ class FishingLocationsWidget(QWidget):
         self._look_for_suitable_fishing_locations_button.clicked.connect(self._button_clicked)
         self._suitable_locations_table = QTableWidget()
         self._suitable_locations_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self._suitable_locations_table.clicked.connect(self._suitable_location_selected)
 
         self._choose_headquarters_combo_box = QComboBox()
         self._choose_headquarters_combo_box.currentTextChanged.connect(self._headquarter_changed)
         self._headquarter_locations_table = QTableWidget()
         self._headquarter_locations_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self._headquarter_locations_table.clicked.connect(self._headquarter_location_selected)
 
         self._add_current_position_marker()
         self._place_ui_elements()
 
         self._fill_organisation_combo_box(get_available_organisations())
+
+    def _suitable_location_selected(self, index):
+        indexes_to_replace = []
+        for marker_index, marker in enumerate(self._suitable_fishing_position_markers):
+            if isinstance(marker, L.circleMarker):
+                indexes_to_replace.append(marker_index)
+
+        for index_to_replace in indexes_to_replace:
+            old_marker = self._suitable_fishing_position_markers[index_to_replace]
+            new_marker = L.marker(old_marker.latLng)
+            self.map.removeLayer(old_marker)
+            self.map.addLayer(new_marker)
+            self._suitable_fishing_position_markers[index_to_replace] = new_marker
+
+        row_index = index.row()
+        marker = self._suitable_fishing_position_markers[row_index]
+        new_marker = L.circleMarker(marker.latLng)
+        self._suitable_fishing_position_markers[row_index] = new_marker
+        self.map.addLayer(new_marker)
+        self.map.removeLayer(marker)
+
+    def _headquarter_location_selected(self, index):
+        row_index = index.row()
+
+        markers = self._headquarter_location_markers[row_index]
+
+        for marker in markers:
+            self.map.addLayer(marker)
 
     def _place_ui_elements(self):
         outer_layout = QVBoxLayout()
@@ -106,19 +139,34 @@ class FishingLocationsWidget(QWidget):
         outer_layout.addLayout(suitable_locations_vs_headquarters_layout)
         self.layout.addLayout(outer_layout)
 
-    def _delete_markers(self):
-        for marker in self._markers:
+    def _add_suitable_fishing_position_markers(self, records):
+        for record in records:
+            marker = L.marker([record.gps[0], record.gps[1]])
+            self._suitable_fishing_position_markers.append(marker)
+            self.map.addLayer(self._suitable_fishing_position_markers[-1])
+
+    def _delete_suitable_fishing_position_markers(self):
+        for marker in self._suitable_fishing_position_markers:
             self.map.removeLayer(marker)
-        self._markers = []
+        self._suitable_fishing_position_markers = []
+
+    def _delete_current_position_marker(self):
+        if self._current_position_marker is not None:
+            self.map.removeLayer(self._current_position_marker)
+        if self._current_position_marker_circle is not None:
+            self.map.removeLayer(self._current_position_marker_circle)
+        self._current_position_marker = None
+        self._current_position_marker_circle = None
 
     def _add_current_position_marker(self):
         current_position = [float(self._choose_current_position_latitude.text()),
                             float(self._choose_current_position_longitude.text())]
-        current_position_marker = L.circleMarker(current_position)
-        current_position_marker.bindPopup("Current position")
-        self._markers.append(current_position_marker)
-        self.map.setView(self._markers[-1], 10)
-        self.map.addLayer(self._markers[-1])
+        self._current_position_marker = L.marker(current_position)
+        self._current_position_marker_circle = L.circleMarker(current_position)
+        self._current_position_marker.bindPopup("Current position")
+        self.map.setView(current_position, 10)
+        self.map.addLayer(self._current_position_marker)
+        self.map.addLayer(self._current_position_marker_circle)
 
     def _fill_suitable_locations_table(self, records):
         self._suitable_locations_table.setRowCount(len(records))
@@ -126,10 +174,6 @@ class FishingLocationsWidget(QWidget):
         self._suitable_locations_table.setHorizontalHeaderLabels(
             ["Identifier", "Name", "Headquarter", "GPS", "Distance [km]"])
         for row_index, record in enumerate(records):
-            marker = L.marker([record.gps[0], record.gps[1]])
-            marker.bindPopup(record.name)
-            self._markers.append(marker)
-            self.map.addLayer(self._markers[-1])
             self._suitable_locations_table.setItem(row_index, 0, QTableWidgetItem(record.id))
             self._suitable_locations_table.setItem(row_index, 1, QTableWidgetItem(record.name))
             self._suitable_locations_table.setItem(row_index, 2, QTableWidgetItem(record.headquarter))
@@ -147,6 +191,12 @@ class FishingLocationsWidget(QWidget):
         self._headquarter_locations_table.setHorizontalHeaderLabels(
             ["Identifier", "Name", "Area [ha]"])
         for row_index, record in enumerate(records):
+            tmp = []
+            for c1, c2 in record.gps_locations:
+                marker = L.marker([c1.convert_to_dd(), c2.convert_to_dd()])
+                marker.bindPopup(record.name)
+                tmp.append(marker)
+            self._headquarter_location_markers.append(tmp)
             self._headquarter_locations_table.setItem(row_index, 0, QTableWidgetItem(record.identifier))
             self._headquarter_locations_table.setItem(row_index, 1, QTableWidgetItem(record.name))
             self._headquarter_locations_table.setItem(row_index, 2, QTableWidgetItem(str(record.area)))
@@ -169,6 +219,10 @@ class FishingLocationsWidget(QWidget):
         self._fill_headquarters_combo_box(get_all_headquarters(index))
 
     def _headquarter_changed(self, headquarter):
+        for marker in self._headquarter_location_markers:
+            for tmp in marker:
+                self.map.removeLayer(tmp)
+        self._headquarter_location_markers = []
         self._fill_headquarter_locations_table(headquarter)
 
     def _button_clicked(self, checked):
@@ -176,11 +230,14 @@ class FishingLocationsWidget(QWidget):
 
     def _start_searching_for_suitable_fishing_locations(self, index):
         if self._can_suitable_locations_table_be_filled():
-            self._delete_markers()
+            self._delete_suitable_fishing_position_markers()
+            self._delete_current_position_marker()
             self._add_current_position_marker()
             self._prepare_suitable_fishing_locations_table()
 
-            self._fill_suitable_locations_table(self._get_suitable_fishing_locations(index))
+            suitable_fishing_locations = self._get_suitable_fishing_locations(index)
+            self._fill_suitable_locations_table(suitable_fishing_locations)
+            self._add_suitable_fishing_position_markers(suitable_fishing_locations)
 
     def _prepare_suitable_fishing_locations_table(self):
         self._suitable_locations_table.clear()

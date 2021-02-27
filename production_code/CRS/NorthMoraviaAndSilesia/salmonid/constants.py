@@ -71,4 +71,5 @@ class NorthMoraviaAndSilesiaSalmonidConstants:
         "MO OLOMOUC": (49.6078183, 17.2831197),
         "MO STARÁ VES NAD ONDŘEJNICÍ": (49.7276794, 18.1881647),
         "MO HRANICE": (49.5625267, 17.7384581),
+        "MO VALAŠSKÉ MEZIŘÍČÍ   CH A P": (49.4576125, 17.9867611),
     }

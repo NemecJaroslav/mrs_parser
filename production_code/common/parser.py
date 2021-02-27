@@ -66,7 +66,7 @@ class Parser:
         suitable_fishing_locations = []
         for fishing_location in self._fishing_locations:
             for dms_1, dms_2 in fishing_location.gps_locations:
-                end_point = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
+                end_point = (dms_1.convert_to_dd(), dms_2.convert_to_dd())
                 distance = self._get_distance_in_km(start_point, end_point)
                 if (distance_limit.min_distance
                         <= distance < distance_limit.max_distance):
@@ -126,7 +126,7 @@ class Parser:
             headquarter_gps = self._get_headquarter_gps(headquarter)
             for location in self._headquarter_to_fishing_locations[headquarter]:
                 for dms_1, dms_2 in location.gps_locations:
-                    end_point = (self._dms_to_dd(dms_1), self._dms_to_dd(dms_2))
+                    end_point = (dms_1.convert_to_dd(), dms_2.convert_to_dd())
                     result.append(self.headquarters_locations_distance(
                         headquarter, location.name, end_point,
                         self._get_distance_in_km(headquarter_gps, end_point)))
@@ -163,8 +163,8 @@ class Parser:
             for gps_1, gps_2 in itertools.combinations(fishing_location.gps_locations, 2):
                 gps_1_dms_1, gps_1_dms_2 = gps_1
                 gps_2_dms_1, gps_2_dms_2 = gps_2
-                gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
-                gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
+                gps_1_dd = (gps_1_dms_1.convert_to_dd(), gps_1_dms_2.convert_to_dd())
+                gps_2_dd = (gps_2_dms_1.convert_to_dd(), gps_2_dms_2.convert_to_dd())
                 distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
@@ -182,8 +182,8 @@ class Parser:
                                                   fishing_location_2.gps_locations):
                 gps_1_dms_1, gps_1_dms_2 = gps_1
                 gps_2_dms_1, gps_2_dms_2 = gps_2
-                gps_1_dd = (self._dms_to_dd(gps_1_dms_1), self._dms_to_dd(gps_1_dms_2))
-                gps_2_dd = (self._dms_to_dd(gps_2_dms_1), self._dms_to_dd(gps_2_dms_2))
+                gps_1_dd = (gps_1_dms_1.convert_to_dd(), gps_1_dms_2.convert_to_dd())
+                gps_2_dd = (gps_2_dms_1.convert_to_dd(), gps_2_dms_2.convert_to_dd())
                 distance = self._get_distance_in_km(gps_1_dd, gps_2_dd)
                 if ((distance_limit.min_distance
                      <= distance <= distance_limit.max_distance)
@@ -278,16 +278,6 @@ class Parser:
         if search_result is None:
             return Constants.EMPTY_AREA
         return search_result.group(Constants.AREA_PATTERN_GROUP_NAME)
-
-    @staticmethod
-    def _dms_to_dd(dms):
-        gps_in_dd = (dms.degrees
-                     + dms.minutes / Constants.MINUTES_IN_HOUR
-                     + dms.seconds / Constants.SECONDS_IN_HOUR)
-        if (dms.direction == Constants.WEST
-                or dms.direction == Constants.SOUTH):
-            return -gps_in_dd
-        return gps_in_dd
 
     @staticmethod
     def _get_distance_in_km(location_1, location_2):

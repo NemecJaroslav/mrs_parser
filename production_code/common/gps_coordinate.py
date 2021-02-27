@@ -8,6 +8,15 @@ class GPSCoordinate:
         self.seconds = seconds
         self.direction = direction
 
+    def convert_to_dd(self):
+        gps_in_dd = (self.degrees
+                     + self.minutes / Constants.MINUTES_IN_HOUR
+                     + self.seconds / Constants.SECONDS_IN_HOUR)
+        if (self.direction == Constants.WEST
+                or self.direction == Constants.SOUTH):
+            return -gps_in_dd
+        return gps_in_dd
+
     def __eq__(self, other):
         if isinstance(other, GPSCoordinate):
             return (self.degrees == other.degrees
