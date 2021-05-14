@@ -232,8 +232,6 @@ def get_expected_fishing_locations():
                          (GPSCoordinate(49, 7, 15.84, "N"), GPSCoordinate(16, 4, 13.49, "E"))]),
         FishingLocation("461308", "MOCLA 1M", "HROTOVICE", 0.8,
                         [(GPSCoordinate(49, 5, 11.68, "N"), GPSCoordinate(16, 00, 37.42, "E"))]),
-        FishingLocation("461322", "MOCLA 2", "HROTOVICE", 3.85,
-                        [(GPSCoordinate(49, 7, 19.95, "N"), GPSCoordinate(16, 4, 01.16, "E"))]),
         FishingLocation("461080", "MORAVA 2", "LANŽHOT", 20.0,
                         [(GPSCoordinate(48, 41, 34.94, "N"), GPSCoordinate(16, 59, 46.59, "E")),
                          (GPSCoordinate(48, 44, 06.77, "N"), GPSCoordinate(17, 1, 16.28, "E"))]),
@@ -930,4 +928,6 @@ def get_expected_fishing_locations():
                           GPSCoordinate(15, 59, 47.304, "E"))]),
         FishingLocation("461233", "FRYŠÁVKA 1A", "NOVÉ MĚSTO NA MORAVĚ", 0.7,
                         [(GPSCoordinate(49, 34, 47.70, "N"), GPSCoordinate(16, 3, 49.08, "E"))]),
+        FishingLocation("461401", "ZÁRUBICE", "HROTOVICE", 5.1,
+                        [(GPSCoordinate(49, 7, 22.5258, "N"), GPSCoordinate(15, 59, 15.2082, "E"))]),
     ]

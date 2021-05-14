@@ -9,9 +9,12 @@ class SalmonidConstants:
         + "143-seznam-rybarskych-reviru-pstruhovych")
     LOCATION_URL_PATTERN = ("(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME
-                            + ">/index.php/15-pstruhove-reviry/.*?)\".*?</a>")
+                            + ">/index.php/.*?15-pstruhove-reviry/.*?)\".*?</a>")
 
-    INCORRECT_GPS = {}
+    INCORRECT_GPS = {
+        "49.4795856N, 16.6544583E":
+            "49° 28' 46.509'' N, 16° 39' 16.0488'' E",
+    }
     HEADQUARTER_GPS = {
         "BOSKOVICE": (49.4908731, 16.6943608),
         "TIŠNOV": (49.3425425, 16.4272783),

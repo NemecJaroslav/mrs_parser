@@ -79,6 +79,8 @@ def get_expected_fishing_locations():
                         [(GPSCoordinate(49, 28, 33.45, "N"), GPSCoordinate(17, 8, 50.31, "E")),
                          (GPSCoordinate(49, 28, 5.45, "N"), GPSCoordinate(17, 2, 23.11, "E"))]),
         FishingLocation("463024", "HODONÍNKA 1", "NEDVĚDICE", 4.0, []),
+        FishingLocation("463083", "HORNÍ RYBNÍK", "BOSKOVICE", 0.5,
+                        [(GPSCoordinate(49, 28, 46.509, "N"), GPSCoordinate(16, 39, 16.0488, "E"))]),
         FishingLocation("463025", "CHVOJNICE 1", "NÁMĚŠŤ NAD OSLAVOU", 3.0, []),
         FishingLocation("463026", "CHVOJNICE 2", "VELKÁ BÍTEŠ", 2.0, []),
         FishingLocation("463048", "JANUŠTICE 1", "ZLÍN", 2.5,
