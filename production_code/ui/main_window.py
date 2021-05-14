@@ -1,4 +1,6 @@
+import io
 import sys
+import folium
 
 from production_code.fishing_locations_interface.api import (
     get_available_organisations, get_suitable_fishing_locations, get_all_headquarters,
@@ -9,9 +11,9 @@ from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QApplication, QVBoxLayout, QPushButton, QHBoxLayout, QComboBox, QLabel, QLineEdit,
     QTableWidget, QTableWidgetItem, QFormLayout, QAbstractItemView, QHeaderView,
 )
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 from PyQt5.QtGui import QDoubleValidator, QIntValidator
-from pyqtlet import L, MapWidget
 
 
 # https://realpython.com/python-pyqt-gui-calculator/
@@ -28,19 +30,16 @@ class FishingLocationsWidget(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         self.layout = QVBoxLayout(self)
-        self.mapWidget = MapWidget()
+        self.mapWidget = QWebEngineView()
         self.layout.addWidget(self.mapWidget)
         self.setLayout(self.layout)
 
-        current_position = [49.4880292, 16.6594564]
+        current_position = [49.1806731, 16.6801281]
 
-        self.map = L.map(self.mapWidget)
-        self.map.setView(current_position, 10)
-        L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(self.map)
-        self._current_position_marker = None
-        self._current_position_marker_circle = None
+        self.map = None
+        self._create_map(current_position)
+
         self._suitable_fishing_position_markers = []
-        self._headquarter_location_markers = []
 
         self._choose_organization_combo_box = QComboBox()
         self._choose_organization_combo_box.currentIndexChanged.connect(self._organisation_changed)
@@ -110,52 +109,44 @@ class FishingLocationsWidget(QWidget):
         outer_layout.addLayout(suitable_locations_vs_headquarters_layout)
         self.layout.addLayout(outer_layout)
 
+    def _redraw_map(self):
+        data = io.BytesIO()
+        self.map.save(data, close_file=False)
+        self.mapWidget.setHtml(data.getvalue().decode())
+
+    def _create_map(self, current_position):
+        self.map = folium.Map(tiles="Stamen Terrain", zoom_start=13, location=current_position)
+        marker = folium.Marker(current_position, popup="Current position", icon=folium.Icon(icon="car", prefix="fa"))
+        marker.add_to(self.map)
+        self._redraw_map()
+
     def _add_suitable_fishing_position_markers(self, records):
         for record in records:
-            marker = L.marker([record.gps[0], record.gps[1]])
-            marker.bindPopup(record.name + ", " + self._format_float(record.distance) + " km")
+            marker = folium.Marker(
+                [record.gps[0], record.gps[1]], popup=record.name + ", " + self._format_float(record.distance) + " km")
             self._suitable_fishing_position_markers.append(marker)
-            self.map.addLayer(self._suitable_fishing_position_markers[-1])
+            self._suitable_fishing_position_markers[-1].add_to(self.map)
+        self._redraw_map()
 
     def _delete_suitable_fishing_position_markers(self):
-        for marker in self._suitable_fishing_position_markers:
-            self.map.removeLayer(marker)
         self._suitable_fishing_position_markers = []
-
-    def _delete_current_position_marker(self):
-        if self._current_position_marker is not None:
-            self.map.removeLayer(self._current_position_marker)
-        if self._current_position_marker_circle is not None:
-            self.map.removeLayer(self._current_position_marker_circle)
-        self._current_position_marker = None
-        self._current_position_marker_circle = None
 
     def _add_current_position_marker(self):
         current_position = [float(self._choose_current_position_latitude.text()),
                             float(self._choose_current_position_longitude.text())]
-        self._current_position_marker = L.marker(current_position)
-        self._current_position_marker_circle = L.circleMarker(current_position)
-        self._current_position_marker.bindPopup("Current position")
-        self.map.setView(current_position, 10)
-        self.map.addLayer(self._current_position_marker)
-        self.map.addLayer(self._current_position_marker_circle)
+        self._create_map(current_position)
 
     def _suitable_location_selected(self, index):
         marker = self._suitable_fishing_position_markers[index.row()]
-        self.map.setView(marker.latLng, 20)
+        self.map.location = marker.location
+        self._redraw_map()
 
+    # TODO: implement
     def _add_headquarter_fishing_location_markers(self, records):
-        for record in records:
-            for c1, c2 in record.gps_locations:
-                marker = L.circleMarker([c1.convert_to_dd(), c2.convert_to_dd()])
-                marker.bindPopup(record.name)
-                self._headquarter_location_markers.append(marker)
-                self.map.addLayer(self._headquarter_location_markers[-1])
-
-    def _delete_headquarter_fishing_location_marker(self):
-        for marker in self._headquarter_location_markers:
-            self.map.removeLayer(marker)
-        self._headquarter_location_markers = []
+        return
+        # for record in records:
+        #     for c1, c2 in record.gps_locations:
+        #         marker = folium.CircleMarker([c1.convert_to_dd(), c2.convert_to_dd()], popup=record.name)
 
     def _fill_suitable_locations_table(self, records):
         self._suitable_locations_table.setRowCount(len(records))
@@ -200,7 +191,6 @@ class FishingLocationsWidget(QWidget):
         self._fill_headquarters_combo_box(get_all_headquarters(index))
 
     def _headquarter_changed(self, headquarter):
-        self._delete_headquarter_fishing_location_marker()
         records = get_fishing_locations_for_given_headquarter(
             self._choose_organization_combo_box.currentIndex(), headquarter)
         self._fill_headquarter_locations_table(headquarter, records)
@@ -212,7 +202,6 @@ class FishingLocationsWidget(QWidget):
     def _start_searching_for_suitable_fishing_locations(self, index):
         if self._can_suitable_locations_table_be_filled():
             self._delete_suitable_fishing_position_markers()
-            self._delete_current_position_marker()
             self._add_current_position_marker()
             self._prepare_suitable_fishing_locations_table()
 
