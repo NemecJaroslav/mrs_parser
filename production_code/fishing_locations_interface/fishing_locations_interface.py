@@ -22,15 +22,3 @@ def get_available_organisations():
 
 def get_suitable_fishing_locations(parser_identifier, start_point, distance_limit):
     return parsers[parser_identifier].get_suitable_fishing_locations(start_point, distance_limit)
-
-
-def get_all_headquarters(parser_identifier):
-    return parsers[parser_identifier].get_all_headquarters()
-
-
-def get_total_area_for_given_headquarter(parser_identifier, headquarter):
-    return parsers[parser_identifier].get_total_area_for_given_headquarter(headquarter)
-
-
-def get_fishing_locations_for_given_headquarter(parser_identifier, headquarter):
-    return parsers[parser_identifier].get_fishing_locations_for_given_headquarter(headquarter)
