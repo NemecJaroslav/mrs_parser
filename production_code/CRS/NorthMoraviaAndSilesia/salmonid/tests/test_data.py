@@ -122,7 +122,7 @@ def get_expected_fishing_locations():
         FishingLocation("473032", "JUHYNĚ 1", "MO CHORYNĚ", 0.0,
                         [(GPSCoordinate(49, 30, 12.578, "N"), GPSCoordinate(17, 53, 41.555, "E")),
                          (GPSCoordinate(49, 29, 20.198, "N"), GPSCoordinate(17, 53, 3.853, "E"))]),
-        FishingLocation("473033", "JUHYNĚ 2", "MO KELČ", 0.0,
+        FishingLocation("473033", "JUHYNĚ 2", "MO CHORYNĚ", 0.0,
                         [(GPSCoordinate(49, 29, 20.198, "N"), GPSCoordinate(17, 53, 3.853, "E")),
                          (GPSCoordinate(49, 25, 42.227, "N"), GPSCoordinate(17, 47, 14.651, "E"))]),
         FishingLocation("473034", "KLENOS 1", "MO PŘÍBOR", 0.0,
