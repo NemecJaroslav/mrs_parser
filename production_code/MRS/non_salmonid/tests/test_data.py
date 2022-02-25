@@ -236,7 +236,7 @@ def get_expected_fishing_locations():
         FishingLocation("461308", "MOCLA 1M", "HROTOVICE", 0.8,
                         [(GPSCoordinate(49, 5, 11.68, "N"), GPSCoordinate(16, 00, 37.42, "E"))]),
         FishingLocation("461080", "MORAVA 2", "LANŽHOT", 20.0,
-                        [(GPSCoordinate(48, 41, 34.94, "N"), GPSCoordinate(16, 59, 46.59, "E")),
+                        [(GPSCoordinate(48, 40, 5.929, "N"), GPSCoordinate(16, 58, 2.312, "E")),
                          (GPSCoordinate(48, 44, 06.77, "N"), GPSCoordinate(17, 1, 16.28, "E"))]),
         FishingLocation("461081", "MORAVA 3", "TVRDONICE", 23.0,
                         [(GPSCoordinate(48, 44, 06.77, "N"), GPSCoordinate(17, 1, 16.28, "E")),
