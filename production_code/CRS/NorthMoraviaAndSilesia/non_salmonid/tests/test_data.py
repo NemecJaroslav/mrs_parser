@@ -598,7 +598,6 @@ def get_expected_fishing_locations():
                          (GPSCoordinate(49, 55, 26.705, "N"), GPSCoordinate(18, 20, 7.527, "E"))]),
         FishingLocation("471173", "MAJETÍN 1 A", "MO BRODEK U PŘEROVA", 0.0,
                         [(GPSCoordinate(49, 30, 50.172, "N"), GPSCoordinate(17, 19, 11.777, "E"))]),
-        FishingLocation("471174", "OLEŠNÁ 2", "MO FRÝDEK-MÍSTEK", 0.0, []),
         FishingLocation("471175", "PILÍK 1 A", "MO PASKOV", 0.0,
                         [(GPSCoordinate(49, 45, 8.559, "N"), GPSCoordinate(18, 17, 2.866, "E")),
                          (GPSCoordinate(49, 45, 0.736, "N"), GPSCoordinate(18, 17, 7.095, "E"))]),
