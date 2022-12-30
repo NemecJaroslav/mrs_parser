@@ -41,7 +41,7 @@ class NorthMoraviaAndSilesiaConstants:
     ]
     LOCATION_URL_PATTERN = ("<a href=\"(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME
-                            + ">/katalog/rybarske-reviry/mimopstruhove-reviry/.*.html)\"")
+                            + ">/katalog/rybarske-reviry/.*.html)\"")
 
     HEADQUARTER_GPS = {
         "MO ŠTERNBERK": (49.7249119, 17.2861164),
