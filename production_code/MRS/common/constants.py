@@ -2,7 +2,7 @@ from production_code.common.constants import Constants
 
 
 class MRSConstants:
-    MRS_HOME_PAGE = "http://www.mrsbrno.cz"
+    MRS_HOME_PAGE = "http://z.mrsbrno.cz"
     LOCATION_ID_PATTERN = ("ev. číslo revíru:.*?(?P<"
                            + Constants.LOCATION_ID_PATTERN_GROUP_NAME
                            + ">\\d{3}\\s*\\d{3})<")
