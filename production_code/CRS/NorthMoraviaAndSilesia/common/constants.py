@@ -8,7 +8,8 @@ class NorthMoraviaAndSilesiaCommonConstants:
                              + Constants.LOCATION_NAME_PATTERN_GROUP_NAME
                              + ">.*)[–-].*(MO|VÚS|ÚS).*</title>")
     HEADQUARTER_PATTERN = ("<title>.*\\|.*\\|.*[–-](?P<"
-                           + Constants.HEADQUARTER_PATTERN_GROUP_NAME + ">.*(MO|VÚS|ÚS).*)</title>")
+                           + Constants.HEADQUARTER_PATTERN_GROUP_NAME +
+                           ">.*(MO|VÚS|ÚS)\\s+[-a-zA-ZŠČíýřčěšéáž]+[a-zA-ZŠČíýřčěšéáž\\s]*)(\\s*|-|.*)</title>")
     AREA_PATTERN = ("<p><strong>(?:[\\d\\s,]*km)*\\s*(?P<"
                     + Constants.AREA_PATTERN_GROUP_NAME
                     + ">\\d[,\\d]*)\\s*ha\\s*(?:[\\d\\s,]*km)*</strong></p>")
