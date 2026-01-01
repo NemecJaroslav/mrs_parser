@@ -44,16 +44,19 @@ class Parser:
     def get_parser_description():
         raise NotImplementedError("Must be implemented")
 
-    def parse(self):
-        for location_url in self._get_locations_url():
-            decoded_page = self._get_decoded_source_page(location_url)
-            fishing_location = FishingLocation(
+    def get_fishing_location(self, decoded_page):
+        return FishingLocation(
                 self._remove_white_characters(self._get_location_id(decoded_page)),
                 self._get_location_name(decoded_page).strip().upper(),
                 self._get_headquarter(decoded_page).strip().upper(),
                 self._string_area_to_float(self._get_area(decoded_page)),
                 self._convert_string_to_gps(self._get_gps(decoded_page))
             )
+
+    def parse(self):
+        for location_url in self._get_locations_url():
+            decoded_page = self._get_decoded_source_page(location_url)
+            fishing_location = self.get_fishing_location(decoded_page)
             if self._check_fishing_location(fishing_location):
                 self._fishing_locations.append(fishing_location)
                 self._headquarter_to_fishing_locations[fishing_location.headquarter].append(
