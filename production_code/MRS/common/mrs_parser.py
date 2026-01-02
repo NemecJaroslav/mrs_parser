@@ -5,50 +5,72 @@ from typing import List, Tuple
 import re
 from production_code.common.gps_coordinate import DDComponent
 from production_code.common.parser import Parser
+from production_code.common.constants import Constants
 from production_code.MRS.common.constants import MRSConstants
 from production_code.common.fishing_location import FishingLocation
 
 
 class MRSParser(Parser):
-    @staticmethod
-    def _get_bpvr():
-        FILE_ID = "18WmpnlBkfeCD_79biAVpxiUHeLfweRKC"
-        URL = f"https://drive.google.com/uc?export=download&id={FILE_ID}"
-        PHRASE = "REVÍRY MIMOPSTRUHOVÉ"
+    def _get_justified_close_locations(self):
+        raise NotImplementedError("Must be implemented")
 
-        # stáhnout PDF do paměti
-        r = requests.get(URL)
+    def _get_locations(self):
+        return self._get_fishing_locations(self._get_raw_fishing_locations())
+
+    def _get_incorrect_gps(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_headquarter_gps(self, headquarter):
+        raise NotImplementedError("Must be implemented")
+
+    @staticmethod
+    def get_parser_description():
+        raise NotImplementedError("Must be implemented")
+
+    # No decoding done as we parse PDF file in case of MRS
+    def _get_decoded_source_page(self, location_url):
+        return location_url
+
+    def get_url_to_bpvr(self):
+        raise NotImplementedError("Must be implemented")
+
+    def get_phase_in_bpvr_to_look_for(self):
+        raise NotImplementedError("Must be implemented")
+
+    def get_location_id_start(self):
+        raise NotImplementedError("Must be implemented")
+
+    def _get_raw_fishing_locations(self):
+        r = requests.get(self.get_url_to_bpvr())
         r.raise_for_status()
         reader = PdfReader(BytesIO(r.content))
 
-        # spojit text všech stran
         all_text = []
         for page in reader.pages:
-            all_text.append(page.extract_text() or "")
-        joined = "\n".join(all_text)
+            all_text.append(page.extract_text() or Constants.EMPTY_STRING)
+        joined = Constants.NEW_LINE.join(all_text)
 
-        # najít frázi a vrátit text od ní dál
-        idx = joined.find(PHRASE)
+        phrase = self.get_phase_in_bpvr_to_look_for()
+        idx = joined.find(phrase)
         if idx == -1:
-            return ""
-        result = joined[idx+len(PHRASE):]
+            return Constants.EMPTY_STRING
+        result = joined[idx+len(phrase):]
         return result
 
-    @staticmethod
-    def _get_locations(bpvr):
+    def _get_fishing_locations(self, bpvr):
         lines = bpvr.splitlines()
         chunks = []
         current = []
 
         def flush():
             if current:
-                chunks.append("\n".join(current).strip())
+                chunks.append(Constants.NEW_LINE.join(current).strip())
                 current.clear()
 
         for line in lines:
-            if line.startswith("461"):
+            if line.startswith(self.get_location_id_start()):
                 flush()
-                current.append(line)  # zahrne i řádek "461..." do oddílu
+                current.append(line)
             else:
                 current.append(line)
         flush()
@@ -57,13 +79,9 @@ class MRSParser(Parser):
     @staticmethod
     def parse_gps(gps: str) -> List[Tuple[DDComponent, DDComponent]]:
         gps = gps.replace('\u00A0', ' ')  # normalize non-breaking spaces
-        GPS_PATTERN = re.compile(
-            r'(?:\bGPS\b[^0-9NSnsEWew]+?)?'  # optional "GPS ..." label
-            r'(?P<lat>\d{1,2}(?:\.\d+)?)\s*(?P<lat_hemi>[NSns])\s*,\s*'
-            r'(?P<lon>\d{1,3}(?:\.\d+)?)\s*(?P<lon_hemi>[EWew])\b'
-        )
+        gps_pattern = re.compile(MRSConstants.GPS_PATTERN)
         results: List[Tuple[DDComponent, DDComponent]] = []
-        for m in GPS_PATTERN.finditer(gps):
+        for m in gps_pattern.finditer(gps):
             lat_val = float(m.group('lat'))
             lon_val = float(m.group('lon'))
             lat_dir = m.group('lat_hemi').upper()
@@ -74,21 +92,21 @@ class MRSParser(Parser):
             results.append((lat_comp, lon_comp))
         return results
 
-    def _get_locations_url(self):
-        return self._get_locations(self._get_bpvr())
-
-    def _get_decoded_source_page(self, location_url):
-        return location_url
-
+    # nazev musi zustat
     def get_fishing_location(self, location):
         line = location.splitlines()[0]
-        m_revir = re.search(r'(?P<cislo>\b461\s*\d{3}\b)', line)
-        cislo_reviru = m_revir.group('cislo').replace(" ", "") if m_revir else None  # "461024"
+        prefix = re.escape(self.get_location_id_start())
+        pattern = rf'(?P<cislo>\b{prefix}\s*\d{{3}}\b)'
+        m_revir = re.search(pattern, line)
+        cislo_reviru = m_revir.group('cislo').replace(" ", "") if m_revir else None
+
         m_nazev = re.search(
-            r'\b461\s*\d{3}\b\s+(?P<nazev>.+?)(?=\s*[-–—]+\s*(?:PS|MRS)\b)',
+            rf'\b{re.escape(self.get_location_id_start())}\s*\d{{3}}\b\s+(?P<nazev>.+?)(?=\s*[-–—]+\s*(?:PS|MRS)\b)',
             line
         )
-        nazev_reviru = m_nazev.group('nazev').strip().upper() if m_nazev else None  # "DYJE 5 – Novomlýnská nádrž"
+
+        nazev_reviru = m_nazev.group('nazev').strip().upper() if m_nazev else None
+
         m_spolek = re.search(
             r'(?P<spolek>(?:PS|MRS)\b.+?)'
             r'(?=\s+\d+(?:[.,]\d+)?\s*(?:km|ha)\b|[,;|]|$)',

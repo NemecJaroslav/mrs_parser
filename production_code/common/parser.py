@@ -31,7 +31,7 @@ class Parser:
     def _get_justified_close_locations(self):
         raise NotImplementedError("Must be implemented")
 
-    def _get_locations_url(self):
+    def _get_locations(self):
         raise NotImplementedError("Must be implemented")
 
     def _get_incorrect_gps(self):
@@ -54,8 +54,8 @@ class Parser:
             )
 
     def parse(self):
-        for location_url in self._get_locations_url():
-            decoded_page = self._get_decoded_source_page(location_url)
+        for location in self._get_locations():
+            decoded_page = self._get_decoded_source_page(location)
             fishing_location = self.get_fishing_location(decoded_page)
             if self._check_fishing_location(fishing_location):
                 self._fishing_locations.append(fishing_location)

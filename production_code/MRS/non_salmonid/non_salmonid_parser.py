@@ -17,8 +17,12 @@ class NonSalmonidParser(MRSParser):
     def _get_headquarter_gps(self, headquarter):
         return NonSalmonidConstants.HEADQUARTER_GPS[headquarter]
 
-    def _get_locations_list_url(self):
-        return NonSalmonidConstants.LOCATIONS_LIST_URL
+    def get_url_to_bpvr(self):
+        file_id = "18WmpnlBkfeCD_79biAVpxiUHeLfweRKC"
+        return f"https://drive.google.com/uc?export=download&id={file_id}"
 
-    def _get_location_url_pattern(self):
-        return NonSalmonidConstants.LOCATION_URL_PATTERN
+    def get_phase_in_bpvr_to_look_for(self):
+        return "REVÍRY MIMOPSTRUHOVÉ"
+
+    def get_location_id_start(self):
+        return "461"

@@ -3,10 +3,6 @@ from production_code.MRS.common.constants import MRSConstants
 
 
 class SalmonidConstants:
-    LOCATIONS_LIST_URL = (
-        MRSConstants.MRS_HOME_PAGE
-        + "/index.php/kontakty/33-seznam-reviru/"
-        + "143-seznam-rybarskych-reviru-pstruhovych")
     LOCATION_URL_PATTERN = ("(?P<"
                             + Constants.LOCATION_URL_PATTERN_GROUP_NAME
                             + ">/index.php/.*?15-pstruhove-reviry/.*?)\".*?</a>")
@@ -24,7 +20,8 @@ class SalmonidConstants:
         "UHERSKÝ BROD": (49.0305231, 17.6331086),
         "UHERSKÉ HRADIŠTĚ": (49.0739647, 17.4734000),
         "BYSTŘICE POD HOSTÝNEM": (49.3999906, 17.6720375),
-        "BYSTŘICE NAD PERNŠTEJNEM": (49.5224858, 16.2548258),
+        "BYSTŘÍCE POD HOSTÝNEM": (49.3999906, 17.6720375),
+        "BYSTŘICE NAD PERŠTEJNEM": (49.5224858, 16.2548258),
         "ŽĎÁR NAD SÁZAVOU": (49.5610386, 15.9283689),
         "ZLÍN": (49.2261231, 17.6843786),
         "ZNOJMO": (48.8367225, 16.0680575),
@@ -36,7 +33,7 @@ class SalmonidConstants:
         "NEDVĚDICE": (49.5041311, 16.3387117),
         "NÁMĚŠŤ NAD OSLAVOU": (49.2084344, 16.1613239),
         "IVANČICE": (49.1063772, 16.3662583),
-        "NOVÁ VES U OSLAVAN": (49.1062867, 16.3149697),
+        "NOVÁ VES": (49.1062867, 16.3149697),
         "MOHELNO": (49.1139642, 16.1907844),
         "TŘEBÍČ": (49.2165169, 15.8570558),
         "SLAVIČÍN": (49.0871503, 17.8796653),

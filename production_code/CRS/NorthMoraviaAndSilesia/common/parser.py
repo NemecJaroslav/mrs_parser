@@ -9,7 +9,7 @@ class NorthMoraviaAndSilesiaParser(Parser):
     def _get_justified_close_locations(self):
         raise NotImplementedError("Must be implemented")
 
-    def _get_locations_url(self):
+    def _get_locations(self):
         locations_url = []
         for location_list in self._get_locations_per_page():
             decoded_page = self._get_decoded_source_page(location_list)
