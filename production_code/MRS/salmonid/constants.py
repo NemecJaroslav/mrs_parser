@@ -1,5 +1,4 @@
 from production_code.common.constants import Constants
-from production_code.MRS.common.constants import MRSConstants
 
 
 class SalmonidConstants:

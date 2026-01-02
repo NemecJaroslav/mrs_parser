@@ -4,17 +4,17 @@ from production_code.common.constants import Constants
 class DDComponent:
     def __init__(self, value: float, direction: str):
         direction = direction.upper()
-        if direction not in ("N", "S", "E", "W"):
+        if direction not in (Constants.NORTH, Constants.SOUTH, Constants.EAST, Constants.WEST):
             raise ValueError(f"Invalid direction: {direction}")
-        if direction in ("N", "S") and not (-90 <= value <= 90):
+        if direction in (Constants.NORTH, Constants.SOUTH) and not (-90 <= value <= 90):
             raise ValueError(f"Invalid latitude value: {value}")
-        if direction in ("E", "W") and not (-180 <= value <= 180):
+        if direction in (Constants.EAST, Constants.WEST) and not (-180 <= value <= 180):
             raise ValueError(f"Invalid longitude value: {value}")
         self.value = float(value)
         self.direction = direction
 
     def convert_to_dd(self) -> float:
-        sign = -1 if self.direction in ("S", "W") else 1
+        sign = -1 if self.direction in (Constants.SOUTH, Constants.WEST) else 1
         return sign * self.value
 
     def __repr__(self):

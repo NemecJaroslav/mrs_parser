@@ -78,7 +78,7 @@ class MRSParser(Parser):
 
     @staticmethod
     def parse_gps(gps: str) -> List[Tuple[DDComponent, DDComponent]]:
-        gps = gps.replace('\u00A0', ' ')  # normalize non-breaking spaces
+        gps = gps.replace('\u00A0', ' ')
         gps_pattern = re.compile(MRSConstants.GPS_PATTERN)
         results: List[Tuple[DDComponent, DDComponent]] = []
         for m in gps_pattern.finditer(gps):
@@ -92,42 +92,51 @@ class MRSParser(Parser):
             results.append((lat_comp, lon_comp))
         return results
 
-    # nazev musi zustat
-    def get_fishing_location(self, location):
-        line = location.splitlines()[0]
+    def _get_identifier(self, line):
         prefix = re.escape(self.get_location_id_start())
-        pattern = rf'(?P<cislo>\b{prefix}\s*\d{{3}}\b)'
-        m_revir = re.search(pattern, line)
-        cislo_reviru = m_revir.group('cislo').replace(" ", "") if m_revir else None
+        pattern = rf'(?P<identifier>\b{prefix}\s*\d{{3}}\b)'
+        m_identifier = re.search(pattern, line)
+        identifier = m_identifier.group('identifier').replace(" ", "") if m_identifier else None
+        return identifier
 
-        m_nazev = re.search(
-            rf'\b{re.escape(self.get_location_id_start())}\s*\d{{3}}\b\s+(?P<nazev>.+?)(?=\s*[-–—]+\s*(?:PS|MRS)\b)',
+    def _get_name(self, line):
+        m_name = re.search(
+            rf'\b{re.escape(self.get_location_id_start())}\s*\d{{3}}\b\s+(?P<name>.+?)(?=\s*[-–—]+\s*(?:PS|MRS)\b)',
             line
         )
+        name = m_name.group('name').strip().upper() if m_name else None
+        return name
 
-        nazev_reviru = m_nazev.group('nazev').strip().upper() if m_nazev else None
-
-        m_spolek = re.search(
-            r'(?P<spolek>(?:PS|MRS)\b.+?)'
+    @staticmethod
+    def __get_headquarter(line):
+        m_headquarter = re.search(
+            r'(?P<headquarter>(?:PS|MRS)\b.+?)'
             r'(?=\s+\d+(?:[.,]\d+)?\s*(?:km|ha)\b|[,;|]|$)',
             line,
             flags=re.IGNORECASE
         )
-        pobocny_spolek = re.sub(r'\s+', ' ', re.sub(r'^(?i:(PS))\s+', '',
-                                                    m_spolek.group('spolek').replace('\u00A0', ' ')
-                                                    .strip())).strip().upper() if m_spolek else None
-        m_ha_all = re.findall(r'\b(?P<ha>\d{1,3}(?:[\s\u00A0]\d{3})*(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s*ha\b', line,
-                              flags=re.IGNORECASE)
-        vymera_ha = 0.0
-        if m_ha_all:
-            raw = m_ha_all[-1]  # pokud by se vyskytlo více "ha", bereme poslední
-            vymera_ha = float(raw.replace(" ", "").replace("\u00A0", "").replace(",", "."))
+        headquarter = re.sub(r'\s+', ' ', re.sub(r'^(?i:(PS))\s+', '',
+                                                 m_headquarter.group('headquarter').replace('\u00A0', ' ')
+                                                 .strip())).strip().upper() if m_headquarter else None
+        return headquarter
 
+    @staticmethod
+    def __get_area(line):
+        m_area = re.findall(r'\b(?P<area>\d{1,3}(?:[\s\u00A0]\d{3})*(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s*ha\b', line,
+                            flags=re.IGNORECASE)
+        area = 0.0
+        if m_area:
+            raw = m_area[-1]
+            area = float(raw.replace(" ", "").replace("\u00A0", "").replace(",", "."))
+        return area
+
+    def get_fishing_location(self, location):
+        line = location.splitlines()[0]
         fishing_location = FishingLocation(
-            cislo_reviru,
-            nazev_reviru,
-            pobocny_spolek,
-            vymera_ha,
+            self._get_identifier(line),
+            self._get_name(line),
+            self.__get_headquarter(line),
+            self.__get_area(line),
             self.parse_gps(location)
         )
         return fishing_location
